@@ -2,12 +2,26 @@
 
 import { ArrowRight, Search } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { stats } from "@/data/offers"
+import { offers, stats } from "@/data/offers"
 
 export function Hero() {
+  const [query, setQuery] = useState("")
+  const [focused, setFocused] = useState(false)
+
+  const suggestions = query
+    ? offers
+        .filter(
+          (o) =>
+            o.name.toLowerCase().includes(query.toLowerCase()) ||
+            o.category.toLowerCase().includes(query.toLowerCase()),
+        )
+        .slice(0, 5)
+    : []
+
   return (
     <section className="relative overflow-hidden pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-28 lg:pt-40">
       <div className="absolute inset-0 -z-10">
@@ -34,18 +48,51 @@ export function Hero() {
             Every deal checked. Every savings real.
           </p>
 
-          <div className="mx-auto mt-8 flex max-w-xl items-center gap-2 rounded-xl border border-border bg-background p-1.5 shadow-lg shadow-brand-500/5 lg:mt-10">
-            <Search className="ml-3 h-5 w-5 shrink-0 text-muted-foreground" />
-            <Input
-              placeholder="Search tools, categories, or keywords..."
-              className="border-0 bg-transparent shadow-none focus-visible:ring-0"
-            />
-            <Button size="sm" className="shrink-0 gap-1" asChild>
-              <Link href="/tools">
-                Search
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </Button>
+          <div className="relative mx-auto mt-8 max-w-xl lg:mt-10">
+            <div className="flex items-center gap-2 rounded-xl border border-border bg-background p-1.5 shadow-lg shadow-brand-500/5">
+              <Search className="ml-3 h-5 w-5 shrink-0 text-muted-foreground" />
+              <Input
+                placeholder="Search tools, categories, or keywords..."
+                className="border-0 bg-transparent shadow-none focus-visible:ring-0"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setTimeout(() => setFocused(false), 200)}
+              />
+              <Button size="sm" className="shrink-0 gap-1" asChild>
+                <Link href="/tools">
+                  Search
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </Button>
+            </div>
+
+            {focused && suggestions.length > 0 && (
+              <div className="absolute inset-x-0 top-full z-20 mt-1.5 overflow-hidden rounded-xl border border-border bg-background shadow-xl animate-scale-in">
+                {suggestions.map((offer) => (
+                  <Link
+                    key={offer.id}
+                    href={`/offer/${offer.id}`}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-muted"
+                  >
+                    <div className={`h-7 w-7 shrink-0 rounded-md bg-gradient-to-br ${offer.color} text-[8px] font-bold text-white flex items-center justify-center`}>
+                      {offer.name.slice(0, 2).toUpperCase()}
+                    </div>
+                    <div className="min-w-0 flex-1 text-left">
+                      <span className="font-medium">{offer.name}</span>
+                      <span className="ml-2 text-xs text-muted-foreground">{offer.category}</span>
+                    </div>
+                    <span className="shrink-0 text-xs text-muted-foreground">{offer.discount}</span>
+                  </Link>
+                ))}
+                <Link
+                  href={`/tools?q=${encodeURIComponent(query)}`}
+                  className="block border-t border-border px-4 py-2.5 text-center text-xs font-medium text-muted-foreground transition-colors hover:bg-muted"
+                >
+                  View all results for &quot;{query}&quot;
+                </Link>
+              </div>
+            )}
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted-foreground">

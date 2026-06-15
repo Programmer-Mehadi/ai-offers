@@ -2,7 +2,7 @@
 
 import { notFound, useParams } from "next/navigation"
 import {
-  ArrowLeft, ArrowRight, ArrowUpRight, Award, Bookmark, Flag, Gem, Globe, Link2,
+  ArrowLeft, ArrowRight, ArrowUpRight, Award, Bookmark, CheckCircle2, Flag, Gem, Globe, Link2,
   LucideIcon, Share2, Sparkles, Tag, Users,
 } from "lucide-react"
 import Link from "next/link"
@@ -52,6 +52,19 @@ export default function OfferPage() {
   if (!offer) notFound()
 
   const saved = isFavorited(slug)
+
+  function isClaimed(id: string): boolean {
+    try { return JSON.parse(localStorage.getItem("claimed") || "[]").includes(id) } catch { return false }
+  }
+  function toggleClaimed(id: string) {
+    const c = JSON.parse(localStorage.getItem("claimed") || "[]")
+    const idx = c.indexOf(id)
+    if (idx === -1) { c.push(id); toast.success("Marked as claimed!") } else { c.splice(idx, 1) }
+    localStorage.setItem("claimed", JSON.stringify(c))
+    window.dispatchEvent(new Event("claimed-updated"))
+  }
+  const claimed = isClaimed(slug)
+
   const currentIndex = offers.findIndex((o) => o.id === slug)
   const prevOffer = currentIndex > 0 ? offers[currentIndex - 1] : null
   const nextOffer = currentIndex < offers.length - 1 ? offers[currentIndex + 1] : null
@@ -180,11 +193,23 @@ export default function OfferPage() {
                   )}
 
                   <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button size="lg" className="gap-1.5" asChild>
-                      <a href={offer.claimUrl || "#"} target="_blank" rel="noopener noreferrer">
-                        Claim This Offer
-                        <ArrowUpRight className="h-4 w-4" />
-                      </a>
+                    <Button
+                      size="lg"
+                      className={cn("gap-1.5", claimed && "border-emerald-500 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400")}
+                      onClick={() => toggleClaimed(slug)}
+                      asChild={!claimed}
+                    >
+                      {claimed ? (
+                        <span className="inline-flex items-center gap-1.5">
+                          <CheckCircle2 className="h-4 w-4" />
+                          Mark as unclaimed
+                        </span>
+                      ) : (
+                        <a href={offer.claimUrl || "#"} target="_blank" rel="noopener noreferrer">
+                          Claim This Offer
+                          <ArrowUpRight className="h-4 w-4" />
+                        </a>
+                      )}
                     </Button>
                     <Button size="lg" variant="outline" asChild>
                       <Link href={`/${catSlug}`}>
@@ -243,6 +268,29 @@ export default function OfferPage() {
                   )}
                 </div>
               )}
+
+              {/* Similar offers */}
+              <div className="mt-10">
+                <h2 className="mb-4 text-lg font-bold">Similar offers you might like</h2>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {(getOffersByCategory(offer.category).filter((o) => o.id !== slug).slice(0, 4) || []).map((ro) => (
+                    <Link
+                      key={ro.id}
+                      href={`/offer/${ro.id}`}
+                      className="group flex items-center gap-3 rounded-xl border border-border/50 p-4 transition-all hover:border-transparent hover:shadow-md"
+                    >
+                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${ro.color} text-xs font-bold text-white`}>
+                        {ro.name.slice(0, 2).toUpperCase()}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-medium leading-tight group-hover:text-brand-600 dark:group-hover:text-brand-400">{ro.name}</p>
+                        <p className="text-xs text-muted-foreground">{ro.discount}</p>
+                      </div>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <div className="space-y-6">

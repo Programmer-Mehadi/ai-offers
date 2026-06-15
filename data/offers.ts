@@ -15,6 +15,20 @@ export interface Offer {
   howToClaim?: string[]
   claimUrl?: string
   isReferral?: boolean
+  dateAdded?: string
+  popularity?: number
+  studentTypes?: string[]
+  regions?: string[]
+  isExpiring?: boolean
+}
+
+export interface Resource {
+  id: string
+  title: string
+  description: string
+  icon: string
+  href: string
+  category: string
 }
 
 export interface Category {
@@ -832,4 +846,114 @@ export function getOffersByCategory(categoryName: string): Offer[] {
 
 export function getCategoryByName(name: string): Category | undefined {
   return categories.find((c) => c.name === name)
+}
+
+export const studentTypes = [
+  { id: "high-school", label: "High School", icon: "School" },
+  { id: "undergrad", label: "Undergraduate", icon: "GraduationCap" },
+  { id: "graduate", label: "Graduate", icon: "BookOpen" },
+  { id: "international", label: "International", icon: "Globe" },
+]
+
+export const regions = [
+  { id: "global", label: "Global", flag: "🌍" },
+  { id: "us", label: "United States", flag: "🇺🇸" },
+  { id: "eu", label: "Europe", flag: "🇪🇺" },
+  { id: "india", label: "India", flag: "🇮🇳" },
+  { id: "uk", label: "United Kingdom", flag: "🇬🇧" },
+]
+
+export const resources: Resource[] = [
+  {
+    id: "github-education-guide",
+    title: "How to Get GitHub Education Pack",
+    description: "Step-by-step guide to claim the Student Developer Pack with $200+ in free tools.",
+    icon: "github",
+    href: "#",
+    category: "Getting Started",
+  },
+  {
+    id: "edu-email-guide",
+    title: "Best .edu Email Services for Students",
+    description: "Compare free and affordable .edu email providers for student verification.",
+    icon: "mail",
+    href: "#",
+    category: "Getting Started",
+  },
+  {
+    id: "sheerid-guide",
+    title: "What is SheerID & How to Verify",
+    description: "Everything you need to know about SheerID student verification.",
+    icon: "shield",
+    href: "#",
+    category: "Getting Started",
+  },
+  {
+    id: "unidays-vs-student-beans",
+    title: "UNiDAYS vs Student Beans — Which is Better?",
+    description: "Compare the two biggest student discount platforms side by side.",
+    icon: "scale",
+    href: "#",
+    category: "Comparisons",
+  },
+  {
+    id: "student-budget-template",
+    title: "Free Student Budget Template",
+    description: "Download a free spreadsheet to track your student finances.",
+    icon: "file-text",
+    href: "#",
+    category: "Tools",
+  },
+  {
+    id: "scholarship-databases",
+    title: "Top Scholarship Databases for 2026",
+    description: "Find scholarships that match your profile with these free search tools.",
+    icon: "search",
+    href: "#",
+    category: "Tools",
+  },
+  {
+    id: "freelance-for-students",
+    title: "Best Freelance Platforms for Students",
+    description: "Start earning with these student-friendly freelance marketplaces.",
+    icon: "briefcase",
+    href: "#",
+    category: "Earning",
+  },
+  {
+    id: "student-credit-cards",
+    title: "Best Student Credit Cards 2026",
+    description: "Compare credit cards designed for students with no annual fee.",
+    icon: "credit-card",
+    href: "#",
+    category: "Finance",
+  },
+]
+
+export function getRecentOffers(count = 8): Offer[] {
+  return offers.slice().reverse().slice(0, count)
+}
+
+export function getExpiringOffers(count = 8): Offer[] {
+  return offers.filter((o) => o.isExpiring).slice(0, count)
+}
+
+export function getPopularOffers(count = 8): Offer[] {
+  return [...offers].sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, count)
+}
+
+export function getTrendingOffers(count = 6): Offer[] {
+  return offers.filter((o) => o.featured).slice(0, count)
+}
+
+export function getSimilarOffers(offer: Offer, count = 4): Offer[] {
+  const sameCategory = offers.filter((o) => o.id !== offer.id && o.category === offer.category)
+  if (sameCategory.length >= count) return sameCategory.slice(0, count)
+  const fromTags = offers.filter(
+    (o) =>
+      o.id !== offer.id &&
+      o.category !== offer.category &&
+      o.tags?.some((t) => offer.tags?.includes(t)),
+  )
+  return [...sameCategory, ...fromTags].slice(0, count)
 }

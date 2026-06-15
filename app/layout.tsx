@@ -5,6 +5,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/toaster"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { CookieConsent } from "@/components/cookie-consent"
+import { CommandPalette } from "@/components/command-palette"
 import { cn } from "@/lib/utils"
 
 const fontSans = Plus_Jakarta_Sans({
@@ -44,6 +46,8 @@ export default function RootLayout({
           {children}
           <Toaster />
           <ScrollToTop />
+          <CookieConsent />
+          <CommandPalette />
         </ThemeProvider>
       </body>
     </html>

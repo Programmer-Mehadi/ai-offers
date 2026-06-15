@@ -1,15 +1,22 @@
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 import { Newsletter } from "@/components/newsletter"
+import { categories } from "@/data/offers"
 
 const footerLinks = [
   {
     title: "Offers",
     links: [
       { href: "/tools", label: "All Offers" },
+      { href: "/new", label: "Recently Added" },
+      { href: "/popular", label: "Most Popular" },
+      { href: "/expiring-soon", label: "Expiring Soon" },
+      { href: "/compare", label: "Compare Offers" },
       { href: "/categories", label: "Categories" },
       { href: "/how-we-verify", label: "How We Verify" },
       { href: "/submit-offer", label: "Submit an Offer" },
+      { href: "/faq", label: "FAQ" },
     ],
   },
   {
@@ -17,7 +24,9 @@ const footerLinks = [
     links: [
       { href: "/about", label: "About" },
       { href: "/blog", label: "Blog" },
+      { href: "/resources", label: "Resources" },
       { href: "/contact", label: "Contact" },
+      { href: "/sitemap", label: "Sitemap" },
       { href: "/privacy-cookies-terms", label: "Privacy & Terms" },
     ],
   },
@@ -27,6 +36,30 @@ export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        {/* Top categories */}
+        <div className="mb-10">
+          <h4 className="mb-3 text-sm font-semibold">Top Categories</h4>
+          <div className="flex flex-wrap gap-2">
+            {categories.slice(0, 6).map((cat) => (
+              <Link
+                key={cat.id}
+                href={`/${cat.id}`}
+                className="inline-flex items-center gap-1 rounded-full border border-border/50 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-transparent hover:bg-muted hover:text-foreground"
+              >
+                {cat.name}
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            ))}
+            <Link
+              href="/categories"
+              className="inline-flex items-center gap-1 rounded-full border border-border/50 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-muted"
+            >
+              All categories
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2">
@@ -36,9 +69,14 @@ export function Footer() {
               <span className="text-base font-bold">StudentPerks</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
-              Helping students save money with verified
-              discounts and exclusive offers.
+              Helping students save money with verified discounts and exclusive offers.
             </p>
+            <div className="mt-4 flex gap-3">
+              <Link href="/new" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">New</Link>
+              <Link href="/popular" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Popular</Link>
+              <Link href="/expiring-soon" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Expiring</Link>
+              <Link href="/compare" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Compare</Link>
+            </div>
           </div>
 
           {footerLinks.map((group) => (
@@ -47,10 +85,7 @@ export function Footer() {
               <ul className="space-y-2">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
+                    <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                       {link.label}
                     </Link>
                   </li>
@@ -64,21 +99,9 @@ export function Footer() {
             <div className="mt-6">
               <h4 className="mb-3 text-sm font-semibold">Follow Us</h4>
               <ul className="space-y-2">
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                    Twitter / X
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                    GitHub
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                    Discord
-                  </Link>
-                </li>
+                <li><Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Twitter / X</Link></li>
+                <li><Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">GitHub</Link></li>
+                <li><Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Discord</Link></li>
               </ul>
             </div>
           </div>

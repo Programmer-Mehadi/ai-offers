@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { Bookmark, Menu, Moon, Search, Sun, X } from "lucide-react"
+import { Bookmark, Menu, Moon, Search, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/categories", label: "Categories" },
   { href: "/blog", label: "Blog" },
   { href: "/how-we-verify", label: "How We Verify" },
+  { href: "/faq", label: "FAQ" },
 ]
 
 function getFavoritesCount(): number {
@@ -64,7 +65,21 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" className="relative hidden md:inline-flex" asChild>
+          <button
+            onClick={() => {
+              const ev = new KeyboardEvent("keydown", { metaKey: true, key: "k", bubbles: true })
+              window.dispatchEvent(ev)
+            }}
+            className="hidden items-center gap-2 rounded-lg border border-border/60 bg-muted/50 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted md:inline-flex"
+          >
+            <Search className="h-3.5 w-3.5" />
+            <span>Search...</span>
+            <kbd className="rounded border border-border bg-background px-1 py-0.5 text-[10px] font-medium text-muted-foreground/70">
+              ⌘K
+            </kbd>
+          </button>
+
+          <Button variant="ghost" size="icon" className="relative" asChild>
             <Link href="/favorites">
               <Bookmark className="h-4 w-4" />
               {favCount > 0 && (
@@ -73,13 +88,6 @@ export function Navbar() {
                 </span>
               )}
               <span className="sr-only">Favorites</span>
-            </Link>
-          </Button>
-
-          <Button variant="ghost" size="icon" className="hidden md:inline-flex" asChild>
-            <Link href="/tools">
-              <Search className="h-4 w-4" />
-              <span className="sr-only">Search offers</span>
             </Link>
           </Button>
 
@@ -98,57 +106,68 @@ export function Navbar() {
             </Button>
           )}
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            <span className="sr-only">Menu</span>
-          </Button>
-        </div>
-      </div>
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-4 w-4" />
+                <span className="sr-only">Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72 p-6">
+              <div className="flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
+                    SP
+                  </div>
+                  <span className="text-sm font-bold">StudentPerks</span>
+                </Link>
+              </div>
 
-      <div
-        className={cn(
-          "overflow-hidden border-t border-border/40 transition-all duration-300 md:hidden",
-          mobileOpen ? "max-h-80" : "max-h-0",
-        )}
-      >
-        <nav className="flex flex-col gap-1 p-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/favorites"
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            <Bookmark className="h-4 w-4" />
-            Favorites
-            {favCount > 0 && (
-              <span className="flex h-5 min-w-[18px] items-center justify-center rounded-full bg-brand-500 px-1.5 text-[10px] font-bold text-white">
-                {favCount}
-              </span>
-            )}
-          </Link>
-          <Link
-            href="/tools"
-            onClick={() => setMobileOpen(false)}
-            className="mt-2 flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-2.5 text-sm text-muted-foreground"
-          >
-            <Search className="h-4 w-4" />
-            Search offers...
-          </Link>
-        </nav>
+              <nav className="mt-8 flex flex-col gap-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="mt-6 border-t border-border pt-6">
+                <p className="mb-3 text-xs font-semibold text-muted-foreground">Quick links</p>
+                <div className="flex flex-col gap-1">
+                  <Link
+                    href="/favorites"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                  >
+                    <Bookmark className="h-4 w-4" />
+                    Favorites
+                    {favCount > 0 && (
+                      <span className="flex h-5 min-w-[18px] items-center justify-center rounded-full bg-brand-500 px-1.5 text-[10px] font-bold text-white">
+                        {favCount}
+                      </span>
+                    )}
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setMobileOpen(false)
+                      const ev = new KeyboardEvent("keydown", { metaKey: true, key: "k", bubbles: true })
+                      window.dispatchEvent(ev)
+                    }}
+                    className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-accent"
+                  >
+                    <Search className="h-4 w-4" />
+                    Search
+                  </button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )
