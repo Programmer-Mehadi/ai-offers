@@ -49,6 +49,11 @@ export function ToolCard({ offer }: { offer: Offer }) {
         <div className="flex gap-1">
           {offer.featured && <Badge variant="secondary" className="bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">Featured</Badge>}
           {offer.hidden_gem && <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400">Hidden</Badge>}
+          {offer.audience === "everyone" ? (
+            <Badge variant="secondary" className="bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-400">Everyone</Badge>
+          ) : (
+            <Badge variant="secondary" className="bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-400">Students</Badge>
+          )}
         </div>
         <Link href={`/offer/${offer.id}`} className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground" onClick={(e) => e.stopPropagation()}>
           View

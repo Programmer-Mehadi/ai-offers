@@ -45,6 +45,7 @@ export function OfferCard({ offer, variant = "default" }: OfferCardProps) {
         </div>
       )}
 
+
       <CardContent className={cn(isCompact ? "p-4" : "p-5 sm:p-6")}>
         <div className="mb-3 flex items-center gap-3">
           <div
@@ -71,7 +72,12 @@ export function OfferCard({ offer, variant = "default" }: OfferCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className={cn("border-t border-border/50 pt-3", isCompact ? "px-4 pb-3" : "px-5 pb-4 sm:px-6 sm:pb-5")}>
+      <CardFooter className={cn("flex items-center justify-between border-t border-border/50 pt-3", isCompact ? "px-4 pb-3" : "px-5 pb-4 sm:px-6 sm:pb-5")}>
+        {offer.audience === "everyone" ? (
+          <Badge variant="secondary" className="bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-400">Everyone</Badge>
+        ) : (
+          <Badge variant="secondary" className="bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-400">Students</Badge>
+        )}
         <Link
           href={offer.url}
           className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"

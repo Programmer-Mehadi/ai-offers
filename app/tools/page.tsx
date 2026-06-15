@@ -21,6 +21,7 @@ export default function ToolsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [page, setPage] = useState(1)
   const [sort, setSort] = useState<SortKey>("name")
+  const [audience, setAudience] = useState<"all" | "students" | "everyone">("all")
   const [quickView, setQuickView] = useState<Offer | null>(null)
 
   const filtered = useMemo(() => {
@@ -32,7 +33,8 @@ export default function ToolsPage() {
       const matchesCategory = selectedCategory
         ? offer.category === selectedCategory
         : true
-      return matchesSearch && matchesCategory
+      const matchesAudience = audience === "all" ? true : (offer.audience ?? "students") === audience
+      return matchesSearch && matchesCategory && matchesAudience
     })
 
     result.sort((a, b) => {
@@ -45,7 +47,7 @@ export default function ToolsPage() {
     })
 
     return result
-  }, [search, selectedCategory, sort])
+  }, [search, selectedCategory, sort, audience])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE))
   const safePage = Math.min(page, totalPages)
@@ -91,6 +93,26 @@ export default function ToolsPage() {
                   <option value="popularity">Sort: Popular</option>
                 </select>
               </div>
+            </div>
+            <div className="flex items-center gap-1 rounded-lg border border-border/50 bg-muted/30 p-0.5">
+              <button
+                onClick={() => { setAudience("all"); setPage(1) }}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${audience === "all" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                All
+              </button>
+              <button
+                onClick={() => { setAudience("students"); setPage(1) }}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${audience === "students" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Students
+              </button>
+              <button
+                onClick={() => { setAudience("everyone"); setPage(1) }}
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${audience === "everyone" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Everyone
+              </button>
             </div>
           </div>
 

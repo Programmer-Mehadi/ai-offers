@@ -7,6 +7,7 @@ export interface Offer {
   featured?: boolean
   hidden_gem?: boolean
   underrated?: boolean
+  audience?: "students" | "everyone"
   url: string
   color: string
   logo?: string
@@ -93,6 +94,7 @@ export const offers: Offer[] = [
     description: "Free $350+ credits — All Claude models via API",
     discount: "Free $350+ credits",
     category: "AI & Machine Learning",
+    audience: "everyone",
     featured: true,
     url: "/offer/aerolink",
     color: "from-violet-500 to-purple-600",
@@ -111,6 +113,7 @@ export const offers: Offer[] = [
     description: "Free up to $300 credits — Claude & GPT API access",
     discount: "Free up to $300 credits",
     category: "AI & Machine Learning",
+    audience: "everyone",
     featured: true,
     url: "/offer/freemodel",
     color: "from-blue-500 to-indigo-600",
@@ -131,6 +134,7 @@ export const offers: Offer[] = [
   {
     id: "freellmapi",
     name: "FreeLLMAPI",
+    audience: "everyone",
     description: "1B+ free LLM tokens/month across 60 models",
     discount: "1B+ free tokens/month",
     category: "AI & Machine Learning",
@@ -150,6 +154,7 @@ export const offers: Offer[] = [
     description: "Free $100 credits — Gemini, GPT, DeepSeek & more API access",
     discount: "Free $100 credits",
     category: "AI & Machine Learning",
+    audience: "everyone",
     featured: true,
     url: "/offer/bluesminds",
     color: "from-cyan-500 to-teal-600",
@@ -166,6 +171,7 @@ export const offers: Offer[] = [
     description: "Up to $200 free credits — Claude, GLM & more API access",
     discount: "Up to $200 free credits",
     category: "AI & Machine Learning",
+    audience: "everyone",
     featured: true,
     url: "/offer/agentrouter",
     color: "from-emerald-500 to-green-600",
@@ -194,6 +200,7 @@ export const offers: Offer[] = [
   {
     id: "kimchi",
     name: "Kimchi",
+    audience: "everyone",
     description: "$50/mo free credits",
     discount: "$50/mo free credits",
     category: "Development Tools",
@@ -210,6 +217,7 @@ export const offers: Offer[] = [
     description: "Go plan for $1/month with $10 in credits included",
     discount: "Go plan for $1/month",
     category: "Development Tools",
+    audience: "everyone",
     featured: true,
     url: "/offer/command-code",
     color: "from-rose-500 to-pink-600",
@@ -224,6 +232,7 @@ export const offers: Offer[] = [
     discount: "Free Pro for 1 year",
     category: "Development Tools",
     featured: true,
+    audience: "everyone",
     url: "/offer/zed",
     color: "from-amber-500 to-yellow-600",
     tags: ["Free", "Developer"],
@@ -236,6 +245,7 @@ export const offers: Offer[] = [
     description: "Free $10 search API credits",
     discount: "Free $10 credits",
     category: "AI & Machine Learning",
+    audience: "everyone",
     hidden_gem: true,
     url: "/offer/exa-ai",
     color: "from-purple-500 to-fuchsia-600",
@@ -288,6 +298,7 @@ export const offers: Offer[] = [
     description: "87% off + 3 months extra from $1.99/mo",
     discount: "87% off + 3 months free",
     category: "Security & Privacy",
+    audience: "everyone",
     hidden_gem: true,
     url: "/offer/surfshark-vpn",
     color: "from-lime-500 to-green-600",
@@ -340,6 +351,7 @@ export const offers: Offer[] = [
     description: "Free Basic plan ($120 value) with toolkit, AI, and hosting",
     discount: "Free Basic plan ($120 value)",
     category: "Design & Creative",
+    audience: "everyone",
     underrated: true,
     url: "/offer/framer",
     color: "from-cyan-500 to-blue-600",
@@ -366,6 +378,7 @@ export const offers: Offer[] = [
     description: "Free Pro plan on first upgrade + 50 free credits/month",
     discount: "Free Pro plan + 50 credits/mo",
     category: "Productivity",
+    audience: "everyone",
     underrated: true,
     url: "/offer/kiro",
     color: "from-violet-500 to-indigo-600",
@@ -416,6 +429,7 @@ export const offers: Offer[] = [
     id: "tech",
     name: ".TECH",
     description: "Free .TECH domain for 1 year",
+    audience: "everyone",
     discount: "Free .TECH domain for 1 year",
     category: "Development Tools",
     url: "/offer/tech",
