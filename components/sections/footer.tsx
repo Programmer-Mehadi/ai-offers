@@ -1,5 +1,7 @@
 import Link from "next/link"
 
+import { Newsletter } from "@/components/newsletter"
+
 const footerLinks = [
   {
     title: "Offers",
@@ -25,7 +27,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
@@ -57,25 +59,28 @@ export function Footer() {
             </div>
           ))}
 
-          <div>
-            <h4 className="mb-3 text-sm font-semibold">Follow Us</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                  Twitter / X
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                  GitHub
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                  Discord
-                </Link>
-              </li>
-            </ul>
+          <div className="col-span-2 md:col-span-1">
+            <Newsletter />
+            <div className="mt-6">
+              <h4 className="mb-3 text-sm font-semibold">Follow Us</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                    Twitter / X
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                    GitHub
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                    Discord
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 

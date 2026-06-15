@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/toaster"
+import { ScrollToTop } from "@/components/scroll-to-top"
 import { cn } from "@/lib/utils"
 
 const fontSans = Plus_Jakarta_Sans({
@@ -38,7 +40,11 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster />
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   )

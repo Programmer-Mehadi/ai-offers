@@ -53,16 +53,18 @@ export default function FavoritesPage() {
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           {favoriteIds.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-24 text-center">
-              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-muted">
-                <Heart className="h-7 w-7 text-muted-foreground" />
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-100 to-violet-100 dark:from-brand-950/30 dark:to-violet-950/30">
+                <Heart className="h-8 w-8 text-brand-400 dark:text-brand-500" />
               </div>
               <h1 className="text-2xl font-bold tracking-tight">Your Favorites</h1>
               <p className="mt-2 max-w-sm text-muted-foreground">
-                See a deal you love? Tap the bookmark icon to save it here and
-                come back anytime.
+                Nothing saved yet. When you find a deal you love, tap the bookmark icon to keep track of it here.
               </p>
-              <Button className="mt-6" asChild>
-                <Link href="/tools">Browse Offers</Link>
+              <Button className="mt-6 gap-1.5" asChild>
+                <Link href="/tools">
+                  <Heart className="h-4 w-4" />
+                  Find deals to save
+                </Link>
               </Button>
             </div>
           ) : (

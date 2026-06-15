@@ -1,6 +1,12 @@
-import { notFound } from "next/navigation"
-import { ArrowLeft, ArrowRight, ArrowUpRight, Award, Bookmark, Gem, Globe, Link2, LucideIcon, Share2, Sparkles, Tag, Users } from "lucide-react"
+"use client"
+
+import { notFound, useParams } from "next/navigation"
+import {
+  ArrowLeft, ArrowRight, ArrowUpRight, Award, Bookmark, Flag, Gem, Globe, Link2,
+  LucideIcon, Share2, Sparkles, Tag, Users,
+} from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -8,34 +14,47 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
+import { Breadcrumbs } from "@/components/breadcrumbs"
 import { getOfferBySlug, getCategoryByName, getOffersByCategory, offers, getCategorySlug } from "@/data/offers"
 import { cn } from "@/lib/utils"
 
 const tagIcons: Record<string, LucideIcon> = {
-  API: Globe,
-  Free: Award,
-  Credit: Users,
-  Discount: Tag,
-  Developer: Link2,
-  AI: Sparkles,
+  API: Globe, Free: Award, Credit: Users, Discount: Tag, Developer: Link2, AI: Sparkles,
 }
 
-export default async function OfferPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
+function getFavorites(): string[] {
+  try { return JSON.parse(localStorage.getItem("favorites") || "[]") } catch { return [] }
+}
+
+function toggleFavorite(id: string) {
+  const favs = getFavorites()
+  const idx = favs.indexOf(id)
+  if (idx === -1) {
+    favs.push(id)
+    toast.success("Saved to favorites")
+  } else {
+    favs.splice(idx, 1)
+    toast.success("Removed from favorites")
+  }
+  localStorage.setItem("favorites", JSON.stringify(favs))
+  window.dispatchEvent(new Event("favorites-updated"))
+}
+
+function isFavorited(id: string): boolean {
+  return getFavorites().includes(id)
+}
+
+export default function OfferPage() {
+  const params = useParams()
+  const slug = params.slug as string
   const offer = getOfferBySlug(slug)
 
-  if (!offer) {
-    notFound()
-  }
+  if (!offer) notFound()
 
+  const saved = isFavorited(slug)
   const currentIndex = offers.findIndex((o) => o.id === slug)
   const prevOffer = currentIndex > 0 ? offers[currentIndex - 1] : null
   const nextOffer = currentIndex < offers.length - 1 ? offers[currentIndex + 1] : null
-
   const relatedOffers = getOffersByCategory(offer.category).filter((o) => o.id !== slug).slice(0, 4)
   const catSlug = getCategorySlug(offer.category)
 
@@ -44,16 +63,16 @@ export default async function OfferPage({
       <Navbar />
       <main className="flex-1 pt-24">
         <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-          <Link href="/tools" className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
-            <ArrowLeft className="h-4 w-4" />
-            Back to all offers
-          </Link>
+          <Breadcrumbs items={[
+            { label: "Offers", href: "/tools" },
+            { label: offer.category, href: `/${catSlug}` },
+            { label: offer.name },
+          ]} />
 
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <Card className="overflow-hidden border-border/50">
                 <div className={`h-2 bg-gradient-to-r ${offer.color}`} />
-
                 <CardContent className="p-6 sm:p-8">
                   <div className="mb-6 flex items-start justify-between gap-4">
                     <div className="flex items-center gap-4">
@@ -68,25 +87,36 @@ export default async function OfferPage({
                           </Link>
                           {offer.featured && (
                             <Badge variant="secondary" className="gap-1 bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
-                              <Sparkles className="h-3 w-3" />
-                              Featured
+                              <Sparkles className="h-3 w-3" /> Featured
                             </Badge>
                           )}
                           {offer.hidden_gem && (
                             <Badge variant="secondary" className="gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400">
-                              <Gem className="h-3 w-3" />
-                              Hidden Gem
+                              <Gem className="h-3 w-3" /> Hidden Gem
                             </Badge>
                           )}
                         </div>
                       </div>
                     </div>
                     <div className="flex gap-1.5">
-                      <Button variant="outline" size="icon" className="h-9 w-9">
-                        <Bookmark className="h-4 w-4" />
-                        <span className="sr-only">Save</span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-9 w-9"
+                        onClick={() => toggleFavorite(slug)}
+                      >
+                        <Bookmark className={cn("h-4 w-4", saved && "fill-brand-500 text-brand-500")} />
+                        <span className="sr-only">{saved ? "Remove from" : "Save to"} favorites</span>
                       </Button>
-                      <Button variant="outline" size="icon" className="h-9 w-9">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-9 w-9"
+                        onClick={() => {
+                          navigator.clipboard.writeText(window.location.href)
+                          toast.success("Link copied to clipboard")
+                        }}
+                      >
                         <Share2 className="h-4 w-4" />
                         <span className="sr-only">Share</span>
                       </Button>
@@ -94,7 +124,6 @@ export default async function OfferPage({
                   </div>
 
                   <p className="mb-6 text-lg text-muted-foreground">{offer.description}</p>
-
                   <div className={`mb-6 inline-block rounded-lg bg-gradient-to-r ${offer.color} px-4 py-2 text-sm font-semibold text-white`}>
                     {offer.discount}
                   </div>
@@ -105,8 +134,7 @@ export default async function OfferPage({
                         const Icon = tagIcons[tag] || Tag
                         return (
                           <Badge key={tag} variant="outline" className="gap-1 px-3 py-1">
-                            <Icon className="h-3 w-3" />
-                            {tag}
+                            <Icon className="h-3 w-3" /> {tag}
                           </Badge>
                         )
                       })}
@@ -159,7 +187,26 @@ export default async function OfferPage({
                       </a>
                     </Button>
                     <Button size="lg" variant="outline" asChild>
-                      <Link href="/tools">Browse All Offers</Link>
+                      <Link href={`/${catSlug}`}>
+                        More in {offer.category}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+
+                  <div className="mt-6">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="gap-1.5 text-xs text-muted-foreground"
+                      onClick={() => {
+                        toast.success("Thanks for the report!", {
+                          description: "Our team will review this offer.",
+                        })
+                      }}
+                    >
+                      <Flag className="h-3.5 w-3.5" />
+                      Report expired or incorrect
                     </Button>
                   </div>
                 </CardContent>
@@ -181,9 +228,7 @@ export default async function OfferPage({
                         <p className="truncate text-sm font-medium">{prevOffer.name}</p>
                       </div>
                     </Link>
-                  ) : (
-                    <div />
-                  )}
+                  ) : <div />}
                   {nextOffer && (
                     <Link
                       href={`/offer/${nextOffer.id}`}
