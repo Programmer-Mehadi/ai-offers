@@ -20,9 +20,9 @@ const fontMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "StudentPerks — Verified Student Discounts & Offers",
+  title: "StudentPerks — Discounts, Free Tools & Offers for Students",
   description:
-    "Discover verified student discounts, free tools, and exclusive offers across development, AI, design, and more. Save money as a student.",
+    "Discover verified discounts, free tools, and exclusive offers across development, AI, design, and more. Save big on the tools you need.",
 }
 
 export default function RootLayout({

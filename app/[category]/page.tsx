@@ -43,7 +43,7 @@ export default async function CategoryPage({
               <div>
                 <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{categoryName}</h1>
                 <p className="mt-1 text-muted-foreground">
-                  {categoryOffers.length} verified student offers
+                  {categoryOffers.length} verified offers and discounts
                 </p>
               </div>
             </div>

@@ -61,7 +61,7 @@ export default function FAQPage() {
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Frequently Asked Questions</h1>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Everything you need to know about StudentPerks and student discounts.
+               Everything you need to know about StudentPerks and how our discounts work.
             </p>
           </div>
 

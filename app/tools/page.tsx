@@ -64,7 +64,7 @@ export default function ToolsPage() {
           <div className="mb-8">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">All offers</h1>
             <p className="mt-2 text-muted-foreground">
-              Browse {offers.length} verified student discounts and free tools.
+               Browse {offers.length} verified discounts and free tools.
             </p>
           </div>
 

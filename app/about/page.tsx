@@ -44,7 +44,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-              About StudentPerks
+              About us
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
               We help students discover verified discounts and free tools — because being a student
@@ -82,9 +82,9 @@ export default function AboutPage() {
           <div className="mb-16">
             <h2 className="mb-2 text-2xl font-bold tracking-tight">Our Mission</h2>
             <p className="text-muted-foreground">
-              StudentPerks was built because finding real student discounts is harder than it should be.
-              Most deal sites are cluttered, outdated, or full of expired offers. We&apos;re changing that
-              with rigorous verification, clean design, and a laser focus on what actually works for students.
+              StudentPerks was built because finding real discounts as a student is harder than it should be.
+               Most deal sites are cluttered, outdated, or full of expired offers. We&apos;re changing that
+               with rigorous verification, clean design, and a laser focus on offers that actually deliver value.
             </p>
             <p className="mt-4 text-muted-foreground">
               Every offer on this site has been checked by a human, cross-referenced with official sources,

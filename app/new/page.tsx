@@ -27,7 +27,7 @@ export default function NewPage() {
             <div>
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Recently Added</h1>
               <p className="mt-1 text-muted-foreground">
-                The latest verified student discounts, freshly added to our directory.
+                 The latest verified discounts and free tools, freshly added to our directory.
               </p>
             </div>
           </div>

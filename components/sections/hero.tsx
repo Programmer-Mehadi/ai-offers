@@ -44,7 +44,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-4 text-base text-muted-foreground sm:text-lg lg:mt-6 lg:text-xl">
-            {stats.totalOffers}+ verified student offers across development, AI, design, and more.
+            {stats.totalOffers}+ verified discounts and free tools across development, AI, design, and more.
             Every deal checked. Every savings real.
           </p>
 

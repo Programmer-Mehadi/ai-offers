@@ -52,7 +52,7 @@ export default function SitemapPage() {
           <div className="mb-10">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Sitemap</h1>
             <p className="mt-2 text-muted-foreground">
-              All pages on StudentPerks, organized by section.
+               All pages on our site, organized by section.
             </p>
           </div>
 

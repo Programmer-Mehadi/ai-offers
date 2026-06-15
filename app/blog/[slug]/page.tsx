@@ -134,7 +134,7 @@ export default async function BlogPostPage({
 
               <div className="rounded-xl border border-border/50 bg-muted/30 p-6">
                 <h3 className="mb-2 text-lg font-bold">Enjoying this guide?</h3>
-                <p className="mb-4 text-sm text-muted-foreground">Check out our full catalog of verified student discounts.</p>
+                 <p className="mb-4 text-sm text-muted-foreground">Check out our full catalog of verified discounts and free tools.</p>
                 <Link href="/tools" className="inline-flex items-center gap-1.5 rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90">
                   Browse all offers
                 </Link>

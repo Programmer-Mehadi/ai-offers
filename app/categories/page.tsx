@@ -34,7 +34,7 @@ export default function CategoriesPage() {
           <div className="mb-10 max-w-2xl">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">All Categories</h1>
             <p className="mt-2 text-muted-foreground">
-              Browse offers by category — {categories.length} categories with verified student discounts.
+               Browse offers by category — {categories.length} categories with verified discounts and free tools.
             </p>
           </div>
 

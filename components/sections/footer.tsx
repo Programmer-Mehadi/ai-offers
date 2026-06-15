@@ -16,7 +16,17 @@ const footerLinks = [
       { href: "/categories", label: "Categories" },
       { href: "/how-we-verify", label: "How We Verify" },
       { href: "/submit-offer", label: "Submit an Offer" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { href: "/guides", label: "Guides" },
+      { href: "/savings-calculator", label: "Savings Calculator" },
       { href: "/faq", label: "FAQ" },
+      { href: "/wishlist", label: "Wishlist" },
+      { href: "/changelog", label: "Changelog" },
+      { href: "/press", label: "Press Kit" },
     ],
   },
   {
@@ -69,7 +79,7 @@ export function Footer() {
               <span className="text-base font-bold">StudentPerks</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
-              Helping students save money with verified discounts and exclusive offers.
+              Helping you save money with verified discounts and exclusive offers.
             </p>
             <div className="mt-4 flex gap-3">
               <Link href="/new" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">New</Link>
@@ -108,7 +118,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-border/40 pt-6 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} StudentPerks. Not affiliated with any listed brands.
+          &copy; {new Date().getFullYear()} StudentPerks. Not affiliated with any listed brands. Many offers require student verification.
           All trademarks belong to their respective owners.
         </div>
       </div>

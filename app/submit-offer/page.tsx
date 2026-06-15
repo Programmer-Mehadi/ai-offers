@@ -29,7 +29,7 @@ export default function SubmitOfferPage() {
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Submit an Offer</h1>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Found a student discount or free tool that we&apos;re missing? Let us know and we&apos;ll
+               Found a great discount or free tool that we&apos;re missing? Let us know and we&apos;ll
               verify it for the whole community.
             </p>
           </div>
