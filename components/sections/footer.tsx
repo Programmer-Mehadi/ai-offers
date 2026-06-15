@@ -27,6 +27,8 @@ const footerLinks = [
       { href: "/wishlist", label: "Wishlist" },
       { href: "/changelog", label: "Changelog" },
       { href: "/press", label: "Press Kit" },
+      { href: "/discover", label: "Discover" },
+      { href: "/search", label: "Search" },
     ],
   },
   {
@@ -84,7 +86,7 @@ export function Footer() {
             <div className="mt-4 flex gap-3">
               <Link href="/new" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">New</Link>
               <Link href="/popular" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Popular</Link>
-              <Link href="/expiring-soon" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Expiring</Link>
+              <Link href="/discover" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Discover</Link>
               <Link href="/compare" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Compare</Link>
             </div>
           </div>

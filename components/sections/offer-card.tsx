@@ -66,7 +66,7 @@ export function OfferCard({ offer, variant = "default" }: OfferCardProps) {
         </p>
 
         <div
-          className={`mt-3 inline-block rounded-md bg-gradient-to-r ${offer.color} px-2.5 py-1 text-xs font-semibold text-white`}
+          className={`mt-3 inline-block rounded-lg bg-gradient-to-r ${offer.color} px-3 py-1.5 text-sm font-bold text-white shadow-sm`}
         >
           {offer.discount}
         </div>

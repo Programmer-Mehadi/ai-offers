@@ -41,7 +41,7 @@ export function ToolCard({ offer }: { offer: Offer }) {
           </div>
         </div>
         <p className="text-sm text-muted-foreground">{offer.description}</p>
-        <div className={cn("mt-3 inline-block rounded-md bg-gradient-to-r px-2.5 py-1 text-xs font-semibold text-white", offer.color)}>
+        <div className={cn("mt-3 inline-block rounded-lg bg-gradient-to-r px-3 py-1.5 text-sm font-bold text-white shadow-sm", offer.color)}>
           {offer.discount}
         </div>
       </CardContent>

@@ -972,3 +972,20 @@ export function getSimilarOffers(offer: Offer, count = 4): Offer[] {
   return [...sameCategory, ...fromTags].slice(0, count)
 }
 
+export function getAllOfferTags(): string[] {
+  const tagSet = new Set<string>()
+  for (const o of offers) {
+    o.tags?.forEach((t) => tagSet.add(t))
+  }
+  return [...tagSet].sort()
+}
+
+export function getOffersByTag(tag: string): Offer[] {
+  return offers.filter((o) => o.tags?.includes(tag))
+}
+
+export function getRandomOffers(count = 4): Offer[] {
+  const shuffled = [...offers].sort(() => Math.random() - 0.5)
+  return shuffled.slice(0, count)
+}
+

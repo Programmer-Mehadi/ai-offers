@@ -7,6 +7,7 @@ import { Toaster } from "@/components/toaster"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { CookieConsent } from "@/components/cookie-consent"
 import { CommandPalette } from "@/components/command-palette"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 const fontSans = Plus_Jakarta_Sans({
@@ -43,11 +44,13 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          {children}
-          <Toaster />
-          <ScrollToTop />
-          <CookieConsent />
-          <CommandPalette />
+          <TooltipProvider>
+            {children}
+            <Toaster />
+            <ScrollToTop />
+            <CookieConsent />
+            <CommandPalette />
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

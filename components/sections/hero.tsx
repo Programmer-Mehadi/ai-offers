@@ -24,7 +24,11 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-28 lg:pt-40">
+      {/* Animated gradient orbs */}
       <div className="absolute inset-0 -z-10">
+        <div className="absolute -left-32 -top-32 h-72 w-72 animate-pulse rounded-full bg-gradient-to-br from-brand-400/30 to-violet-500/20 blur-3xl duration-[4000ms]" />
+        <div className="absolute -right-32 top-1/3 h-96 w-96 animate-pulse rounded-full bg-gradient-to-br from-sky-400/20 to-brand-500/20 blur-3xl duration-[5000ms]" />
+        <div className="absolute bottom-0 left-1/3 h-64 w-64 animate-pulse rounded-full bg-gradient-to-br from-violet-400/20 to-pink-400/15 blur-3xl duration-[6000ms]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-100/40 via-transparent to-transparent dark:from-brand-900/20" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-violet-100/30 via-transparent to-transparent dark:from-violet-900/10" />
       </div>
@@ -33,7 +37,7 @@ export function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-xs font-medium text-muted-foreground shadow-xs backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
-            {stats.verifiedDeals} verified â€” updated daily
+            {stats.verifiedDeals} verified &mdash; updated daily
           </div>
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -60,7 +64,7 @@ export function Hero() {
                 onBlur={() => setTimeout(() => setFocused(false), 200)}
               />
               <Button size="sm" className="shrink-0 gap-1" asChild>
-                <Link href="/tools">
+                <Link href={query.trim() ? `/search?q=${encodeURIComponent(query.trim())}` : "/tools"}>
                   Search
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
@@ -86,7 +90,7 @@ export function Hero() {
                   </Link>
                 ))}
                 <Link
-                  href={`/tools?q=${encodeURIComponent(query)}`}
+                  href={`/search?q=${encodeURIComponent(query)}`}
                   className="block border-t border-border px-4 py-2.5 text-center text-xs font-medium text-muted-foreground transition-colors hover:bg-muted"
                 >
                   View all results for &quot;{query}&quot;
@@ -114,4 +118,3 @@ export function Hero() {
     </section>
   )
 }
-
