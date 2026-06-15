@@ -1,3 +1,4 @@
+import Link from "next/link"
 import {
   Brain,
   Cloud,
@@ -59,20 +60,22 @@ function CategoryCard({ category }: { category: Category }) {
   const Icon = iconMap[category.icon] || Code2
 
   return (
-    <Card className="group cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
-      <CardContent className="flex flex-col items-center gap-3 p-4 sm:p-6">
-        <div
-          className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${category.color} text-white shadow-sm transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12`}
-        >
-          <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
-        </div>
-        <div className="text-center">
-          <h3 className="text-sm font-semibold sm:text-base">{category.name}</h3>
-          <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
-            {category.count} offers
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+    <Link href={`/${category.id}`}>
+      <Card className="group cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
+        <CardContent className="flex flex-col items-center gap-3 p-4 sm:p-6">
+          <div
+            className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${category.color} text-white shadow-sm transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12`}
+          >
+            <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+          </div>
+          <div className="text-center">
+            <h3 className="text-sm font-semibold sm:text-base">{category.name}</h3>
+            <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
+              {category.count} offers
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
