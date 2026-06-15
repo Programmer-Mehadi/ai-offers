@@ -5,18 +5,18 @@ const footerLinks = [
     title: "Offers",
     links: [
       { href: "/tools", label: "All Offers" },
-      { href: "#", label: "Categories" },
-      { href: "#", label: "How We Verify" },
-      { href: "#", label: "Submit an Offer" },
+      { href: "/categories", label: "Categories" },
+      { href: "/how-we-verify", label: "How We Verify" },
+      { href: "/submit-offer", label: "Submit an Offer" },
     ],
   },
   {
     title: "Company",
     links: [
-      { href: "#", label: "About" },
-      { href: "#", label: "Blog" },
-      { href: "#", label: "Contact" },
-      { href: "#", label: "Privacy & Terms" },
+      { href: "/about", label: "About" },
+      { href: "/blog", label: "Blog" },
+      { href: "/contact", label: "Contact" },
+      { href: "/privacy-cookies-terms", label: "Privacy & Terms" },
     ],
   },
 ]
