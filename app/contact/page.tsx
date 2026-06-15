@@ -123,8 +123,8 @@ export default function ContactPage() {
                         </label>
                         <textarea
                           id="message"
-                          rows={5}
-                          className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          rows={4}
+                          className="flex min-h-10 w-full rounded-lg border border-input bg-transparent px-3 py-2 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm dark:bg-input/30"
                           placeholder="Tell us more..."
                           required
                         />
