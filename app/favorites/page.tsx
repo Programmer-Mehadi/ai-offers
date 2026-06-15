@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Heart, Search, Trash2 } from "lucide-react"
 import Link from "next/link"
@@ -161,3 +161,4 @@ function FavoriteCard({
     </Card>
   )
 }
+

@@ -1,4 +1,4 @@
-import { BookOpen, Briefcase, CreditCard, ExternalLink, FileText, Mail, Scale, Search, Shield } from "lucide-react"
+﻿import { BookOpen, Briefcase, CreditCard, ExternalLink, FileText, Mail, Scale, Search, Shield } from "lucide-react"
 import Link from "next/link"
 
 import { Card, CardContent } from "@/components/ui/card"
@@ -83,3 +83,4 @@ function ResourceCard({ resource }: { resource: Resource }) {
     </Link>
   )
 }
+

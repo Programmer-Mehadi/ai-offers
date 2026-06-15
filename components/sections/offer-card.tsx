@@ -1,4 +1,4 @@
-import { ArrowUpRight, Award, Gem, Sparkles } from "lucide-react"
+﻿import { ArrowUpRight, Award, Gem, Sparkles } from "lucide-react"
 import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
@@ -89,3 +89,4 @@ export function OfferCard({ offer, variant = "default" }: OfferCardProps) {
     </Card>
   )
 }
+

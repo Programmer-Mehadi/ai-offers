@@ -1,4 +1,4 @@
-export interface Testimonial {
+﻿export interface Testimonial {
   id: string
   name: string
   role: string
@@ -46,3 +46,4 @@ export const testimonials: Testimonial[] = [
     saved: "$120+/yr",
   },
 ]
+

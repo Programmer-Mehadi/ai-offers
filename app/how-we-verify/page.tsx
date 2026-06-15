@@ -1,4 +1,4 @@
-import {
+﻿import {
   BadgeCheck,
   Bot,
   FileCheck,
@@ -23,7 +23,7 @@ const steps = [
     icon: Bot,
     title: "AI Cross-Check",
     description:
-      "AI scans each offer for outdated details, broken links, hidden conditions, and conflicting info. It only flags issues — no offers are auto-published.",
+      "AI scans each offer for outdated details, broken links, hidden conditions, and conflicting info. It only flags issues â€” no offers are auto-published.",
   },
   {
     icon: Globe,
@@ -120,3 +120,4 @@ export default function HowWeVerifyPage() {
     </div>
   )
 }
+

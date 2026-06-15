@@ -1,4 +1,4 @@
-import { Sparkles } from "lucide-react"
+﻿import { Sparkles } from "lucide-react"
 import Link from "next/link"
 
 import { Navbar } from "@/components/sections/navbar"
@@ -43,7 +43,7 @@ export default function NewPage() {
               href="/tools"
               className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
             >
-              Browse all offers →
+              Browse all offers â†’
             </Link>
           </div>
         </div>
@@ -52,3 +52,4 @@ export default function NewPage() {
     </div>
   )
 }
+

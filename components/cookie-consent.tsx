@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Cookie } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -52,3 +52,4 @@ export function CookieConsent() {
     </div>
   )
 }
+

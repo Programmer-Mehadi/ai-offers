@@ -1,4 +1,4 @@
-import { Cookie, FileText, Lock, Mail, Shield } from "lucide-react"
+﻿import { Cookie, FileText, Lock, Mail, Shield } from "lucide-react"
 import Link from "next/link"
 
 import { Card, CardContent } from "@/components/ui/card"
@@ -10,7 +10,7 @@ const sections = [
     icon: FileText,
     title: "Privacy Promise",
     content:
-      "StudentPerks respects your privacy. We do not sell, rent, or share your personal data with third parties for their marketing purposes. Favorites are stored locally in your browser using localStorage — they never touch our servers. We use minimal analytics to understand which offers are popular, and this data is anonymized.",
+      "OfferPerks respects your privacy. We do not sell, rent, or share your personal data with third parties for their marketing purposes. Favorites are stored locally in your browser using localStorage â€” they never touch our servers. We use minimal analytics to understand which offers are popular, and this data is anonymized.",
   },
   {
     icon: Cookie,
@@ -22,7 +22,7 @@ const sections = [
     icon: Shield,
     title: "Terms of Use",
     content:
-      "StudentPerks is a free informational resource for discovering student discounts. All offer details — including pricing, eligibility, and availability — are subject to change by the provider. We verify offers regularly but recommend confirming current terms on the provider's official website before making any purchase or commitment.",
+      "OfferPerks is a free informational resource for discovering student discounts. All offer details â€” including pricing, eligibility, and availability â€” are subject to change by the provider. We verify offers regularly but recommend confirming current terms on the provider's official website before making any purchase or commitment.",
   },
   {
     icon: Mail,
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Privacy, Cookies & Terms</h1>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-              How we handle your data, cookies, and the terms that govern your use of StudentPerks.
+              How we handle your data, cookies, and the terms that govern your use of OfferPerks.
             </p>
           </div>
 
@@ -85,3 +85,4 @@ export default function PrivacyPage() {
     </div>
   )
 }
+

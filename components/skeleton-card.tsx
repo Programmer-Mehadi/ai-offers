@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
+﻿import { Card, CardContent, CardFooter } from "@/components/ui/card"
 
 export function SkeletonCard() {
   return (
@@ -32,3 +32,4 @@ export function SkeletonGrid({ count = 8 }: { count?: number }) {
     </div>
   )
 }
+

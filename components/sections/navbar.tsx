@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import { Bookmark, Menu, Moon, Search, Sun } from "lucide-react"
@@ -48,9 +48,9 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 text-xs font-bold text-white">
-            SP
+            OP
           </div>
-          <span className="text-lg font-bold tracking-tight">StudentPerks</span>
+          <span className="text-lg font-bold tracking-tight">OfferPerks</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
@@ -76,7 +76,7 @@ export function Navbar() {
             <Search className="h-3.5 w-3.5" />
             <span>Search...</span>
             <kbd className="rounded border border-border bg-background px-1 py-0.5 text-[10px] font-medium text-muted-foreground/70">
-              ⌘K
+              âŒ˜K
             </kbd>
           </button>
 
@@ -118,9 +118,9 @@ export function Navbar() {
               <div className="flex items-center justify-between">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                   <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
-                    SP
+                    OP
                   </div>
-                  <span className="text-sm font-bold">StudentPerks</span>
+                  <span className="text-sm font-bold">OfferPerks</span>
                 </Link>
               </div>
 
@@ -173,3 +173,4 @@ export function Navbar() {
     </header>
   )
 }
+

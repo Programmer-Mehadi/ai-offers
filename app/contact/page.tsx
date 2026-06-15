@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Mail, MapPin, MessageSquare, Send } from "lucide-react"
 import { useState } from "react"
@@ -13,19 +13,19 @@ const contactMethods = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@studentperks.co",
-    href: "mailto:hello@studentperks.co",
+    value: "hello@OfferPerks.co",
+    href: "mailto:hello@OfferPerks.co",
   },
   {
     icon: MessageSquare,
     label: "Suggest a Correction",
-    value: "corrections@studentperks.co",
-    href: "mailto:corrections@studentperks.co",
+    value: "corrections@OfferPerks.co",
+    href: "mailto:corrections@OfferPerks.co",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Remote — serving students worldwide",
+    value: "Remote â€” serving students worldwide",
     href: null,
   },
 ]
@@ -145,3 +145,4 @@ export default function ContactPage() {
     </div>
   )
 }
+

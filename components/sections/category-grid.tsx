@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import {
   Brain,
   Cloud,
@@ -42,7 +42,7 @@ export function CategoryGrid() {
             Browse by category
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Explore offers across {categories.length} categories — from development tools to food & dining
+            Explore offers across {categories.length} categories â€” from development tools to food & dining
           </p>
         </div>
 
@@ -79,3 +79,4 @@ function CategoryCard({ category }: { category: Category }) {
     </Link>
   )
 }
+

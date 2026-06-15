@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Mail } from "lucide-react"
 import { useState } from "react"
@@ -48,3 +48,4 @@ export function Newsletter() {
     </form>
   )
 }
+

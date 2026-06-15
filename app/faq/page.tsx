@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { ChevronDown, HelpCircle } from "lucide-react"
 import { useState } from "react"
@@ -41,7 +41,7 @@ const faqs = [
   },
   {
     q: "How do I report an expired or incorrect offer?",
-    a: "Each offer detail page has a 'Report expired or incorrect' button. You can also email corrections@studentperks.co.",
+    a: "Each offer detail page has a 'Report expired or incorrect' button. You can also email corrections@OfferPerks.co.",
   },
 ]
 
@@ -61,7 +61,7 @@ export default function FAQPage() {
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Frequently Asked Questions</h1>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-               Everything you need to know about StudentPerks and how our discounts work.
+               Everything you need to know about OfferPerks and how our discounts work.
             </p>
           </div>
 
@@ -114,3 +114,4 @@ export default function FAQPage() {
     </div>
   )
 }
+

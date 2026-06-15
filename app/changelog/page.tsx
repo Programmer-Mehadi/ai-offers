@@ -1,4 +1,4 @@
-import { Clock, Gift, RefreshCw, Sparkles, Trash2, Wrench } from "lucide-react"
+﻿import { Clock, Gift, RefreshCw, Sparkles, Trash2, Wrench } from "lucide-react"
 import Link from "next/link"
 
 import { Navbar } from "@/components/sections/navbar"
@@ -76,3 +76,4 @@ export default function ChangelogPage() {
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-export interface ChangelogEntry {
+﻿export interface ChangelogEntry {
   date: string
   title: string
   description: string
@@ -21,13 +21,13 @@ export const changelog: ChangelogEntry[] = [
   {
     date: "Jun 10, 2026",
     title: "Command Palette Launched",
-    description: "Press ⌘K (or Ctrl+K) to search offers and categories from anywhere on the site. Quick navigation at your fingertips.",
+    description: "Press âŒ˜K (or Ctrl+K) to search offers and categories from anywhere on the site. Quick navigation at your fingertips.",
     type: "improvement",
   },
   {
     date: "Jun 8, 2026",
     title: "New Guide: Free Cloud Credits",
-    description: "Published 'Ultimate Guide to Free Cloud Credits for Students' — covers Azure, AWS, GCP, and Oracle offers.",
+    description: "Published 'Ultimate Guide to Free Cloud Credits for Students' â€” covers Azure, AWS, GCP, and Oracle offers.",
     type: "new",
   },
   {
@@ -80,8 +80,9 @@ export const changelog: ChangelogEntry[] = [
   },
   {
     date: "May 15, 2026",
-    title: "StudentPerks Launched",
+    title: "OfferPerks Launched",
     description: "Initial launch with 34 verified student offers across 12 categories. Features: search, compare, favorites, and dark mode.",
     type: "new",
   },
 ]
+

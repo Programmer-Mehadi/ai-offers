@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Search } from "lucide-react"
 import Link from "next/link"
@@ -107,11 +107,12 @@ export function CommandPalette() {
           <div className="px-4 py-8 text-center text-sm text-muted-foreground">No results found</div>
         )}
         <div className="border-t border-border px-4 py-2 text-[10px] text-muted-foreground">
-          <kbd className="rounded border border-border px-1 py-0.5">↑↓</kbd> navigate{' '}
-          <kbd className="rounded border border-border px-1 py-0.5">↵</kbd> select{' '}
+          <kbd className="rounded border border-border px-1 py-0.5">â†‘â†“</kbd> navigate{' '}
+          <kbd className="rounded border border-border px-1 py-0.5">â†µ</kbd> select{' '}
           <kbd className="rounded border border-border px-1 py-0.5">ESC</kbd> close
         </div>
       </div>
     </div>
   )
 }
+

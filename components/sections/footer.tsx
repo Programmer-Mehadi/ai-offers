@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import { Newsletter } from "@/components/newsletter"
@@ -74,9 +74,9 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
-                SP
+                OP
               </div>
-              <span className="text-base font-bold">StudentPerks</span>
+              <span className="text-base font-bold">OfferPerks</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
               Helping you save money with verified discounts and exclusive offers.
@@ -118,10 +118,11 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-border/40 pt-6 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} StudentPerks. Not affiliated with any listed brands. Many offers require student verification.
+          &copy; {new Date().getFullYear()} OfferPerks. Not affiliated with any listed brands. Many offers require student verification.
           All trademarks belong to their respective owners.
         </div>
       </div>
     </footer>
   )
 }
+

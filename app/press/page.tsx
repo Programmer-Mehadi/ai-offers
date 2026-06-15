@@ -1,4 +1,4 @@
-import { Download } from "lucide-react"
+﻿import { Download } from "lucide-react"
 
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
 const brandAssets = [
-  { name: "StudentPerks Logo (Horizontal)", format: "SVG", size: "24 KB" },
-  { name: "StudentPerks Logo (Icon Only)", format: "SVG", size: "8 KB" },
-  { name: "StudentPerks Logo (Horizontal Dark)", format: "SVG", size: "24 KB" },
-  { name: "StudentPerks Wordmark", format: "SVG", size: "12 KB" },
+  { name: "OfferPerks Logo (Horizontal)", format: "SVG", size: "24 KB" },
+  { name: "OfferPerks Logo (Icon Only)", format: "SVG", size: "8 KB" },
+  { name: "OfferPerks Logo (Horizontal Dark)", format: "SVG", size: "24 KB" },
+  { name: "OfferPerks Wordmark", format: "SVG", size: "12 KB" },
 ]
 
 const stats = [
@@ -31,14 +31,14 @@ export default function PressPage() {
           <div className="mb-10">
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Press Kit</h1>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              Resources for journalists, bloggers, and partners covering StudentPerks.
+              Resources for journalists, bloggers, and partners covering OfferPerks.
             </p>
           </div>
 
           <section className="mb-12">
-            <h2 className="mb-4 text-xl font-bold">About StudentPerks</h2>
+            <h2 className="mb-4 text-xl font-bold">About OfferPerks</h2>
             <p className="leading-relaxed text-muted-foreground">
-              StudentPerks is a curated directory of verified discounts and free tools, focused on what students actually need.
+              OfferPerks is a curated directory of verified discounts and free tools, focused on what students actually need.
               We help you save money on software, cloud services, entertainment, and more. Every offer is manually verified
               before being listed and re-checked monthly. Founded in 2026, we&apos;ve already helped thousands discover savings
               worth hundreds of dollars per year.
@@ -98,7 +98,7 @@ export default function PressPage() {
             <h2 className="mb-4 text-xl font-bold">Brand Guidelines</h2>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" /> Use the provided logo assets without modification.</li>
-              <li className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" /> Maintain clear space around the logo (minimum 1x the height of the SP mark).</li>
+              <li className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" /> Maintain clear space around the logo (minimum 1x the height of the OP mark).</li>
               <li className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" /> Primary color: indigo (#6366f1). Accent: vibrant amber (#f59e0b).</li>
               <li className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" /> Font: Plus Jakarta Sans for headlines, JetBrains Mono for code.</li>
               <li className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" /> Do not use the logo on busy backgrounds without sufficient contrast.</li>
@@ -113,7 +113,7 @@ export default function PressPage() {
                   For press inquiries, partnership proposals, or interview requests:
                 </p>
                 <p className="mt-2 font-medium">
-                  press@studentperks.co
+                  press@OfferPerks.co
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   We typically respond within 24 hours.
@@ -127,3 +127,4 @@ export default function PressPage() {
     </div>
   )
 }
+

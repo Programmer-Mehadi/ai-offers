@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Gift, Globe, School, TrendingUp } from "lucide-react"
 
@@ -32,3 +32,4 @@ export function StatsCounter() {
     </section>
   )
 }
+

@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useCallback, useEffect, useState } from "react"
 
@@ -41,3 +41,4 @@ export function useCompare() {
 
   return { compareIds: ids, toggleCompare: toggle, clearCompare: clear }
 }
+

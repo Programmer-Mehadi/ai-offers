@@ -1,4 +1,4 @@
-import type { Offer } from "@/data/offers"
+﻿import type { Offer } from "@/data/offers"
 import { OfferCard } from "./offer-card"
 
 interface OffersSectionProps {
@@ -33,3 +33,4 @@ export function OffersSection({
     </section>
   )
 }
+

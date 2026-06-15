@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { ArrowUp, Lightbulb, ThumbsUp, Trash2 } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -166,3 +166,4 @@ export default function WishlistPage() {
     </div>
   )
 }
+

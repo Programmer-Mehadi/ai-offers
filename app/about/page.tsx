@@ -1,4 +1,4 @@
-import { Award, BadgeCheck, Heart, LineChart, Target } from "lucide-react"
+﻿import { Award, BadgeCheck, Heart, LineChart, Target } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
@@ -47,7 +47,7 @@ export default function AboutPage() {
               About us
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              We help students discover verified discounts and free tools — because being a student
+              We help students discover verified discounts and free tools â€” because being a student
               is expensive enough.
             </p>
           </div>
@@ -82,13 +82,13 @@ export default function AboutPage() {
           <div className="mb-16">
             <h2 className="mb-2 text-2xl font-bold tracking-tight">Our Mission</h2>
             <p className="text-muted-foreground">
-              StudentPerks was built because finding real discounts as a student is harder than it should be.
+              OfferPerks was built because finding real discounts as a student is harder than it should be.
                Most deal sites are cluttered, outdated, or full of expired offers. We&apos;re changing that
                with rigorous verification, clean design, and a laser focus on offers that actually deliver value.
             </p>
             <p className="mt-4 text-muted-foreground">
               Every offer on this site has been checked by a human, cross-referenced with official sources,
-              and verified for student eligibility. If a deal expires, we know within days — and we take it down.
+              and verified for student eligibility. If a deal expires, we know within days â€” and we take it down.
             </p>
           </div>
 
@@ -135,7 +135,7 @@ export default function AboutPage() {
             <Award className="mx-auto mb-3 h-8 w-8 text-brand-600 dark:text-brand-400" />
             <h2 className="text-xl font-bold">Found a deal we missed?</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Help the community — submit a verified offer and we&apos;ll review it.
+              Help the community â€” submit a verified offer and we&apos;ll review it.
             </p>
             <Button className="mt-4" asChild>
               <Link href="/submit-offer">Submit an Offer</Link>
@@ -147,3 +147,4 @@ export default function AboutPage() {
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 
 import { Navbar } from "@/components/sections/navbar"
@@ -82,3 +82,4 @@ export default function SitemapPage() {
     </div>
   )
 }
+

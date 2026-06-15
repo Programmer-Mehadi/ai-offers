@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useEffect, useRef, useState } from "react"
 
@@ -46,3 +46,4 @@ export function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?
     </span>
   )
 }
+

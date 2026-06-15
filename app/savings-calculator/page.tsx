@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { Calculator, Check, RotateCcw } from "lucide-react"
 import { useState } from "react"
@@ -139,3 +139,4 @@ export default function SavingsCalculatorPage() {
     </div>
   )
 }
+

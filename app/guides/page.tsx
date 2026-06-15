@@ -1,4 +1,4 @@
-import { BookOpen } from "lucide-react"
+﻿import { BookOpen } from "lucide-react"
 import Link from "next/link"
 
 import { Navbar } from "@/components/sections/navbar"
@@ -36,7 +36,7 @@ export default function GuidesIndexPage() {
                     <h2 className="text-lg font-bold leading-snug group-hover:text-brand-600 dark:group-hover:text-brand-400">{guide.title}</h2>
                     <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{guide.description}</p>
                     <div className="mt-4 text-xs text-muted-foreground">
-                      {guide.date} · {guide.readTime}
+                      {guide.date} Â· {guide.readTime}
                     </div>
                   </CardContent>
                 </Card>
@@ -49,3 +49,4 @@ export default function GuidesIndexPage() {
     </div>
   )
 }
+

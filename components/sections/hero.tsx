@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { ArrowRight, Search } from "lucide-react"
 import Link from "next/link"
@@ -33,7 +33,7 @@ export function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-xs font-medium text-muted-foreground shadow-xs backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
-            {stats.verifiedDeals} verified — updated daily
+            {stats.verifiedDeals} verified â€” updated daily
           </div>
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -114,3 +114,4 @@ export function Hero() {
     </section>
   )
 }
+

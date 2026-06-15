@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useMemo, useState } from "react"
 import { ChevronLeft, ChevronRight, Search, SlidersHorizontal } from "lucide-react"
@@ -189,3 +189,4 @@ export default function ToolsPage() {
     </div>
   )
 }
+

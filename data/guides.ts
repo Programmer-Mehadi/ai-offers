@@ -1,4 +1,4 @@
-export interface Guide {
+﻿export interface Guide {
   id: string
   slug: string
   title: string
@@ -15,9 +15,9 @@ export const guides: Guide[] = [
     id: "free-cloud-credits",
     slug: "free-cloud-credits",
     title: "Ultimate Guide to Free Cloud Credits for Students",
-    description: "How to get $500+ in free cloud credits from AWS, Google Cloud, Azure, and more — no credit card required for most.",
+    description: "How to get $500+ in free cloud credits from AWS, Google Cloud, Azure, and more â€” no credit card required for most.",
     category: "Cloud & DevOps",
-    author: "StudentPerks Team",
+    author: "OfferPerks Team",
     date: "Jun 10, 2026",
     readTime: "12 min read",
     sections: [
@@ -31,7 +31,7 @@ export const guides: Guide[] = [
       },
       {
         heading: "AWS Educate & AWS Free Tier",
-        content: "AWS Educate provides up to $200 in credits depending on your course. Plus the AWS Free Tier gives you 12 months of free access to core services (EC2 t2.micro, S3 5GB, Lambda 1M requests). AWS requires a credit card even for the free tier, but the Educate credits don't — use those first.",
+        content: "AWS Educate provides up to $200 in credits depending on your course. Plus the AWS Free Tier gives you 12 months of free access to core services (EC2 t2.micro, S3 5GB, Lambda 1M requests). AWS requires a credit card even for the free tier, but the Educate credits don't â€” use those first.",
       },
       {
         heading: "Google Cloud for Students ($300+)",
@@ -55,9 +55,9 @@ export const guides: Guide[] = [
     id: "github-student-pack",
     slug: "github-student-pack",
     title: "How to Get GitHub Student Developer Pack (2026)",
-    description: "Complete walkthrough to claim the GitHub Student Developer Pack — what's inside, how to apply, and how to make the most of it.",
+    description: "Complete walkthrough to claim the GitHub Student Developer Pack â€” what's inside, how to apply, and how to make the most of it.",
     category: "Developer Tools",
-    author: "StudentPerks Team",
+    author: "OfferPerks Team",
     date: "May 28, 2026",
     readTime: "8 min read",
     sections: [
@@ -67,7 +67,7 @@ export const guides: Guide[] = [
       },
       {
         heading: "What's Included in 2026",
-        content: "The pack includes: GitHub Copilot (free while a student), JetBrains IDEs (IntelliJ, PyCharm, WebStorm — all free), DigitalOcean $200 credit, Namecheap .me domain (1 year free), GitHub Pro account, Sentry $1,000/month credit, Heroku $13/month credit, Datadog, Better Code Hub, and 50+ more tools. Some are free forever as a student, others are time-limited credits.",
+        content: "The pack includes: GitHub Copilot (free while a student), JetBrains IDEs (IntelliJ, PyCharm, WebStorm â€” all free), DigitalOcean $200 credit, Namecheap .me domain (1 year free), GitHub Pro account, Sentry $1,000/month credit, Heroku $13/month credit, Datadog, Better Code Hub, and 50+ more tools. Some are free forever as a student, others are time-limited credits.",
       },
       {
         heading: "How to Apply",
@@ -75,7 +75,7 @@ export const guides: Guide[] = [
       },
       {
         heading: "Verification Tips",
-        content: "Using your .edu email is the fastest method. If your school isn't in their system, submit a document instead — a tuition receipt or class schedule works. SheerID typically responds in under 2 minutes. International students from 150+ countries are supported. The pack expires after 2 years, but you can re-apply if still a student.",
+        content: "Using your .edu email is the fastest method. If your school isn't in their system, submit a document instead â€” a tuition receipt or class schedule works. SheerID typically responds in under 2 minutes. International students from 150+ countries are supported. The pack expires after 2 years, but you can re-apply if still a student.",
       },
       {
         heading: "Best Tools to Claim First",
@@ -87,9 +87,9 @@ export const guides: Guide[] = [
     id: "student-discounts-2026",
     slug: "student-discounts-2026",
     title: "The Complete Student Discounts Guide for 2026",
-    description: "Every major student discount available in 2026 — from software to subscriptions to hardware — and how to claim them.",
+    description: "Every major student discount available in 2026 â€” from software to subscriptions to hardware â€” and how to claim them.",
     category: "General",
-    author: "StudentPerks Team",
+    author: "OfferPerks Team",
     date: "May 15, 2026",
     readTime: "15 min read",
     sections: [
@@ -124,3 +124,4 @@ export const guides: Guide[] = [
     ],
   },
 ]
+

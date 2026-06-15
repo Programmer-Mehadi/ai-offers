@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
@@ -20,7 +20,7 @@ const fontMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "StudentPerks — Discounts, Free Tools & Offers for Students",
+  title: "OfferPerks â€” Discounts, Free Tools & Offers for Students",
   description:
     "Discover verified discounts, free tools, and exclusive offers across development, AI, design, and more. Save big on the tools you need.",
 }
@@ -53,3 +53,4 @@ export default function RootLayout({
     </html>
   )
 }
+

@@ -1,4 +1,4 @@
-export interface Offer {
+﻿export interface Offer {
   id: string
   name: string
   description: string
@@ -91,7 +91,7 @@ export const offers: Offer[] = [
   {
     id: "aerolink",
     name: "Aerolink",
-    description: "Free $350+ credits — All Claude models via API",
+    description: "Free $350+ credits â€” All Claude models via API",
     discount: "Free $350+ credits",
     category: "AI & Machine Learning",
     audience: "everyone",
@@ -110,7 +110,7 @@ export const offers: Offer[] = [
   {
     id: "freemodel",
     name: "FreeModel",
-    description: "Free up to $300 credits — Claude & GPT API access",
+    description: "Free up to $300 credits â€” Claude & GPT API access",
     discount: "Free up to $300 credits",
     category: "AI & Machine Learning",
     audience: "everyone",
@@ -120,7 +120,7 @@ export const offers: Offer[] = [
     tags: ["API", "Credit", "Developer"],
     notes: [
       "Verify your account (phone or Telegram) to unlock 1 month of Pro free (~$300 value).",
-      "Rate limits: $10 per 5 hours · $67 per week. No credit card needed.",
+      "Rate limits: $10 per 5 hours Â· $67 per week. No credit card needed.",
       "This free Pro access is only valid for your first month. After that, access expires.",
     ],
     howToClaim: [
@@ -144,14 +144,14 @@ export const offers: Offer[] = [
     notes: [
       "Clone repo, add free API keys from providers like Gemini, Groq, Mistral, Cerebras.",
       "No credit card needed anywhere. Point any OpenAI-compatible SDK at localhost.",
-      "Free for everyone — not student-specific.",
+      "Free for everyone â€” not student-specific.",
     ],
     claimUrl: "#",
   },
   {
     id: "bluesminds",
     name: "BluesMinds",
-    description: "Free $100 credits — Gemini, GPT, DeepSeek & more API access",
+    description: "Free $100 credits â€” Gemini, GPT, DeepSeek & more API access",
     discount: "Free $100 credits",
     category: "AI & Machine Learning",
     audience: "everyone",
@@ -168,7 +168,7 @@ export const offers: Offer[] = [
   {
     id: "agentrouter",
     name: "AgentRouter",
-    description: "Up to $200 free credits — Claude, GLM & more API access",
+    description: "Up to $200 free credits â€” Claude, GLM & more API access",
     discount: "Up to $200 free credits",
     category: "AI & Machine Learning",
     audience: "everyone",
@@ -182,7 +182,7 @@ export const offers: Offer[] = [
   {
     id: "mnml-ai",
     name: "mnml.ai",
-    description: "30% off any plan — AI architecture rendering tool",
+    description: "30% off any plan â€” AI architecture rendering tool",
     discount: "30% off any plan",
     category: "AI & Machine Learning",
     url: "/offer/mnml-ai",
@@ -193,7 +193,7 @@ export const offers: Offer[] = [
       "Click Claim Discount and visit the mnml.ai website.",
       "Sign up or log in with your student email (.edu or equivalent).",
       "Verify your student status through their verification partner.",
-      "30% off any plan — applies immediately once verified.",
+      "30% off any plan â€” applies immediately once verified.",
     ],
     claimUrl: "#",
   },
@@ -570,17 +570,17 @@ export const stats = {
 export const blogPosts: BlogPost[] = [
   {
     id: "aws-vs-azure-vs-gcp-for-students",
-    title: "Best Free Cloud for Students 2026 — AWS vs Azure vs GCP vs DigitalOcean",
+    title: "Best Free Cloud for Students 2026 â€” AWS vs Azure vs GCP vs DigitalOcean",
     slug: "aws-vs-azure-vs-gcp-for-students",
     excerpt:
-      "Compare the best free cloud platforms for students in 2026. Azure, GCP, AWS, and DigitalOcean — no credit card options, always-free tiers, and which leads to cloud jobs.",
+      "Compare the best free cloud platforms for students in 2026. Azure, GCP, AWS, and DigitalOcean â€” no credit card options, always-free tiers, and which leads to cloud jobs.",
     content: `
 ## Quick Answer
 
-**Best overall for students: Azure for Students** — $100 credit, no credit card required, annual renewal, free CI/CD via Azure DevOps.
-**Best for AI/ML and free hosting: Google Cloud** — $300 credit, always-free e2-micro VM, free BigQuery and Gemini API tier.
-**Best for job market: AWS** — no student program, but most enterprise adoption (~31% market share) and highest cert value.
-**Best via GitHub Education: DigitalOcean** — $200 credit, simplest platform, ideal for indie projects and beginners.
+**Best overall for students: Azure for Students** â€” $100 credit, no credit card required, annual renewal, free CI/CD via Azure DevOps.
+**Best for AI/ML and free hosting: Google Cloud** â€” $300 credit, always-free e2-micro VM, free BigQuery and Gemini API tier.
+**Best for job market: AWS** â€” no student program, but most enterprise adoption (~31% market share) and highest cert value.
+**Best via GitHub Education: DigitalOcean** â€” $200 credit, simplest platform, ideal for indie projects and beginners.
 
 ## The Comparison Table
 
@@ -593,17 +593,17 @@ export const blogPosts: BlogPost[] = [
 
 ## Deep Dive: Azure for Students
 
-**Azure for Students is the best entry point for most students worldwide** — $100 in credits with no credit card required, annual renewal as long as you're enrolled, and the most generous always-free CI/CD via Azure DevOps.
+**Azure for Students is the best entry point for most students worldwide** â€” $100 in credits with no credit card required, annual renewal as long as you're enrolled, and the most generous always-free CI/CD via Azure DevOps.
 
 What you get:
 - $100 in credits for any Azure service
-- Azure DevOps — 5 users, unlimited private repos, 1,800 CI/CD build minutes/month
+- Azure DevOps â€” 5 users, unlimited private repos, 1,800 CI/CD build minutes/month
 - Always-free forever: Azure SQL, Cosmos DB, Azure Functions, App Service
-- Azure Dev Tools for Teaching — free Visual Studio, SQL Server, Windows Server
+- Azure Dev Tools for Teaching â€” free Visual Studio, SQL Server, Windows Server
 
 ## Deep Dive: Google Cloud
 
-**Google Cloud is the best platform for students who want free AI/ML tools** — $300 in trial credits, the only always-free VM (e2-micro) that survives after credits expire, and the most generous free AI API tiers.
+**Google Cloud is the best platform for students who want free AI/ML tools** â€” $300 in trial credits, the only always-free VM (e2-micro) that survives after credits expire, and the most generous free AI API tiers.
 
 What you get:
 - $300 in credits for 90 days
@@ -630,9 +630,9 @@ What you get:
 
 ## The Verdict
 
-Start with Azure for Students — no card needed, $100 credits, annual renewal.
-Stack GCP for AI/ML and free hosting — best free AI APIs.
-Use AWS when you need a job — most recognized in enterprise.
+Start with Azure for Students â€” no card needed, $100 credits, annual renewal.
+Stack GCP for AI/ML and free hosting â€” best free AI APIs.
+Use AWS when you need a job â€” most recognized in enterprise.
 Grab DigitalOcean via GitHub if you're already on GitHub Education.
     `.trim(),
     author: "Student Offers Team",
@@ -645,7 +645,7 @@ Grab DigitalOcean via GitHub if you're already on GitHub Education.
     title: "10 Best Free AI Tools Every Student Should Use in 2026",
     slug: "best-free-ai-tools-for-students",
     excerpt:
-      "Discover the top free AI tools for students in 2026 — from coding assistants to research helpers, all available with student verification.",
+      "Discover the top free AI tools for students in 2026 â€” from coding assistants to research helpers, all available with student verification.",
     content: `
 ## Why Students Need AI Tools
 
@@ -669,7 +669,7 @@ Google's Gemini offers free access through Google AI Studio with generous rate l
 
 ## 5. Perplexity AI (Free Tier)
 
-AI-powered search engine with citations — perfect for research papers.
+AI-powered search engine with citations â€” perfect for research papers.
 
 ## 6. Grammarly (Free for Students)
 
@@ -698,7 +698,7 @@ Online IDE with AI code completion. 50% off Replit Core for students.
   },
   {
     id: "student-discounts-guide-2026",
-    title: "The Ultimate Student Discounts Guide 2026 — Save $1000+",
+    title: "The Ultimate Student Discounts Guide 2026 â€” Save $1000+",
     slug: "student-discounts-guide-2026",
     excerpt:
       "A comprehensive guide to student discounts in 2026. Learn how to save over $1000 per year on software, services, and everyday essentials.",
@@ -798,7 +798,7 @@ Free static site hosting directly from your GitHub repository.
   },
   {
     id: "best-vpn-for-students-2026",
-    title: "Best VPN for Students 2026 — Discounts and Free Options",
+    title: "Best VPN for Students 2026 â€” Discounts and Free Options",
     slug: "best-vpn-for-students-2026",
     excerpt:
       "Compare the best VPN services for students with exclusive discounts. Surfshark, NordVPN, and more at student-friendly prices.",
@@ -870,11 +870,11 @@ export const studentTypes = [
 ]
 
 export const regions = [
-  { id: "global", label: "Global", flag: "🌍" },
-  { id: "us", label: "United States", flag: "🇺🇸" },
-  { id: "eu", label: "Europe", flag: "🇪🇺" },
-  { id: "india", label: "India", flag: "🇮🇳" },
-  { id: "uk", label: "United Kingdom", flag: "🇬🇧" },
+  { id: "global", label: "Global", flag: "ðŸŒ" },
+  { id: "us", label: "United States", flag: "ðŸ‡ºðŸ‡¸" },
+  { id: "eu", label: "Europe", flag: "ðŸ‡ªðŸ‡º" },
+  { id: "india", label: "India", flag: "ðŸ‡®ðŸ‡³" },
+  { id: "uk", label: "United Kingdom", flag: "ðŸ‡¬ðŸ‡§" },
 ]
 
 export const resources: Resource[] = [
@@ -904,7 +904,7 @@ export const resources: Resource[] = [
   },
   {
     id: "unidays-vs-student-beans",
-    title: "UNiDAYS vs Student Beans — Which is Better?",
+    title: "UNiDAYS vs Student Beans â€” Which is Better?",
     description: "Compare the two biggest student discount platforms side by side.",
     icon: "scale",
     href: "#",
@@ -971,3 +971,4 @@ export function getSimilarOffers(offer: Offer, count = 4): Offer[] {
   )
   return [...sameCategory, ...fromTags].slice(0, count)
 }
+

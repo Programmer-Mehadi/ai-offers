@@ -1,4 +1,4 @@
-import { TrendingUp } from "lucide-react"
+﻿import { TrendingUp } from "lucide-react"
 import Link from "next/link"
 
 import { Navbar } from "@/components/sections/navbar"
@@ -50,7 +50,7 @@ export default function PopularPage() {
               href="/tools"
               className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
             >
-              Browse all offers →
+              Browse all offers â†’
             </Link>
           </div>
         </div>
@@ -59,3 +59,4 @@ export default function PopularPage() {
     </div>
   )
 }
+

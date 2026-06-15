@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { X } from "lucide-react"
@@ -113,7 +113,7 @@ export default function ComparePage() {
             <div className="lg:col-span-3">
               {selected.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
-                  <div className="mb-4 text-4xl">⇄</div>
+                  <div className="mb-4 text-4xl">â‡„</div>
                   <h2 className="text-xl font-bold">Select offers to compare</h2>
                   <p className="mt-1 text-sm text-muted-foreground">
                     Search for offers on the left and add up to 3 at a time.
@@ -148,7 +148,7 @@ export default function ComparePage() {
                       <CompareRow label="Category" values={selected.map((o) => o.category)} />
                       <CompareRow label="Discount" values={selected.map((o) => o.discount)} />
                       <CompareRow label="Description" values={selected.map((o) => o.description)} />
-                      <CompareRow label="Tags" values={selected.map((o) => o.tags?.join(", ") || "—")} />
+                      <CompareRow label="Tags" values={selected.map((o) => o.tags?.join(", ") || "â€”")} />
                       <CompareRow
                         label="Type"
                         values={selected.map((o) =>
@@ -198,3 +198,4 @@ function CompareRow({ label, values }: { label: string; values: string[] }) {
     </tr>
   )
 }
+

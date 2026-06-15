@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { ArrowUpRight, X } from "lucide-react"
 import Link from "next/link"
@@ -68,3 +68,4 @@ export function QuickView({ offer, onClose }: QuickViewProps) {
     </div>
   )
 }
+
