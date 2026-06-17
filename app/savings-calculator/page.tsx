@@ -1,7 +1,7 @@
 ﻿"use client"
 
 import { Calculator, Check, RotateCcw } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import Link from "next/link"
 
@@ -10,12 +10,15 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { offers } from "@/data/offers"
+import { getOffers } from "@/data/offers"
 import { cn } from "@/lib/utils"
 
 export default function SavingsCalculatorPage() {
   const [selections, setSelections] = useState<Record<string, boolean>>({})
   const [showAll, setShowAll] = useState(false)
+  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>([])
+
+  useEffect(() => { getOffers().then(setOffers) }, [])
 
   const displayed = showAll ? offers : offers.slice(0, 16)
 

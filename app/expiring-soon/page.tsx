@@ -9,8 +9,8 @@ import { Breadcrumbs } from "@/components/breadcrumbs"
 import { ToolCard } from "@/app/[category]/tool-card"
 import { getExpiringOffers } from "@/data/offers"
 
-export default function ExpiringSoonPage() {
-  const expiring = getExpiringOffers(12)
+export default async function ExpiringSoonPage() {
+  const expiring = await getExpiringOffers(12)
 
   return (
     <div className="flex min-h-screen flex-col">

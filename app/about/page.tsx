@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
-import { stats } from "@/data/offers"
+import { getStats } from "@/data/offers"
 
 const values = [
   {
@@ -36,7 +36,8 @@ const team = [
   { name: "Raj Patel", role: "Community Manager", initials: "RP" },
 ]
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const stats = await getStats()
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

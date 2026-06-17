@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { categories } from "@/data/offers"
+import { getCategories } from "@/data/offers"
 
 const groups = [
   {
@@ -20,7 +20,7 @@ const groups = [
   },
   {
     title: "Categories",
-    links: categories.map((c) => ({ href: `/${c.id}`, label: c.name })),
+    links: [], // populated below from API
   },
   {
     title: "Resources",
@@ -41,7 +41,9 @@ const groups = [
   },
 ]
 
-export default function SitemapPage() {
+export default async function SitemapPage() {
+  const categories = await getCategories()
+  groups[1].links = categories.map((c: { id: string; name: string }) => ({ href: `/${c.id}`, label: c.name }))
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

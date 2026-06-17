@@ -9,8 +9,8 @@ import { PageTransition } from "@/components/page-transition"
 import { ToolCard } from "@/app/[category]/tool-card"
 import { getRecentOffers } from "@/data/offers"
 
-export default function NewPage() {
-  const recent = getRecentOffers(12)
+export default async function NewPage() {
+  const recent = await getRecentOffers(12)
 
   return (
     <div className="flex min-h-screen flex-col">

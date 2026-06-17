@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { resources, type Resource } from "@/data/offers"
+import { getResources, type Resource } from "@/data/offers"
 
 const iconMap: Record<string, typeof ExternalLink> = {
   github: ExternalLink,
@@ -18,9 +18,9 @@ const iconMap: Record<string, typeof ExternalLink> = {
   "credit-card": CreditCard,
 }
 
-const categories = Array.from(new Set(resources.map((r) => r.category)))
-
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
+  const resources = await getResources()
+  const categories = Array.from(new Set(resources.map((r) => r.category)))
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

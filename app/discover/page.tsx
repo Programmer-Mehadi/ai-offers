@@ -1,7 +1,7 @@
 "use client"
 
 import { RefreshCw, Shuffle } from "lucide-react"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
@@ -10,26 +10,29 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { PageTransition } from "@/components/page-transition"
-import { offers } from "@/data/offers"
+import { getOffers } from "@/data/offers"
 
 function seededRandom(seed: number) {
   const x = Math.sin(seed + 1) * 10000
   return x - Math.floor(x)
 }
 
-function pickOffers(seed: number, count: number) {
-  const order = offers.map((_, i) => i)
+function pickOffers(allOffers: Awaited<ReturnType<typeof getOffers>>, seed: number, count: number) {
+  const order = allOffers.map((_, i) => i)
   for (let i = order.length - 1; i > 0; i--) {
     const j = Math.floor(seededRandom(seed * (i + 1)) * (i + 1));
     [order[i], order[j]] = [order[j], order[i]]
   }
-  return order.slice(0, count).map((i) => offers[i])
+  return order.slice(0, count).map((i) => allOffers[i])
 }
 
 export default function DiscoverPage() {
+  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>([])
   const [seed, setSeed] = useState(() => Date.now())
 
-  const randomOffers = useMemo(() => pickOffers(seed, 4), [seed])
+  useEffect(() => { getOffers().then(setOffers) }, [])
+
+  const randomOffers = useMemo(() => pickOffers(offers, seed, 4), [offers, seed])
 
   function reshuffle() {
     setSeed(Date.now())

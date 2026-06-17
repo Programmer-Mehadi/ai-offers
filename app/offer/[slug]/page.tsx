@@ -1,6 +1,7 @@
 "use client"
 
 import { notFound, useParams } from "next/navigation"
+import { useEffect, useState } from "react"
 import {
   ArrowLeft, ArrowRight, ArrowUpRight, Award, Bookmark, CheckCircle2, DollarSign, Flag, Gem, Globe, Link2,
   LucideIcon, Share2, Sparkles, Tag, Users,
@@ -17,7 +18,7 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { PageTransition } from "@/components/page-transition"
-import { getOfferBySlug, getCategoryByName, getOffersByCategory, offers, getCategorySlug } from "@/data/offers"
+import { getOfferBySlug, getCategoryByName, getOffersByCategory, getOffers, getCategorySlug } from "@/data/offers"
 import { cn } from "@/lib/utils"
 
 const tagIcons: Record<string, LucideIcon> = {
@@ -57,8 +58,19 @@ function extractValue(discount: string): string {
 export default function OfferPage() {
   const params = useParams()
   const slug = params.slug as string
-  const offer = getOfferBySlug(slug)
+  const [offer, setOffer] = useState<Awaited<ReturnType<typeof getOfferBySlug>>>(undefined)
+  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>([])
+  const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    Promise.all([getOfferBySlug(slug), getOffers()]).then(([o, all]) => {
+      setOffer(o)
+      setOffers(all)
+      setLoading(false)
+    })
+  }, [slug])
+
+  if (loading) return null
   if (!offer) notFound()
 
   const saved = isFavorited(slug)
@@ -79,7 +91,7 @@ export default function OfferPage() {
   const currentIndex = offers.findIndex((o) => o.id === slug)
   const prevOffer = currentIndex > 0 ? offers[currentIndex - 1] : null
   const nextOffer = currentIndex < offers.length - 1 ? offers[currentIndex + 1] : null
-  const relatedOffers = getOffersByCategory(offer.category).filter((o) => o.id !== slug).slice(0, 4)
+  const relatedOffers = offers.filter((o) => o.category === offer.category && o.id !== slug).slice(0, 4)
   const catSlug = getCategorySlug(offer.category)
 
   return (

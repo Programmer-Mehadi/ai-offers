@@ -18,14 +18,15 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
-import { categories } from "@/data/offers"
+import { getCategories } from "@/data/offers"
 
 const iconMap: Record<string, LucideIcon> = {
   Code2, Brain, Zap, Palette, GraduationCap, Cloud, Film,
   ShoppingBag, Plane, Users, Shield, UtensilsCrossed,
 }
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const categories = await getCategories()
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

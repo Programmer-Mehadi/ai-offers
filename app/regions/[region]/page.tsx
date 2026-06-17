@@ -5,11 +5,7 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Card, CardContent } from "@/components/ui/card"
-import { offers, regions } from "@/data/offers"
-
-export function generateStaticParams() {
-  return regions.map((r) => ({ region: r.id }))
-}
+import { getOffers, getRegions } from "@/data/offers"
 
 export default async function RegionPage({
   params,
@@ -17,6 +13,7 @@ export default async function RegionPage({
   params: Promise<{ region: string }>
 }) {
   const { region } = await params
+  const [offers, regions] = await Promise.all([getOffers(), getRegions()])
   const regionObj = regions.find((r) => r.id === region)
   if (!regionObj) notFound()
 

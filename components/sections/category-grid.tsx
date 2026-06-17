@@ -16,7 +16,7 @@ import {
 } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { categories, type Category } from "@/data/offers"
+import { getCategories, type Category } from "@/data/offers"
 
 const iconMap: Record<string, LucideIcon> = {
   Code2,
@@ -33,7 +33,8 @@ const iconMap: Record<string, LucideIcon> = {
   UtensilsCrossed,
 }
 
-export function CategoryGrid() {
+export async function CategoryGrid() {
+  const categories = await getCategories()
   return (
     <section id="categories" className="py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

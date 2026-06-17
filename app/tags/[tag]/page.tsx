@@ -10,8 +10,9 @@ import { Button } from "@/components/ui/button"
 import { getAllOfferTags, getOffersByTag } from "@/data/offers"
 import { ToolCard } from "@/app/[category]/tool-card"
 
-export function generateStaticParams() {
-  return getAllOfferTags().map((tag) => ({ tag: tag.toLowerCase().replace(/\s+/g, "-") }))
+export async function generateStaticParams() {
+  const tags = await getAllOfferTags()
+  return tags.map((tag: string) => ({ tag: tag.toLowerCase().replace(/\s+/g, "-") }))
 }
 
 export default async function TagPage({
@@ -20,12 +21,12 @@ export default async function TagPage({
   params: Promise<{ tag: string }>
 }) {
   const { tag: tagSlug } = await params
-  const allTags = getAllOfferTags()
+  const allTags = await getAllOfferTags()
   const matchedTag = allTags.find((t) => t.toLowerCase().replace(/\s+/g, "-") === tagSlug)
 
   if (!matchedTag) notFound()
 
-  const tagged = getOffersByTag(matchedTag)
+  const tagged = await getOffersByTag(matchedTag)
   const otherTags = allTags.filter((t) => t !== matchedTag)
 
   return (

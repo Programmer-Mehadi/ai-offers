@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
-import { type Offer, offers } from "@/data/offers"
+import { type Offer, getOffers } from "@/data/offers"
 
 function getFavorites(): string[] {
   if (typeof window === "undefined") return []
@@ -23,11 +23,13 @@ function getFavorites(): string[] {
 export default function FavoritesPage() {
   const [favoriteIds, setFavoriteIds] = useState<string[]>(() => getFavorites())
   const [search, setSearch] = useState("")
+  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>([])
 
   useEffect(() => {
     const handler = () => setFavoriteIds(getFavorites())
     window.addEventListener("storage", handler)
     window.addEventListener("favorites-updated", handler)
+    getOffers().then(setOffers)
     return () => {
       window.removeEventListener("storage", handler)
       window.removeEventListener("favorites-updated", handler)

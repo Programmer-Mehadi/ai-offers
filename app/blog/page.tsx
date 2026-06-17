@@ -5,9 +5,10 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
-import { blogPosts } from "@/data/offers"
+import { getBlogPosts } from "@/data/offers"
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts()
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

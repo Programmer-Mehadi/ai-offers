@@ -3,7 +3,7 @@
 import { Search as SearchIcon, X } from "lucide-react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { Suspense, useMemo, useState } from "react"
+import { Suspense, useEffect, useMemo, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,13 +11,16 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { PageTransition } from "@/components/page-transition"
 import { ToolCard } from "@/app/[category]/tool-card"
-import { offers } from "@/data/offers"
+import { getOffers } from "@/data/offers"
 
 function SearchContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const q = searchParams.get("q") || ""
   const [input, setInput] = useState(q)
+  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>([])
+
+  useEffect(() => { getOffers().then(setOffers) }, [])
 
   const results = useMemo(() => {
     if (!q) return offers

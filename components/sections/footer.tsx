@@ -2,7 +2,7 @@
 import { ArrowRight } from "lucide-react"
 
 import { Newsletter } from "@/components/newsletter"
-import { categories } from "@/data/offers"
+import { getCategories } from "@/data/offers"
 
 const footerLinks = [
   {
@@ -44,7 +44,8 @@ const footerLinks = [
   },
 ]
 
-export function Footer() {
+export async function Footer() {
+  const categories = await getCategories()
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

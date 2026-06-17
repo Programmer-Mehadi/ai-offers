@@ -2,13 +2,23 @@
 
 import { ArrowRight, Search } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { offers, stats } from "@/data/offers"
+import { getOffers, getStats } from "@/data/offers"
+import type { Offer } from "@/data/offers"
 
 export function Hero() {
+  const [offers, setOffers] = useState<Offer[]>([])
+  const [stats, setStats] = useState({ totalOffers: 0, verifiedDeals: "100%", studentsServed: "0" })
+
+  useEffect(() => {
+    Promise.all([getOffers(), getStats()]).then(([o, s]) => {
+      setOffers(o)
+      setStats(s)
+    })
+  }, [])
   const [query, setQuery] = useState("")
   const [focused, setFocused] = useState(false)
 

@@ -7,10 +7,11 @@ import { Footer } from "@/components/sections/footer"
 import { ReadingProgress } from "@/components/reading-progress"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Separator } from "@/components/ui/separator"
-import { guides } from "@/data/guides"
+import { getGuides } from "@/data/guides"
 
-export function generateStaticParams() {
-  return guides.map((g) => ({ slug: g.slug }))
+export async function generateStaticParams() {
+  const all = await getGuides()
+  return all.map((g: { slug: string }) => ({ slug: g.slug }))
 }
 
 export default async function GuidePage({
@@ -19,7 +20,8 @@ export default async function GuidePage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const guide = guides.find((g) => g.slug === slug)
+  const [allGuides] = await Promise.all([getGuides()])
+  const guide = allGuides.find((g: { slug: string }) => g.slug === slug)
   if (!guide) notFound()
 
   return (

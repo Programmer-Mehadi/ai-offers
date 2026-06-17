@@ -6,10 +6,11 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Card, CardContent } from "@/components/ui/card"
-import { offers, studentTypes } from "@/data/offers"
+import { getOffers, getStudentTypes } from "@/data/offers"
 
-export function generateStaticParams() {
-  return studentTypes.map((t) => ({ type: t.id }))
+export async function generateStaticParams() {
+  const types = await getStudentTypes()
+  return types.map((t: { id: string }) => ({ type: t.id }))
 }
 
 const icons: Record<string, typeof School> = { School, GraduationCap, Globe, BookOpen }
@@ -20,6 +21,7 @@ export default async function StudentTypePage({
   params: Promise<{ type: string }>
 }) {
   const { type } = await params
+  const [offers, studentTypes] = await Promise.all([getOffers(), getStudentTypes()])
   const studentType = studentTypes.find((t) => t.id === type)
   if (!studentType) notFound()
 

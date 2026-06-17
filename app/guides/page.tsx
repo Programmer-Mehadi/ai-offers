@@ -5,9 +5,10 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Card, CardContent } from "@/components/ui/card"
-import { guides } from "@/data/guides"
+import { getGuides } from "@/data/guides"
 
-export default function GuidesIndexPage() {
+export default async function GuidesIndexPage() {
+  const guides = await getGuides()
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />

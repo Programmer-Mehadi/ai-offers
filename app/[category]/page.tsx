@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { PageTransition } from "@/components/page-transition"
-import { categories, categoryLookup, getOffersByCategory } from "@/data/offers"
+import { getCategories, categoryLookup, getOffersByCategory } from "@/data/offers"
 import { ToolCard } from "./tool-card"
 
 const categoryDescriptions: Record<string, string> = {
@@ -24,10 +24,6 @@ const categoryDescriptions: Record<string, string> = {
   food: "Food delivery discounts and dining perks to save on meals.",
 }
 
-export async function generateStaticParams() {
-  return categories.map((cat) => ({ category: cat.id }))
-}
-
 export default async function CategoryPage({
   params,
 }: {
@@ -40,7 +36,10 @@ export default async function CategoryPage({
     notFound()
   }
 
-  const categoryOffers = getOffersByCategory(categoryName)
+  const [categories, categoryOffers] = await Promise.all([
+    getCategories(),
+    getOffersByCategory(categoryName),
+  ])
   const cat = categories.find((c) => c.id === slug)
   const otherCategories = categories.filter((c) => c.id !== slug)
 

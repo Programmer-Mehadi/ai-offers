@@ -1,6 +1,6 @@
 ﻿"use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { X } from "lucide-react"
 import Link from "next/link"
 
@@ -10,11 +10,14 @@ import { Input } from "@/components/ui/input"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { offers, type Offer } from "@/data/offers"
+import { getOffers, type Offer } from "@/data/offers"
 
 export default function ComparePage() {
   const [selected, setSelected] = useState<Offer[]>([])
   const [search, setSearch] = useState("")
+  const [offers, setOffers] = useState<Offer[]>([])
+
+  useEffect(() => { getOffers().then(setOffers) }, [])
 
   const searched = offers.filter(
     (o) =>

@@ -10,7 +10,7 @@ import { Footer } from "@/components/sections/footer"
 import { ReadingProgress } from "@/components/reading-progress"
 import { Newsletter } from "@/components/newsletter"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { blogPosts, getBlogBySlug } from "@/data/offers"
+import { getBlogPosts, getBlogPostBySlug } from "@/data/offers"
 
 export default async function BlogPostPage({
   params,
@@ -18,7 +18,10 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const post = getBlogBySlug(slug)
+  const [blogPosts, post] = await Promise.all([
+    getBlogPosts(),
+    getBlogPostBySlug(slug),
+  ])
 
   if (!post) notFound()
 

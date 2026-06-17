@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { changelog, type ChangelogEntry } from "@/data/changelog"
+import { getChangelog, type ChangelogEntry } from "@/data/changelog"
 import { cn } from "@/lib/utils"
 
 const typeConfig: Record<ChangelogEntry["type"], { icon: typeof Gift; label: string; color: string }> = {
@@ -14,7 +14,8 @@ const typeConfig: Record<ChangelogEntry["type"], { icon: typeof Gift; label: str
   improvement: { icon: Wrench, label: "Improvement", color: "from-amber-500 to-orange-600" },
 }
 
-export default function ChangelogPage() {
+export default async function ChangelogPage() {
+  const changelogEntries = await getChangelog()
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -36,7 +37,7 @@ export default function ChangelogPage() {
             <div className="absolute left-[19px] top-0 h-full w-px bg-border/60" />
 
             <div className="space-y-8">
-              {changelog.map((entry, i) => {
+              {changelogEntries.map((entry, i) => {
                 const config = typeConfig[entry.type]
                 const Icon = config.icon
                 return (

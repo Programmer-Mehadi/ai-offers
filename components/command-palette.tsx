@@ -4,14 +4,24 @@ import { Search } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
-import { offers, categories } from "@/data/offers"
+import { getOffers, getCategories } from "@/data/offers"
+import type { Offer, Category } from "@/data/offers"
 import { cn } from "@/lib/utils"
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [offers, setOffers] = useState<Offer[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    Promise.all([getOffers(), getCategories()]).then(([o, c]) => {
+      setOffers(o)
+      setCategories(c)
+    })
+  }, [])
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {

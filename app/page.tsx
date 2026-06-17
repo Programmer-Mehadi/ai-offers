@@ -9,13 +9,18 @@ import { OffersSection } from "@/components/sections/offers-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { StatsCounter } from "@/components/stats-counter"
 import { Footer } from "@/components/sections/footer"
-import { offers, studentTypes, regions, getTrendingOffers } from "@/data/offers"
+import { getOffers, getStudentTypes, getRegions, getTrendingOffers } from "@/data/offers"
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [offers, studentTypes, regions, trending] = await Promise.all([
+    getOffers(),
+    getStudentTypes(),
+    getRegions(),
+    getTrendingOffers(6),
+  ])
   const featuredOffers = offers.filter((o) => o.featured)
   const hiddenGems = offers.filter((o) => o.hidden_gem)
   const underratedPerks = offers.filter((o) => o.underrated)
-  const trending = getTrendingOffers(6)
 
   return (
     <div className="flex min-h-screen flex-col">

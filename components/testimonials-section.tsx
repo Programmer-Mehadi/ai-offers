@@ -3,9 +3,11 @@
 import { Quote } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { testimonials } from "@/data/testimonials"
+import { getTestimonials } from "@/data/testimonials"
+import type { Testimonial } from "@/data/testimonials"
 
-export function TestimonialsSection() {
+export async function TestimonialsSection() {
+  const testimonials = await getTestimonials()
   return (
     <section className="border-y border-border/40 bg-muted/20 py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

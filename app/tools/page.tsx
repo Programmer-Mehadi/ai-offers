@@ -1,6 +1,6 @@
 ﻿"use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Search, SlidersHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -10,7 +10,7 @@ import { Footer } from "@/components/sections/footer"
 import { ToolCard } from "@/app/[category]/tool-card"
 import { QuickView } from "@/components/quick-view"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { categories, offers, type Offer } from "@/data/offers"
+import { getCategories, getOffers, type Offer } from "@/data/offers"
 import { cn } from "@/lib/utils"
 
 const PER_PAGE = 12
@@ -23,6 +23,15 @@ export default function ToolsPage() {
   const [sort, setSort] = useState<SortKey>("name")
   const [audience, setAudience] = useState<"all" | "students" | "everyone">("all")
   const [quickView, setQuickView] = useState<Offer | null>(null)
+  const [offers, setOffers] = useState<Offer[]>([])
+  const [categories, setCategories] = useState<Awaited<ReturnType<typeof getCategories>>>([])
+
+  useEffect(() => {
+    Promise.all([getOffers(), getCategories()]).then(([o, c]) => {
+      setOffers(o)
+      setCategories(c)
+    })
+  }, [])
 
   const filtered = useMemo(() => {
     const result = offers.filter((offer) => {

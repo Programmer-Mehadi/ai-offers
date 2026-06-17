@@ -9,8 +9,8 @@ import { PageTransition } from "@/components/page-transition"
 import { ToolCard } from "@/app/[category]/tool-card"
 import { getPopularOffers } from "@/data/offers"
 
-export default function PopularPage() {
-  const popular = getPopularOffers(12)
+export default async function PopularPage() {
+  const popular = await getPopularOffers(12)
 
   return (
     <div className="flex min-h-screen flex-col">
