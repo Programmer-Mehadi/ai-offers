@@ -18,7 +18,11 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
-import { getCategories, getCategorySlug } from "@/data/offers"
+import {
+  getCategories,
+  getCategoryGradientClass,
+  getCategorySlug,
+} from "@/data/offers"
 
 const iconMap: Record<string, LucideIcon> = {
   Code2,
@@ -55,12 +59,13 @@ export default async function CategoriesPage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => {
               const Icon = iconMap[cat.icon] || Code2
+              const gradientClass = getCategoryGradientClass(cat.color)
               return (
                 <Link key={cat.id} href={`/${getCategorySlug(cat.name)}`}>
                   <Card className="group h-full cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
                     <CardContent className="flex items-start gap-4 p-5">
                       <div
-                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cat.color} text-white shadow-sm transition-transform duration-300 group-hover:scale-110`}
+                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-linear-to-br ${gradientClass} text-white shadow-sm transition-transform duration-300 group-hover:scale-110`}
                       >
                         <Icon className="h-6 w-6" />
                       </div>

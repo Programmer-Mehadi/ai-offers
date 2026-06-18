@@ -8,6 +8,7 @@ import { Footer } from "@/components/sections/footer"
 import { PageTransition } from "@/components/page-transition"
 import {
   getCategories,
+  getCategoryGradientClass,
   categoryLookup,
   getCategorySlug,
   getOffersByCategory,
@@ -56,6 +57,7 @@ export default async function CategoryPage({
     getOffersByCategory(categoryName),
   ])
   const cat = categories.find((c) => getCategorySlug(c.name) === slug)
+  const gradientClass = cat ? getCategoryGradientClass(cat.color) : ""
   const otherCategories = categories.filter(
     (c) => getCategorySlug(c.name) !== slug
   )
@@ -69,15 +71,15 @@ export default async function CategoryPage({
           {cat && (
             <section className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16">
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${cat.color} opacity-5 dark:opacity-[0.07]`}
+                className={`absolute inset-0 bg-linear-to-br ${gradientClass} opacity-5 dark:opacity-[0.07]`}
               />
               <div
-                className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] ${cat.color} via-transparent to-transparent opacity-[0.08]`}
+                className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] ${gradientClass} via-transparent to-transparent opacity-[0.08]`}
               />
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-4">
                   <div
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${cat.color} text-lg font-bold text-white shadow-md`}
+                    className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${gradientClass} text-lg font-bold text-white shadow-md`}
                   >
                     {categoryName.charAt(0)}
                   </div>
@@ -130,7 +132,7 @@ export default async function CategoryPage({
                     className="group flex items-center gap-3 rounded-xl border border-border/50 p-4 transition-all hover:border-transparent hover:shadow-md"
                   >
                     <div
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${c.color} text-xs font-bold text-white`}
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-linear-to-br ${getCategoryGradientClass(c.color)} text-xs font-bold text-white`}
                     >
                       {c.name.charAt(0)}
                     </div>

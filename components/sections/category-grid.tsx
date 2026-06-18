@@ -16,7 +16,12 @@ import {
 } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { getCategories, getCategorySlug, type Category } from "@/data/offers"
+import {
+  getCategories,
+  getCategoryGradientClass,
+  getCategorySlug,
+  type Category,
+} from "@/data/offers"
 
 const iconMap: Record<string, LucideIcon> = {
   Code2,
@@ -60,13 +65,14 @@ export async function CategoryGrid() {
 
 function CategoryCard({ category }: { category: Category }) {
   const Icon = iconMap[category.icon] || Code2
+  const gradientClass = getCategoryGradientClass(category.color)
 
   return (
     <Link href={`/${getCategorySlug(category.name)}`}>
       <Card className="group cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
         <CardContent className="flex flex-col items-center gap-3 p-4 sm:p-6">
           <div
-            className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${category.color} text-white shadow-sm transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12`}
+            className={`flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${gradientClass} text-white shadow-sm transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12`}
           >
             <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>

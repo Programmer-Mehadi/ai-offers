@@ -1,4 +1,4 @@
-﻿import * as api from '@/lib/api'
+﻿import * as api from "@/lib/api"
 
 export interface Offer {
   id: string
@@ -9,7 +9,7 @@ export interface Offer {
   featured?: boolean
   hidden_gem?: boolean
   underrated?: boolean
-  audience?: 'students' | 'everyone'
+  audience?: "students" | "everyone"
   url: string
   color: string
   logo?: string
@@ -42,6 +42,23 @@ export interface Category {
   color: string
 }
 
+const categoryGradientClassMap: Record<string, string> = {
+  "from-violet-500 to-purple-500": "from-violet-500 to-purple-500",
+  "from-sky-500 to-indigo-500": "from-sky-500 to-indigo-500",
+  "from-pink-500 to-rose-500": "from-pink-500 to-rose-500",
+  "from-blue-500 to-cyan-500": "from-blue-500 to-cyan-500",
+  "from-lime-500 to-green-500": "from-lime-500 to-green-500",
+  "from-emerald-500 to-teal-500": "from-emerald-500 to-teal-500",
+  "from-red-500 to-pink-500": "from-red-500 to-pink-500",
+  "from-amber-500 to-orange-500": "from-amber-500 to-orange-500",
+  "from-slate-500 to-gray-500": "from-slate-500 to-gray-500",
+  "from-orange-500 to-red-500": "from-orange-500 to-red-500",
+  "from-indigo-500 to-blue-500": "from-indigo-500 to-blue-500",
+  "from-teal-500 to-emerald-500": "from-teal-500 to-emerald-500",
+}
+
+const fallbackCategoryGradientClass = "from-blue-500 to-cyan-500"
+
 export interface BlogPost {
   id: string
   title: string
@@ -55,23 +72,27 @@ export interface BlogPost {
 }
 
 export const categoryLookup: Record<string, string> = {
-  'ai-and-machine-learning': 'AI & Machine Learning',
-  'cloud-and-hosting': 'Cloud & Hosting',
-  development: 'Development Tools',
-  design: 'Design & Creative',
-  productivity: 'Productivity',
-  learning: 'Learning & Education',
-  media: 'Media & Entertainment',
-  shopping: 'Shopping & Lifestyle',
-  'travel-and-finance': 'Travel & Finance',
-  memberships: 'Student Memberships',
-  security: 'Security & Privacy',
-  food: 'Food & Dining',
+  "ai-and-machine-learning": "AI & Machine Learning",
+  "cloud-and-hosting": "Cloud & Hosting",
+  development: "Development Tools",
+  design: "Design & Creative",
+  productivity: "Productivity",
+  learning: "Learning & Education",
+  media: "Media & Entertainment",
+  shopping: "Shopping & Lifestyle",
+  "travel-and-finance": "Travel & Finance",
+  memberships: "Student Memberships",
+  security: "Security & Privacy",
+  food: "Food & Dining",
 }
 
 export function getCategorySlug(name: string): string {
   const entry = Object.entries(categoryLookup).find(([, v]) => v === name)
-  return entry ? entry[0] : name.toLowerCase().replace(/\s+/g, '-')
+  return entry ? entry[0] : name.toLowerCase().replace(/\s+/g, "-")
+}
+
+export function getCategoryGradientClass(color: string): string {
+  return categoryGradientClassMap[color] || fallbackCategoryGradientClass
 }
 
 export async function getOffers(): Promise<Offer[]> {
@@ -86,7 +107,9 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   return api.getBlogPosts()
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+export async function getBlogPostBySlug(
+  slug: string
+): Promise<BlogPost | undefined> {
   try {
     return await api.getBlogPostBySlug(slug)
   } catch {
@@ -99,8 +122,8 @@ export async function getStats() {
   return {
     totalOffers: s.offersCount ?? 0,
     categories: s.categoriesCount ?? 0,
-    verifiedDeals: '100%',
-    studentsServed: `${s.studentsServed?.toLocaleString() ?? '50K'}+`,
+    verifiedDeals: "100%",
+    studentsServed: `${s.studentsServed?.toLocaleString() ?? "50K"}+`,
   }
 }
 
@@ -124,12 +147,16 @@ export async function getOfferBySlug(slug: string): Promise<Offer | undefined> {
   }
 }
 
-export async function getOffersByCategory(categoryName: string): Promise<Offer[]> {
+export async function getOffersByCategory(
+  categoryName: string
+): Promise<Offer[]> {
   const all = await api.getOffers()
   return all.filter((o) => o.category === categoryName)
 }
 
-export async function getCategoryByName(name: string): Promise<Category | undefined> {
+export async function getCategoryByName(
+  name: string
+): Promise<Category | undefined> {
   const all = await api.getCategories()
   return all.find((c) => c.name === name)
 }
@@ -146,7 +173,9 @@ export async function getExpiringOffers(count = 8): Promise<Offer[]> {
 
 export async function getPopularOffers(count = 8): Promise<Offer[]> {
   const all = await api.getOffers()
-  return [...all].sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, count)
+  return [...all]
+    .sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
+    .slice(0, count)
 }
 
 export async function getTrendingOffers(count = 6): Promise<Offer[]> {
@@ -154,15 +183,20 @@ export async function getTrendingOffers(count = 6): Promise<Offer[]> {
   return all.filter((o) => o.featured).slice(0, count)
 }
 
-export async function getSimilarOffers(offer: Offer, count = 4): Promise<Offer[]> {
+export async function getSimilarOffers(
+  offer: Offer,
+  count = 4
+): Promise<Offer[]> {
   const all = await api.getOffers()
-  const sameCategory = all.filter((o) => o.id !== offer.id && o.category === offer.category)
+  const sameCategory = all.filter(
+    (o) => o.id !== offer.id && o.category === offer.category
+  )
   if (sameCategory.length >= count) return sameCategory.slice(0, count)
   const fromTags = all.filter(
     (o) =>
       o.id !== offer.id &&
       o.category !== offer.category &&
-      o.tags?.some((t) => offer.tags?.includes(t)),
+      o.tags?.some((t) => offer.tags?.includes(t))
   )
   return [...sameCategory, ...fromTags].slice(0, count)
 }
