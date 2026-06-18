@@ -1,7 +1,13 @@
 ﻿"use client"
 
-import { useMemo, useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Search, SlidersHorizontal } from "lucide-react"
+import { Suspense, useMemo, useState, useEffect } from "react"
+import {
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  SlidersHorizontal,
+} from "lucide-react"
+import { useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -16,15 +22,32 @@ import { cn } from "@/lib/utils"
 const PER_PAGE = 12
 type SortKey = "name" | "category" | "popularity"
 
-export default function ToolsPage() {
+function ToolsContent() {
+  const searchParams = useSearchParams()
+  const regionParam = searchParams.get("region")
+  const typeParam = searchParams.get("type")
+
   const [search, setSearch] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(
+    regionParam
+  )
+  const [selectedType, setSelectedType] = useState<string | null>(typeParam)
   const [page, setPage] = useState(1)
   const [sort, setSort] = useState<SortKey>("name")
-  const [audience, setAudience] = useState<"all" | "students" | "everyone">("all")
+  const [audience, setAudience] = useState<"all" | "students" | "everyone">(
+    "all"
+  )
   const [quickView, setQuickView] = useState<Offer | null>(null)
   const [offers, setOffers] = useState<Offer[]>([])
-  const [categories, setCategories] = useState<Awaited<ReturnType<typeof getCategories>>>([])
+  const [categories, setCategories] = useState<
+    Awaited<ReturnType<typeof getCategories>>
+  >([])
+
+  useEffect(() => {
+    setSelectedRegion(regionParam)
+    setSelectedType(typeParam)
+  }, [regionParam, typeParam])
 
   useEffect(() => {
     Promise.all([getOffers(), getCategories()]).then(([o, c]) => {
@@ -42,28 +65,54 @@ export default function ToolsPage() {
       const matchesCategory = selectedCategory
         ? offer.category === selectedCategory
         : true
-      const matchesAudience = audience === "all" ? true : (offer.audience ?? "students") === audience
-      return matchesSearch && matchesCategory && matchesAudience
+      const matchesRegion = selectedRegion
+        ? (offer.regions?.includes(selectedRegion) ?? true)
+        : true
+      const matchesType = selectedType
+        ? (offer.studentTypes?.includes(selectedType) ?? true)
+        : true
+      const matchesAudience =
+        audience === "all" ? true : (offer.audience ?? "students") === audience
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesRegion &&
+        matchesType &&
+        matchesAudience
+      )
     })
 
     result.sort((a, b) => {
       switch (sort) {
-        case "name": return a.name.localeCompare(b.name)
-        case "category": return a.category.localeCompare(b.category)
-        case "popularity": return (b.popularity || 0) - (a.popularity || 0)
-        default: return 0
+        case "name":
+          return a.name.localeCompare(b.name)
+        case "category":
+          return a.category.localeCompare(b.category)
+        case "popularity":
+          return (b.popularity || 0) - (a.popularity || 0)
+        default:
+          return 0
       }
     })
 
     return result
-  }, [search, selectedCategory, sort, audience])
+  }, [search, selectedCategory, selectedRegion, selectedType, sort, audience])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE))
   const safePage = Math.min(page, totalPages)
-  const paginated = filtered.slice((safePage - 1) * PER_PAGE, safePage * PER_PAGE)
+  const paginated = filtered.slice(
+    (safePage - 1) * PER_PAGE,
+    safePage * PER_PAGE
+  )
 
-  const handleSearch = (value: string) => { setSearch(value); setPage(1) }
-  const handleCategory = (cat: string | null) => { setSelectedCategory(cat); setPage(1) }
+  const handleSearch = (value: string) => {
+    setSearch(value)
+    setPage(1)
+  }
+  const handleCategory = (cat: string | null) => {
+    setSelectedCategory(cat)
+    setPage(1)
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -73,15 +122,17 @@ export default function ToolsPage() {
           <Breadcrumbs items={[{ label: "All Offers" }]} />
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">All offers</h1>
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              All offers
+            </h1>
             <p className="mt-2 text-muted-foreground">
-               Browse {offers.length} verified discounts and free tools.
+              Browse {offers.length} verified discounts and free tools.
             </p>
           </div>
 
           <div className="mb-6 flex flex-col gap-4 sm:flex-row">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search offers, tags, or keywords..."
                 className="pl-9"
@@ -91,11 +142,14 @@ export default function ToolsPage() {
             </div>
             <div className="flex items-center gap-2">
               <div className="relative">
-                <SlidersHorizontal className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <SlidersHorizontal className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <select
                   value={sort}
-                  onChange={(e) => { setSort(e.target.value as SortKey); setPage(1) }}
-                  className="h-10 appearance-none rounded-lg border border-input bg-transparent pl-9 pr-8 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:bg-input/30"
+                  onChange={(e) => {
+                    setSort(e.target.value as SortKey)
+                    setPage(1)
+                  }}
+                  className="h-10 appearance-none rounded-lg border border-input bg-transparent pr-8 pl-9 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:bg-input/30"
                 >
                   <option value="name">Sort: A-Z</option>
                   <option value="category">Sort: Category</option>
@@ -105,19 +159,28 @@ export default function ToolsPage() {
             </div>
             <div className="flex items-center gap-1 rounded-lg border border-border/50 bg-muted/30 p-0.5">
               <button
-                onClick={() => { setAudience("all"); setPage(1) }}
+                onClick={() => {
+                  setAudience("all")
+                  setPage(1)
+                }}
                 className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${audience === "all" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
               >
                 All
               </button>
               <button
-                onClick={() => { setAudience("students"); setPage(1) }}
+                onClick={() => {
+                  setAudience("students")
+                  setPage(1)
+                }}
                 className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${audience === "students" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Students
               </button>
               <button
-                onClick={() => { setAudience("everyone"); setPage(1) }}
+                onClick={() => {
+                  setAudience("everyone")
+                  setPage(1)
+                }}
                 className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${audience === "everyone" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
               >
                 Everyone
@@ -138,7 +201,11 @@ export default function ToolsPage() {
                 key={cat.id}
                 variant={selectedCategory === cat.name ? "default" : "outline"}
                 size="sm"
-                onClick={() => handleCategory(selectedCategory === cat.name ? null : cat.name)}
+                onClick={() =>
+                  handleCategory(
+                    selectedCategory === cat.name ? null : cat.name
+                  )
+                }
               >
                 {cat.name}
               </Button>
@@ -153,8 +220,18 @@ export default function ToolsPage() {
           {paginated.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <p className="text-lg font-medium">No offers found</p>
-              <p className="mt-1 text-sm text-muted-foreground">Try a different search or category</p>
-              <Button variant="outline" className="mt-4" onClick={() => { setSearch(""); setSelectedCategory(null); setPage(1) }}>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Try a different search or category
+              </p>
+              <Button
+                variant="outline"
+                className="mt-4"
+                onClick={() => {
+                  setSearch("")
+                  setSelectedCategory(null)
+                  setPage(1)
+                }}
+              >
                 Reset filters
               </Button>
             </div>
@@ -162,7 +239,11 @@ export default function ToolsPage() {
             <>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {paginated.map((offer) => (
-                  <div key={offer.id} onClick={() => setQuickView(offer)} className="cursor-pointer">
+                  <div
+                    key={offer.id}
+                    onClick={() => setQuickView(offer)}
+                    className="cursor-pointer"
+                  >
                     <ToolCard offer={offer} />
                   </div>
                 ))}
@@ -170,21 +251,36 @@ export default function ToolsPage() {
 
               {totalPages > 1 && (
                 <div className="mt-8 flex items-center justify-center gap-2">
-                  <Button variant="outline" size="sm" disabled={safePage <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={safePage <= 1}
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  >
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                    <Button
-                      key={p}
-                      variant={p === safePage ? "default" : "outline"}
-                      size="sm"
-                      className={cn("min-w-9", p === safePage && "pointer-events-none")}
-                      onClick={() => setPage(p)}
-                    >
-                      {p}
-                    </Button>
-                  ))}
-                  <Button variant="outline" size="sm" disabled={safePage >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (p) => (
+                      <Button
+                        key={p}
+                        variant={p === safePage ? "default" : "outline"}
+                        size="sm"
+                        className={cn(
+                          "min-w-9",
+                          p === safePage && "pointer-events-none"
+                        )}
+                        onClick={() => setPage(p)}
+                      >
+                        {p}
+                      </Button>
+                    )
+                  )}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={safePage >= totalPages}
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
@@ -199,3 +295,10 @@ export default function ToolsPage() {
   )
 }
 
+export default function ToolsPage() {
+  return (
+    <Suspense>
+      <ToolsContent />
+    </Suspense>
+  )
+}
