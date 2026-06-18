@@ -31,7 +31,7 @@ function mapOffer(raw: Record<string, unknown>) {
 }
 
 function mapCategory(raw: Record<string, unknown>) {
-  return { ...raw, id: raw._id } as import("@/data/offers").Category
+  return { ...raw, id: raw._id, slug: raw.slug as string } as import("@/data/offers").Category
 }
 
 function mapBlogPost(raw: Record<string, unknown>) {

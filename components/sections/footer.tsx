@@ -65,7 +65,7 @@ export function Footer() {
             {categories.slice(0, 6).map((cat) => (
               <Link
                 key={cat.id || cat.name}
-                href={`/${getCategorySlug(cat.name)}`}
+                href={`/categories/${getCategorySlug(cat.name)}`}
                 className="inline-flex items-center gap-1 rounded-full border border-border/50 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-transparent hover:bg-muted hover:text-foreground"
               >
                 {cat.name}

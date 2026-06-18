@@ -44,7 +44,7 @@ const groups = [
 export default async function SitemapPage() {
   const categories = await getCategories()
   groups[1].links = categories.map((c: { name: string }) => ({
-    href: `/${getCategorySlug(c.name)}`,
+    href: `/categories/${getCategorySlug(c.name)}`,
     label: c.name,
   }))
   return (

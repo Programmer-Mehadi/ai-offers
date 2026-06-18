@@ -9,8 +9,6 @@ import { PageTransition } from "@/components/page-transition"
 import {
   getCategories,
   getCategoryGradientClass,
-  categoryLookup,
-  getCategorySlug,
   getOffersByCategory,
 } from "@/data/offers"
 import { ToolCard } from "./tool-card"
@@ -43,24 +41,20 @@ const categoryDescriptions: Record<string, string> = {
 export default async function CategoryPage({
   params,
 }: {
-  params: Promise<{ category: string }>
+  params: Promise<{ slug: string }>
 }) {
-  const { category: slug } = await params
-  const categoryName = categoryLookup[slug]
+  const { slug } = await params
 
-  if (!categoryName) {
+  const categories = await getCategories()
+  const cat = categories.find((c) => c.slug === slug)
+
+  if (!cat) {
     notFound()
   }
 
-  const [categories, categoryOffers] = await Promise.all([
-    getCategories(),
-    getOffersByCategory(categoryName),
-  ])
-  const cat = categories.find((c) => getCategorySlug(c.name) === slug)
-  const gradientClass = cat ? getCategoryGradientClass(cat.color) : ""
-  const otherCategories = categories.filter(
-    (c) => getCategorySlug(c.name) !== slug
-  )
+  const categoryOffers = await getOffersByCategory(cat.name)
+  const gradientClass = getCategoryGradientClass(cat.color)
+  const otherCategories = categories.filter((c) => c.slug !== slug)
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -68,8 +62,7 @@ export default async function CategoryPage({
       <PageTransition>
         <main className="flex-1">
           {/* Hero banner */}
-          {cat && (
-            <section className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16">
+          <section className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16">
               <div
                 className={`absolute inset-0 bg-linear-to-br ${gradientClass} opacity-5 dark:opacity-[0.07]`}
               />
@@ -81,11 +74,11 @@ export default async function CategoryPage({
                   <div
                     className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${gradientClass} text-lg font-bold text-white shadow-md`}
                   >
-                    {categoryName.charAt(0)}
+                    {cat.name.charAt(0)}
                   </div>
                   <div>
                     <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-                      {categoryName}
+                      {cat.name}
                     </h1>
                     <p className="mt-1 max-w-xl text-muted-foreground">
                       {categoryDescriptions[slug]}
@@ -97,7 +90,6 @@ export default async function CategoryPage({
                 </div>
               </div>
             </section>
-          )}
 
           <div className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
             {categoryOffers.length === 0 ? (
@@ -128,7 +120,7 @@ export default async function CategoryPage({
                 {otherCategories.map((c) => (
                   <Link
                     key={c.id}
-                    href={`/${getCategorySlug(c.name)}`}
+                    href={`/categories/${c.slug}`}
                     className="group flex items-center gap-3 rounded-xl border border-border/50 p-4 transition-all hover:border-transparent hover:shadow-md"
                   >
                     <div

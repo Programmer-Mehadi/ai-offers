@@ -68,7 +68,7 @@ function CategoryCard({ category }: { category: Category }) {
   const gradientClass = getCategoryGradientClass(category.color)
 
   return (
-    <Link href={`/${getCategorySlug(category.name)}`}>
+    <Link href={`/categories/${getCategorySlug(category.name)}`}>
       <Card className="group cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
         <CardContent className="flex flex-col items-center gap-3 p-4 sm:p-6">
           <div

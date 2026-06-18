@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { PageTransition } from "@/components/page-transition"
-import { ToolCard } from "@/app/[category]/tool-card"
+import { ToolCard } from "@/app/categories/[slug]/tool-card"
 import { getOffers } from "@/data/offers"
 
 function SearchContent() {

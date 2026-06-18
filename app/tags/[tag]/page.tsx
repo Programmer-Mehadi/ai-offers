@@ -8,7 +8,7 @@ import { PageTransition } from "@/components/page-transition"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Button } from "@/components/ui/button"
 import { getAllOfferTags, getOffersByTag } from "@/data/offers"
-import { ToolCard } from "@/app/[category]/tool-card"
+import { ToolCard } from "@/app/categories/[slug]/tool-card"
 
 export async function generateStaticParams() {
   const tags = await getAllOfferTags()

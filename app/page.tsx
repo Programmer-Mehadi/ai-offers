@@ -9,14 +9,15 @@ import { OffersSection } from "@/components/sections/offers-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { StatsCounter } from "@/components/stats-counter"
 import { Footer } from "@/components/sections/footer"
-import { getOffers, getStudentTypes, getRegions, getTrendingOffers } from "@/data/offers"
+import { getOffers, getStudentTypes, getRegions, getTrendingOffers, getStats } from "@/data/offers"
 
 export default async function HomePage() {
-  const [offers, studentTypes, regions, trending] = await Promise.all([
+  const [offers, studentTypes, regions, trending, stats] = await Promise.all([
     getOffers(),
     getStudentTypes(),
     getRegions(),
     getTrendingOffers(6),
+    getStats(),
   ])
   const featuredOffers = offers.filter((o) => o.featured)
   const hiddenGems = offers.filter((o) => o.hidden_gem)
@@ -28,7 +29,14 @@ export default async function HomePage() {
       <main className="flex-1">
         <Hero />
 
-        <StatsCounter />
+        <StatsCounter
+          stats={[
+            { icon: "Gift", value: stats.totalOffers, label: "Active Offers", suffix: "+" },
+            { icon: "School", value: stats.categories, label: "Categories", suffix: "" },
+            { icon: "Globe", value: regions.length, label: "Countries", suffix: "+" },
+            { icon: "TrendingUp", value: 6, label: "Savings Average", suffix: "0%" },
+          ]}
+        />
 
         {/* By Student Type */}
         <section className="border-y border-border/40 bg-muted/30 py-12">

@@ -1,6 +1,6 @@
 ﻿"use client"
 
-import { Mail, MapPin, MessageSquare, Send } from "lucide-react"
+import { Mail, MapPin, MessageSquare, Send, AlertCircle } from "lucide-react"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -8,6 +8,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/v1"
 
 const contactMethods = [
   {
@@ -31,11 +33,32 @@ const contactMethods = [
 ]
 
 export default function ContactPage() {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState("")
+  const [sending, setSending] = useState(false)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setSubmitted(true)
+    if (sending) return
+    setError("")
+    setSending(true)
+    try {
+      const res = await fetch(`${API_BASE}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message: `${subject ? subject + " — " : ""}${message}` }),
+      })
+      if (!res.ok) throw new Error("Failed to send message")
+      setSubmitted(true)
+    } catch {
+      setError("Something went wrong. Please try again or email us directly.")
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -91,7 +114,7 @@ export default function ContactPage() {
                       <p className="mt-2 text-sm text-muted-foreground">
                         We&apos;ll get back to you within 24-48 hours.
                       </p>
-                      <Button variant="outline" className="mt-6" onClick={() => setSubmitted(false)}>
+                      <Button variant="outline" className="mt-6" onClick={() => { setSubmitted(false); setName(""); setEmail(""); setSubject(""); setMessage(""); setError(""); }}>
                         Send another message
                       </Button>
                     </div>
@@ -102,20 +125,20 @@ export default function ContactPage() {
                           <label htmlFor="name" className="text-sm font-medium">
                             Name
                           </label>
-                          <Input id="name" placeholder="Your name" required />
+                          <Input id="name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} required />
                         </div>
                         <div className="space-y-2">
                           <label htmlFor="email" className="text-sm font-medium">
                             Email
                           </label>
-                          <Input id="email" type="email" placeholder="you@school.edu" required />
+                          <Input id="email" type="email" placeholder="you@school.edu" value={email} onChange={(e) => setEmail(e.target.value)} required />
                         </div>
                       </div>
                       <div className="space-y-2">
                         <label htmlFor="subject" className="text-sm font-medium">
                           Subject
                         </label>
-                        <Input id="subject" placeholder="How can we help?" required />
+                        <Input id="subject" placeholder="How can we help?" value={subject} onChange={(e) => setSubject(e.target.value)} required />
                       </div>
                       <div className="space-y-2">
                         <label htmlFor="message" className="text-sm font-medium">
@@ -125,13 +148,21 @@ export default function ContactPage() {
                           id="message"
                           rows={4}
                           className="flex min-h-10 w-full rounded-lg border border-input bg-transparent px-3 py-2 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm dark:bg-input/30"
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
                           placeholder="Tell us more..."
                           required
                         />
                       </div>
-                      <Button type="submit" className="gap-1.5">
+                      {error && (
+                        <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
+                          <AlertCircle className="h-4 w-4 shrink-0" />
+                          {error}
+                        </div>
+                      )}
+                      <Button type="submit" className="gap-1.5" disabled={sending}>
                         <Send className="h-4 w-4" />
-                        Send Message
+                        {sending ? "Sending..." : "Send Message"}
                       </Button>
                     </form>
                   )}

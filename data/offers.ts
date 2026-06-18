@@ -37,6 +37,7 @@ export interface Resource {
 export interface Category {
   id: string
   name: string
+  slug: string
   count: number
   icon: string
   color: string

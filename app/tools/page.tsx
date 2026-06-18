@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
-import { ToolCard } from "@/app/[category]/tool-card"
+import { ToolCard } from "@/app/categories/[slug]/tool-card"
 import { QuickView } from "@/components/quick-view"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { getCategories, getOffers, type Offer } from "@/data/offers"
@@ -96,7 +96,7 @@ function ToolsContent() {
     })
 
     return result
-  }, [search, selectedCategory, selectedRegion, selectedType, sort, audience])
+  }, [search, selectedCategory, selectedRegion, selectedType, sort, audience, offers])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE))
   const safePage = Math.min(page, totalPages)

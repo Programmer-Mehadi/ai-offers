@@ -6,7 +6,7 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { PageTransition } from "@/components/page-transition"
-import { ToolCard } from "@/app/[category]/tool-card"
+import { ToolCard } from "@/app/categories/[slug]/tool-card"
 import { getRecentOffers } from "@/data/offers"
 
 export default async function NewPage() {

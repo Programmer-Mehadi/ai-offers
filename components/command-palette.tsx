@@ -64,7 +64,7 @@ export function CommandPalette() {
             type: "category" as const,
             label: c.name,
             description: `${c.count} offers`,
-            href: `/${getCategorySlug(c.name)}`,
+            href: `/categories/${getCategorySlug(c.name)}`,
             color: c.color,
           })),
       ]

@@ -21,7 +21,6 @@ import { Footer } from "@/components/sections/footer"
 import {
   getCategories,
   getCategoryGradientClass,
-  getCategorySlug,
 } from "@/data/offers"
 
 const iconMap: Record<string, LucideIcon> = {
@@ -61,7 +60,7 @@ export default async function CategoriesPage() {
               const Icon = iconMap[cat.icon] || Code2
               const gradientClass = getCategoryGradientClass(cat.color)
               return (
-                <Link key={cat.id} href={`/${getCategorySlug(cat.name)}`}>
+                <Link key={cat.id} href={`/categories/${cat.slug}`}>
                   <Card className="group h-full cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
                     <CardContent className="flex items-start gap-4 p-5">
                       <div

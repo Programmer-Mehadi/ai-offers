@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { ToolCard } from "@/app/[category]/tool-card"
+import { ToolCard } from "@/app/categories/[slug]/tool-card"
 import { getExpiringOffers } from "@/data/offers"
 
 export default async function ExpiringSoonPage() {

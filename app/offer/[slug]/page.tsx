@@ -148,7 +148,7 @@ export default function OfferPage() {
             <Breadcrumbs
               items={[
                 { label: "Offers", href: "/tools" },
-                { label: offer.category, href: `/${catSlug}` },
+                { label: offer.category, href: `/categories/${catSlug}` },
                 { label: offer.name },
               ]}
             />
@@ -172,7 +172,7 @@ export default function OfferPage() {
                           </h1>
                           <div className="mt-1 flex items-center gap-2">
                             <Link
-                              href={`/${catSlug}`}
+                              href={`/categories/${catSlug}`}
                               className="text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
                             >
                               {offer.category}
@@ -371,7 +371,7 @@ export default function OfferPage() {
                         )}
                       </Button>
                       <Button size="lg" variant="outline" asChild>
-                        <Link href={`/${catSlug}`}>
+                        <Link href={`/categories/${catSlug}`}>
                           More in {offer.category}
                           <ArrowRight className="h-4 w-4" />
                         </Link>
@@ -501,7 +501,7 @@ export default function OfferPage() {
                         ))}
                       </div>
                       <Link
-                        href={`/${catSlug}`}
+                        href={`/categories/${catSlug}`}
                         className="mt-3 flex items-center justify-center gap-1 rounded-lg border border-border/50 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted"
                       >
                         View all {categoryOfferCount || ""} offers
@@ -520,7 +520,7 @@ export default function OfferPage() {
                       <li className="flex justify-between">
                         <span>Category</span>
                         <Link
-                          href={`/${catSlug}`}
+                          href={`/categories/${catSlug}`}
                           className="font-medium text-foreground underline underline-offset-2"
                         >
                           {offer.category}
