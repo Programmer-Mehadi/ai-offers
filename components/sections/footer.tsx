@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Newsletter } from "@/components/newsletter"
-import { getCategories } from "@/data/offers"
+import { getCategories, getCategorySlug } from "@/data/offers"
 import type { Category } from "@/data/offers"
 
 const footerLinks = [
@@ -65,7 +65,7 @@ export function Footer() {
             {categories.slice(0, 6).map((cat) => (
               <Link
                 key={cat.id || cat.name}
-                href={`/${cat.id}`}
+                href={`/${getCategorySlug(cat.name)}`}
                 className="inline-flex items-center gap-1 rounded-full border border-border/50 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-transparent hover:bg-muted hover:text-foreground"
               >
                 {cat.name}

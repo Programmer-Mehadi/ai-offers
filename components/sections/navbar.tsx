@@ -36,7 +36,8 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [favCount, setFavCount] = useState(0)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
+  const isDark = mounted && resolvedTheme === "dark"
 
   useEffect(() => {
     setMounted(true)
@@ -118,20 +119,20 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={() => setTheme(isDark ? "light" : "dark")}
                 disabled={!mounted}
                 suppressHydrationWarning
               >
-                {mounted && theme === "dark" ? (
+                {isDark ? (
                   <Sun className="h-4 w-4" />
                 ) : (
-                  <Moon className="h-4 w-4" />
+                  <Moon className={mounted ? "h-4 w-4" : "h-4 w-4 opacity-0"} />
                 )}
                 <span className="sr-only">Toggle theme</span>
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              Toggle {theme === "dark" ? "light" : "dark"} mode
+              Toggle {isDark ? "light" : "dark"} mode
             </TooltipContent>
           </Tooltip>
 

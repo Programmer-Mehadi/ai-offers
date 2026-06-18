@@ -16,7 +16,7 @@ import {
 } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { getCategories, type Category } from "@/data/offers"
+import { getCategories, getCategorySlug, type Category } from "@/data/offers"
 
 const iconMap: Record<string, LucideIcon> = {
   Code2,
@@ -43,7 +43,8 @@ export async function CategoryGrid() {
             Browse by category
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Explore offers across {categories.length} categories â€” from development tools to food & dining
+            Explore offers across {categories.length} categories â€” from
+            development tools to food & dining
           </p>
         </div>
 
@@ -61,7 +62,7 @@ function CategoryCard({ category }: { category: Category }) {
   const Icon = iconMap[category.icon] || Code2
 
   return (
-    <Link href={`/${category.id}`}>
+    <Link href={`/${getCategorySlug(category.name)}`}>
       <Card className="group cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
         <CardContent className="flex flex-col items-center gap-3 p-4 sm:p-6">
           <div
@@ -70,7 +71,9 @@ function CategoryCard({ category }: { category: Category }) {
             <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
           </div>
           <div className="text-center">
-            <h3 className="text-sm font-semibold sm:text-base">{category.name}</h3>
+            <h3 className="text-sm font-semibold sm:text-base">
+              {category.name}
+            </h3>
             <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
               {category.count} offers
             </p>
@@ -80,4 +83,3 @@ function CategoryCard({ category }: { category: Category }) {
     </Link>
   )
 }
-

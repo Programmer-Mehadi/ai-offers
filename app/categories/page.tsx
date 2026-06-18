@@ -18,11 +18,21 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
-import { getCategories } from "@/data/offers"
+import { getCategories, getCategorySlug } from "@/data/offers"
 
 const iconMap: Record<string, LucideIcon> = {
-  Code2, Brain, Zap, Palette, GraduationCap, Cloud, Film,
-  ShoppingBag, Plane, Users, Shield, UtensilsCrossed,
+  Code2,
+  Brain,
+  Zap,
+  Palette,
+  GraduationCap,
+  Cloud,
+  Film,
+  ShoppingBag,
+  Plane,
+  Users,
+  Shield,
+  UtensilsCrossed,
 }
 
 export default async function CategoriesPage() {
@@ -33,9 +43,12 @@ export default async function CategoriesPage() {
       <main className="flex-1 pt-24">
         <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="mb-10 max-w-2xl">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">All Categories</h1>
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              All Categories
+            </h1>
             <p className="mt-2 text-muted-foreground">
-               Browse offers by category â€” {categories.length} categories with verified discounts and free tools.
+              Browse offers by category â€” {categories.length} categories with
+              verified discounts and free tools.
             </p>
           </div>
 
@@ -43,10 +56,12 @@ export default async function CategoriesPage() {
             {categories.map((cat) => {
               const Icon = iconMap[cat.icon] || Code2
               return (
-                <Link key={cat.id} href={`/${cat.id}`}>
+                <Link key={cat.id} href={`/${getCategorySlug(cat.name)}`}>
                   <Card className="group h-full cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
                     <CardContent className="flex items-start gap-4 p-5">
-                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cat.color} text-white shadow-sm transition-transform duration-300 group-hover:scale-110`}>
+                      <div
+                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${cat.color} text-white shadow-sm transition-transform duration-300 group-hover:scale-110`}
+                      >
                         <Icon className="h-6 w-6" />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -71,4 +86,3 @@ export default async function CategoriesPage() {
     </div>
   )
 }
-

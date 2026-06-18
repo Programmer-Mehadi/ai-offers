@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { getCategories } from "@/data/offers"
+import { getCategories, getCategorySlug } from "@/data/offers"
 
 const groups = [
   {
@@ -43,7 +43,10 @@ const groups = [
 
 export default async function SitemapPage() {
   const categories = await getCategories()
-  groups[1].links = categories.map((c: { id: string; name: string }) => ({ href: `/${c.id}`, label: c.name }))
+  groups[1].links = categories.map((c: { name: string }) => ({
+    href: `/${getCategorySlug(c.name)}`,
+    label: c.name,
+  }))
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -52,9 +55,11 @@ export default async function SitemapPage() {
           <Breadcrumbs items={[{ label: "Sitemap" }]} />
 
           <div className="mb-10">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Sitemap</h1>
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Sitemap
+            </h1>
             <p className="mt-2 text-muted-foreground">
-               All pages on our site, organized by section.
+              All pages on our site, organized by section.
             </p>
           </div>
 
@@ -84,4 +89,3 @@ export default async function SitemapPage() {
     </div>
   )
 }
-
