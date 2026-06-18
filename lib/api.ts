@@ -1,12 +1,12 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/v1'
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/v1"
 
-import { getFallback } from './fallback'
+import { getFallback } from "./fallback"
 
 async function fetchApi<T>(path: string): Promise<T> {
   try {
     const res = await fetch(`${BASE_URL}${path}`, { next: { revalidate: 60 } })
     if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`)
-    const json = await res.json() as { success: boolean; data: T }
+    const json = (await res.json()) as { success: boolean; data: T }
     return json.data
   } catch {
     return getFallback(path) as T
@@ -14,35 +14,35 @@ async function fetchApi<T>(path: string): Promise<T> {
 }
 
 function mapOffer(raw: Record<string, unknown>) {
-  return { ...raw, id: raw.slug } as import('@/data/offers').Offer
+  return { ...raw, id: raw.slug } as import("@/data/offers").Offer
 }
 
 function mapCategory(raw: Record<string, unknown>) {
-  return { ...raw, id: raw._id } as import('@/data/offers').Category
+  return { ...raw, id: raw._id } as import("@/data/offers").Category
 }
 
 function mapBlogPost(raw: Record<string, unknown>) {
-  return { ...raw, id: raw.slug } as import('@/data/offers').BlogPost
+  return { ...raw, id: raw.slug } as import("@/data/offers").BlogPost
 }
 
 function mapTestimonial(raw: Record<string, unknown>) {
-  return { ...raw, id: raw._id } as import('@/data/testimonials').Testimonial
+  return { ...raw, id: raw._id } as import("@/data/testimonials").Testimonial
 }
 
 function mapGuide(raw: Record<string, unknown>) {
-  return { ...raw, id: raw.slug } as import('@/data/guides').Guide
+  return { ...raw, id: raw.slug } as import("@/data/guides").Guide
 }
 
 function mapChangelog(raw: Record<string, unknown>) {
-  return raw as unknown as import('@/data/changelog').ChangelogEntry
+  return raw as unknown as import("@/data/changelog").ChangelogEntry
 }
 
 function mapResource(raw: Record<string, unknown>) {
-  return { ...raw, id: raw._id } as import('@/data/offers').Resource
+  return { ...raw, id: raw._id } as import("@/data/offers").Resource
 }
 
 export async function getOffers() {
-  const raw = await fetchApi<Record<string, unknown>[]>('/offers')
+  const raw = await fetchApi<Record<string, unknown>[]>("/offers")
   return raw.map(mapOffer)
 }
 
@@ -52,12 +52,12 @@ export async function getOfferBySlug(slug: string) {
 }
 
 export async function getCategories() {
-  const raw = await fetchApi<Record<string, unknown>[]>('/categories')
+  const raw = await fetchApi<Record<string, unknown>[]>("/categories")
   return raw.map(mapCategory)
 }
 
 export async function getBlogPosts() {
-  const raw = await fetchApi<Record<string, unknown>[]>('/blog')
+  const raw = await fetchApi<Record<string, unknown>[]>("/blog")
   return raw.map(mapBlogPost)
 }
 
@@ -67,15 +67,17 @@ export async function getBlogPostBySlug(slug: string) {
 }
 
 export async function getStudentTypes() {
-  return fetchApi<{ id: string; label: string; icon: string }[]>('/student-types')
+  return fetchApi<{ id: string; label: string; icon: string }[]>(
+    "/student-types"
+  )
 }
 
 export async function getRegions() {
-  return fetchApi<{ id: string; label: string; flag?: string }[]>('/regions')
+  return fetchApi<{ id: string; label: string; flag?: string }[]>("/regions")
 }
 
 export async function getGuides() {
-  const raw = await fetchApi<Record<string, unknown>[]>('/guides')
+  const raw = await fetchApi<Record<string, unknown>[]>("/guides")
   return raw.map(mapGuide)
 }
 
@@ -85,20 +87,20 @@ export async function getGuideBySlug(slug: string) {
 }
 
 export async function getTestimonials() {
-  const raw = await fetchApi<Record<string, unknown>[]>('/testimonials')
+  const raw = await fetchApi<Record<string, unknown>[]>("/testimonials")
   return raw.map(mapTestimonial)
 }
 
 export async function getChangelog() {
-  const raw = await fetchApi<Record<string, unknown>[]>('/changelog')
+  const raw = await fetchApi<Record<string, unknown>[]>("/changelog")
   return raw.map(mapChangelog)
 }
 
 export async function getResources() {
-  const raw = await fetchApi<Record<string, unknown>[]>('/resources')
+  const raw = await fetchApi<Record<string, unknown>[]>("/resources")
   return raw.map(mapResource)
 }
 
 export async function getStats() {
-  return fetchApi<Record<string, number>>('/stats')
+  return fetchApi<Record<string, number>>("/stats")
 }

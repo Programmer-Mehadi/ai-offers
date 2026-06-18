@@ -3,8 +3,22 @@
 import { notFound, useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import {
-  ArrowLeft, ArrowRight, ArrowUpRight, Award, Bookmark, CheckCircle2, DollarSign, Flag, Gem, Globe, Link2,
-  LucideIcon, Share2, Sparkles, Tag, Users,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Award,
+  Bookmark,
+  CheckCircle2,
+  DollarSign,
+  Flag,
+  Gem,
+  Globe,
+  Link2,
+  LucideIcon,
+  Share2,
+  Sparkles,
+  Tag,
+  Users,
 } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
@@ -13,7 +27,11 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
@@ -22,11 +40,20 @@ import { getOfferBySlug, getOffers, getCategorySlug } from "@/data/offers"
 import { cn } from "@/lib/utils"
 
 const tagIcons: Record<string, LucideIcon> = {
-  API: Globe, Free: Award, Credit: Users, Discount: Tag, Developer: Link2, AI: Sparkles,
+  API: Globe,
+  Free: Award,
+  Credit: Users,
+  Discount: Tag,
+  Developer: Link2,
+  AI: Sparkles,
 }
 
 function getFavorites(): string[] {
-  try { return JSON.parse(localStorage.getItem("favorites") || "[]") } catch { return [] }
+  try {
+    return JSON.parse(localStorage.getItem("favorites") || "[]")
+  } catch {
+    return []
+  }
 }
 
 function toggleFavorite(id: string) {
@@ -58,8 +85,11 @@ function extractValue(discount: string): string {
 export default function OfferPage() {
   const params = useParams()
   const slug = params.slug as string
-  const [offer, setOffer] = useState<Awaited<ReturnType<typeof getOfferBySlug>>>(undefined)
-  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>([])
+  const [offer, setOffer] =
+    useState<Awaited<ReturnType<typeof getOfferBySlug>>>(undefined)
+  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>(
+    []
+  )
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -77,12 +107,21 @@ export default function OfferPage() {
   const savingsValue = extractValue(offer.discount)
 
   function isClaimed(id: string): boolean {
-    try { return JSON.parse(localStorage.getItem("claimed") || "[]").includes(id) } catch { return false }
+    try {
+      return JSON.parse(localStorage.getItem("claimed") || "[]").includes(id)
+    } catch {
+      return false
+    }
   }
   function toggleClaimed(id: string) {
     const c = JSON.parse(localStorage.getItem("claimed") || "[]")
     const idx = c.indexOf(id)
-    if (idx === -1) { c.push(id); toast.success("Marked as claimed!") } else { c.splice(idx, 1) }
+    if (idx === -1) {
+      c.push(id)
+      toast.success("Marked as claimed!")
+    } else {
+      c.splice(idx, 1)
+    }
     localStorage.setItem("claimed", JSON.stringify(c))
     window.dispatchEvent(new Event("claimed-updated"))
   }
@@ -90,9 +129,14 @@ export default function OfferPage() {
 
   const currentIndex = offers.findIndex((o) => o.id === slug)
   const prevOffer = currentIndex > 0 ? offers[currentIndex - 1] : null
-  const nextOffer = currentIndex < offers.length - 1 ? offers[currentIndex + 1] : null
-  const relatedOffers = offers.filter((o) => o.category === offer.category && o.id !== slug).slice(0, 4)
-  const categoryOfferCount = offers.filter((o) => o.category === offer.category).length
+  const nextOffer =
+    currentIndex < offers.length - 1 ? offers[currentIndex + 1] : null
+  const relatedOffers = offers
+    .filter((o) => o.category === offer.category && o.id !== slug)
+    .slice(0, 4)
+  const categoryOfferCount = offers.filter(
+    (o) => o.category === offer.category
+  ).length
   const catSlug = getCategorySlug(offer.category)
 
   return (
@@ -101,11 +145,13 @@ export default function OfferPage() {
       <PageTransition>
         <main className="flex-1 pt-24">
           <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-            <Breadcrumbs items={[
-              { label: "Offers", href: "/tools" },
-              { label: offer.category, href: `/${catSlug}` },
-              { label: offer.name },
-            ]} />
+            <Breadcrumbs
+              items={[
+                { label: "Offers", href: "/tools" },
+                { label: offer.category, href: `/${catSlug}` },
+                { label: offer.name },
+              ]}
+            />
 
             <div className="grid gap-8 lg:grid-cols-3">
               <div className="lg:col-span-2">
@@ -115,27 +161,50 @@ export default function OfferPage() {
                   <CardContent className="p-6 sm:p-8">
                     <div className="mb-6 flex items-start justify-between gap-4">
                       <div className="flex items-center gap-4">
-                        <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${offer.color} text-xl font-bold text-white shadow-md`}>
+                        <div
+                          className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${offer.color} text-xl font-bold text-white shadow-md`}
+                        >
                           {offer.name.slice(0, 2).toUpperCase()}
                         </div>
                         <div>
-                          <h1 className="text-2xl font-bold sm:text-3xl">{offer.name}</h1>
+                          <h1 className="text-2xl font-bold sm:text-3xl">
+                            {offer.name}
+                          </h1>
                           <div className="mt-1 flex items-center gap-2">
-                            <Link href={`/${catSlug}`} className="text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground">
+                            <Link
+                              href={`/${catSlug}`}
+                              className="text-sm text-muted-foreground underline underline-offset-2 transition-colors hover:text-foreground"
+                            >
                               {offer.category}
                             </Link>
                             {offer.audience === "everyone" ? (
-                              <Badge variant="secondary" className="bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-400">Everyone</Badge>
+                              <Badge
+                                variant="secondary"
+                                className="bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-400"
+                              >
+                                Everyone
+                              </Badge>
                             ) : (
-                              <Badge variant="secondary" className="bg-brand-50 text-brand-700 dark:bg-brand-950/50 dark:text-brand-400">Students</Badge>
+                              <Badge
+                                variant="secondary"
+                                className="dark:bg-brand-950/50 bg-brand-50 text-brand-700 dark:text-brand-400"
+                              >
+                                Students
+                              </Badge>
                             )}
                             {offer.featured && (
-                              <Badge variant="secondary" className="gap-1 bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
+                              <Badge
+                                variant="secondary"
+                                className="gap-1 bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400"
+                              >
                                 <Sparkles className="h-3 w-3" /> Featured
                               </Badge>
                             )}
                             {offer.hidden_gem && (
-                              <Badge variant="secondary" className="gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400">
+                              <Badge
+                                variant="secondary"
+                                className="gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400"
+                              >
                                 <Gem className="h-3 w-3" /> Hidden Gem
                               </Badge>
                             )}
@@ -145,19 +214,42 @@ export default function OfferPage() {
                       <div className="flex gap-1.5">
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button variant="outline" size="icon" className="h-9 w-9" onClick={() => toggleFavorite(slug)}>
-                              <Bookmark className={cn("h-4 w-4", saved && "fill-brand-500 text-brand-500")} />
-                              <span className="sr-only">{saved ? "Remove from" : "Save to"} favorites</span>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-9 w-9"
+                              onClick={() => toggleFavorite(slug)}
+                            >
+                              <Bookmark
+                                className={cn(
+                                  "h-4 w-4",
+                                  saved && "fill-brand-500 text-brand-500"
+                                )}
+                              />
+                              <span className="sr-only">
+                                {saved ? "Remove from" : "Save to"} favorites
+                              </span>
                             </Button>
                           </TooltipTrigger>
-                          <TooltipContent>{saved ? "Remove from favorites" : "Save to favorites"}</TooltipContent>
+                          <TooltipContent>
+                            {saved
+                              ? "Remove from favorites"
+                              : "Save to favorites"}
+                          </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button variant="outline" size="icon" className="h-9 w-9" onClick={() => {
-                              navigator.clipboard.writeText(window.location.href)
-                              toast.success("Link copied to clipboard")
-                            }}>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-9 w-9"
+                              onClick={() => {
+                                navigator.clipboard.writeText(
+                                  window.location.href
+                                )
+                                toast.success("Link copied to clipboard")
+                              }}
+                            >
                               <Share2 className="h-4 w-4" />
                               <span className="sr-only">Share</span>
                             </Button>
@@ -167,11 +259,15 @@ export default function OfferPage() {
                       </div>
                     </div>
 
-                    <p className="mb-6 text-lg text-muted-foreground">{offer.description}</p>
+                    <p className="mb-6 text-lg text-muted-foreground">
+                      {offer.description}
+                    </p>
 
                     {/* Discount highlight */}
                     <div className="mb-6 flex flex-wrap items-center gap-3">
-                      <div className={`inline-block rounded-lg bg-gradient-to-r ${offer.color} px-5 py-2.5 text-base font-bold text-white shadow-sm`}>
+                      <div
+                        className={`inline-block rounded-lg bg-gradient-to-r ${offer.color} px-5 py-2.5 text-base font-bold text-white shadow-sm`}
+                      >
                         {offer.discount}
                       </div>
                       {savingsValue && (
@@ -187,7 +283,11 @@ export default function OfferPage() {
                         {offer.tags.map((tag) => {
                           const Icon = tagIcons[tag] || Tag
                           return (
-                            <Badge key={tag} variant="outline" className="gap-1 px-3 py-1">
+                            <Badge
+                              key={tag}
+                              variant="outline"
+                              className="gap-1 px-3 py-1"
+                            >
                               <Icon className="h-3 w-3" /> {tag}
                             </Badge>
                           )
@@ -199,10 +299,15 @@ export default function OfferPage() {
 
                     {offer.notes && offer.notes.length > 0 && (
                       <div className="mb-6">
-                        <h2 className="mb-3 text-lg font-semibold">Important Notes</h2>
+                        <h2 className="mb-3 text-lg font-semibold">
+                          Important Notes
+                        </h2>
                         <ul className="space-y-2">
                           {offer.notes.map((note, i) => (
-                            <li key={i} className="flex gap-3 text-sm text-muted-foreground">
+                            <li
+                              key={i}
+                              className="flex gap-3 text-sm text-muted-foreground"
+                            >
                               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
                               {note}
                             </li>
@@ -213,14 +318,18 @@ export default function OfferPage() {
 
                     {offer.howToClaim && offer.howToClaim.length > 0 && (
                       <div className="mb-6">
-                        <h2 className="mb-3 text-lg font-semibold">How to Claim</h2>
+                        <h2 className="mb-3 text-lg font-semibold">
+                          How to Claim
+                        </h2>
                         <ol className="space-y-3">
                           {offer.howToClaim.map((step, i) => (
                             <li key={i} className="flex gap-4">
                               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-500/10 text-sm font-semibold text-brand-600 dark:text-brand-400">
                                 {i + 1}
                               </span>
-                              <span className="pt-0.5 text-sm text-muted-foreground">{step}</span>
+                              <span className="pt-0.5 text-sm text-muted-foreground">
+                                {step}
+                              </span>
                             </li>
                           ))}
                         </ol>
@@ -229,14 +338,19 @@ export default function OfferPage() {
 
                     {offer.isReferral && (
                       <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-300">
-                        Claim link is a referral link &mdash; signing up through it gives you an extra bonus on top of the free offer.
+                        Claim link is a referral link &mdash; signing up through
+                        it gives you an extra bonus on top of the free offer.
                       </div>
                     )}
 
                     <div className="flex flex-col gap-3 sm:flex-row">
                       <Button
                         size="lg"
-                        className={cn("gap-1.5", claimed && "border-emerald-500 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400")}
+                        className={cn(
+                          "gap-1.5",
+                          claimed &&
+                            "border-emerald-500 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400"
+                        )}
                         onClick={() => toggleClaimed(slug)}
                         asChild={!claimed}
                       >
@@ -246,7 +360,11 @@ export default function OfferPage() {
                             Mark as unclaimed
                           </span>
                         ) : (
-                          <a href={offer.claimUrl || "#"} target="_blank" rel="noopener noreferrer">
+                          <a
+                            href={offer.claimUrl || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             Claim This Offer
                             <ArrowUpRight className="h-4 w-4" />
                           </a>
@@ -286,16 +404,22 @@ export default function OfferPage() {
                         href={`/offer/${prevOffer.id}`}
                         className={cn(
                           "group flex items-center gap-3 rounded-xl border border-border/50 p-4 transition-all hover:border-transparent hover:shadow-md",
-                          "text-left",
+                          "text-left"
                         )}
                       >
                         <ArrowLeft className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-1" />
                         <div className="min-w-0">
-                          <p className="text-xs text-muted-foreground">Previous</p>
-                          <p className="truncate text-sm font-medium">{prevOffer.name}</p>
+                          <p className="text-xs text-muted-foreground">
+                            Previous
+                          </p>
+                          <p className="truncate text-sm font-medium">
+                            {prevOffer.name}
+                          </p>
                         </div>
                       </Link>
-                    ) : <div />}
+                    ) : (
+                      <div />
+                    )}
                     {nextOffer && (
                       <Link
                         href={`/offer/${nextOffer.id}`}
@@ -303,7 +427,9 @@ export default function OfferPage() {
                       >
                         <div className="min-w-0">
                           <p className="text-xs text-muted-foreground">Next</p>
-                          <p className="truncate text-sm font-medium">{nextOffer.name}</p>
+                          <p className="truncate text-sm font-medium">
+                            {nextOffer.name}
+                          </p>
                         </div>
                         <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
                       </Link>
@@ -313,7 +439,9 @@ export default function OfferPage() {
 
                 {/* Similar offers */}
                 <div className="mt-10">
-                  <h2 className="mb-4 text-lg font-bold">Similar offers you might like</h2>
+                  <h2 className="mb-4 text-lg font-bold">
+                    Similar offers you might like
+                  </h2>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {relatedOffers.map((ro) => (
                       <Link
@@ -321,12 +449,18 @@ export default function OfferPage() {
                         href={`/offer/${ro.id}`}
                         className="group flex items-center gap-3 rounded-xl border border-border/50 p-4 transition-all hover:border-transparent hover:shadow-md"
                       >
-                        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${ro.color} text-xs font-bold text-white`}>
+                        <div
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${ro.color} text-xs font-bold text-white`}
+                        >
                           {ro.name.slice(0, 2).toUpperCase()}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium leading-tight group-hover:text-brand-600 dark:group-hover:text-brand-400">{ro.name}</p>
-                          <p className="text-xs text-muted-foreground">{ro.discount}</p>
+                          <p className="text-sm leading-tight font-medium group-hover:text-brand-600 dark:group-hover:text-brand-400">
+                            {ro.name}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {ro.discount}
+                          </p>
                         </div>
                         <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
                       </Link>
@@ -340,7 +474,9 @@ export default function OfferPage() {
                 {relatedOffers.length > 0 && (
                   <Card className="border-border/50">
                     <CardContent className="p-5">
-                      <h3 className="mb-4 text-sm font-semibold">More in {offer.category}</h3>
+                      <h3 className="mb-4 text-sm font-semibold">
+                        More in {offer.category}
+                      </h3>
                       <div className="space-y-3">
                         {relatedOffers.map((ro) => (
                           <Link
@@ -348,12 +484,18 @@ export default function OfferPage() {
                             href={`/offer/${ro.id}`}
                             className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-muted"
                           >
-                            <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${ro.color} text-[10px] font-bold text-white`}>
+                            <div
+                              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${ro.color} text-[10px] font-bold text-white`}
+                            >
                               {ro.name.slice(0, 2).toUpperCase()}
                             </div>
                             <div className="min-w-0">
-                              <p className="truncate text-sm font-medium leading-tight">{ro.name}</p>
-                              <p className="truncate text-xs text-muted-foreground">{ro.discount}</p>
+                              <p className="truncate text-sm leading-tight font-medium">
+                                {ro.name}
+                              </p>
+                              <p className="truncate text-xs text-muted-foreground">
+                                {ro.discount}
+                              </p>
                             </div>
                           </Link>
                         ))}
@@ -371,23 +513,39 @@ export default function OfferPage() {
 
                 <Card className="border-border/50">
                   <CardContent className="p-5">
-                    <h3 className="mb-2 text-sm font-semibold">About this offer</h3>
+                    <h3 className="mb-2 text-sm font-semibold">
+                      About this offer
+                    </h3>
                     <ul className="space-y-2 text-xs text-muted-foreground">
                       <li className="flex justify-between">
                         <span>Category</span>
-                        <Link href={`/${catSlug}`} className="font-medium text-foreground underline underline-offset-2">
+                        <Link
+                          href={`/${catSlug}`}
+                          className="font-medium text-foreground underline underline-offset-2"
+                        >
                           {offer.category}
                         </Link>
                       </li>
                       <li className="flex justify-between">
                         <span>Audience</span>
-                        <span className={cn("font-medium", offer.audience === "everyone" ? "text-sky-600 dark:text-sky-400" : "text-brand-600 dark:text-brand-400")}>
-                          {offer.audience === "everyone" ? "Everyone" : "Students"}
+                        <span
+                          className={cn(
+                            "font-medium",
+                            offer.audience === "everyone"
+                              ? "text-sky-600 dark:text-sky-400"
+                              : "text-brand-600 dark:text-brand-400"
+                          )}
+                        >
+                          {offer.audience === "everyone"
+                            ? "Everyone"
+                            : "Students"}
                         </span>
                       </li>
                       <li className="flex justify-between">
                         <span>Verification</span>
-                        <span className="font-medium text-emerald-600 dark:text-emerald-400">Verified</span>
+                        <span className="font-medium text-emerald-600 dark:text-emerald-400">
+                          Verified
+                        </span>
                       </li>
                       <li className="flex justify-between">
                         <span>Updated</span>
