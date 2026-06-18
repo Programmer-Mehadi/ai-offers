@@ -50,6 +50,13 @@ function mapResource(raw: Record<string, unknown>) {
   return { ...raw, id: raw._id } as import("@/data/offers").Resource
 }
 
+function mapRegion(raw: Record<string, unknown>) {
+  return {
+    ...raw,
+    id: raw.name ?? raw._id,
+  } as { id: string; label: string; flag?: string }
+}
+
 export async function getOffers() {
   const raw = await fetchApi<Record<string, unknown>[]>("/offers")
   return raw.map(mapOffer)
@@ -82,7 +89,8 @@ export async function getStudentTypes() {
 }
 
 export async function getRegions() {
-  return fetchApi<{ id: string; label: string; flag?: string }[]>("/regions")
+  const raw = await fetchApi<Record<string, unknown>[]>("/regions")
+  return raw.map(mapRegion)
 }
 
 export async function getGuides() {
