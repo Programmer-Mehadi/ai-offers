@@ -9,9 +9,11 @@ import { Input } from "@/components/ui/input"
 import { getOffers, getStats } from "@/data/offers"
 import type { Offer } from "@/data/offers"
 
+type HeroStats = Awaited<ReturnType<typeof getStats>>
+
 export function Hero() {
   const [offers, setOffers] = useState<Offer[]>([])
-  const [stats, setStats] = useState({ totalOffers: 0, verifiedDeals: "100%", studentsServed: "0" })
+  const [stats, setStats] = useState<HeroStats>({ totalOffers: 0, categories: 0, verifiedDeals: "100%", studentsServed: "0" })
 
   useEffect(() => {
     Promise.all([getOffers(), getStats()]).then(([o, s]) => {

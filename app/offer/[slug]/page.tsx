@@ -18,7 +18,7 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { PageTransition } from "@/components/page-transition"
-import { getOfferBySlug, getCategoryByName, getOffersByCategory, getOffers, getCategorySlug } from "@/data/offers"
+import { getOfferBySlug, getOffers, getCategorySlug } from "@/data/offers"
 import { cn } from "@/lib/utils"
 
 const tagIcons: Record<string, LucideIcon> = {
@@ -92,6 +92,7 @@ export default function OfferPage() {
   const prevOffer = currentIndex > 0 ? offers[currentIndex - 1] : null
   const nextOffer = currentIndex < offers.length - 1 ? offers[currentIndex + 1] : null
   const relatedOffers = offers.filter((o) => o.category === offer.category && o.id !== slug).slice(0, 4)
+  const categoryOfferCount = offers.filter((o) => o.category === offer.category).length
   const catSlug = getCategorySlug(offer.category)
 
   return (
@@ -314,7 +315,7 @@ export default function OfferPage() {
                 <div className="mt-10">
                   <h2 className="mb-4 text-lg font-bold">Similar offers you might like</h2>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    {(getOffersByCategory(offer.category).filter((o) => o.id !== slug).slice(0, 4) || []).map((ro) => (
+                    {relatedOffers.map((ro) => (
                       <Link
                         key={ro.id}
                         href={`/offer/${ro.id}`}
@@ -361,7 +362,7 @@ export default function OfferPage() {
                         href={`/${catSlug}`}
                         className="mt-3 flex items-center justify-center gap-1 rounded-lg border border-border/50 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted"
                       >
-                        View all {getCategoryByName(offer.category)?.count || ""} offers
+                        View all {categoryOfferCount || ""} offers
                         <ArrowRight className="h-3 w-3" />
                       </Link>
                     </CardContent>

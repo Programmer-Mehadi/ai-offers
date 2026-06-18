@@ -34,7 +34,7 @@ function mapGuide(raw: Record<string, unknown>) {
 }
 
 function mapChangelog(raw: Record<string, unknown>) {
-  return raw as import('@/data/changelog').ChangelogEntry
+  return raw as unknown as import('@/data/changelog').ChangelogEntry
 }
 
 function mapResource(raw: Record<string, unknown>) {
