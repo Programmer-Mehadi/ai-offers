@@ -13,10 +13,14 @@ async function fetchApi<T>(path: string): Promise<T> {
     const res = await fetch(`${BASE_URL}${path}`, { next: { revalidate: 60 } })
     if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`)
     const json = (await res.json()) as ApiEnvelope<T>
-    if (json.data && typeof json.data === "object" && "data" in json.data) {
-      return json.data.data
+    const payload = json.data
+    if (payload && typeof payload === "object") {
+      // { success: true, data: { items: [...], meta: {...} } }  (paginated list)
+      if ("items" in payload) return (payload as { items: T }).items
+      // { success: true, data: { data: T } }  (double-wrapped)
+      if ("data" in payload) return (payload as { data: T }).data
     }
-    return json.data as T
+    return payload as T
   } catch {
     return getFallback(path) as T
   }
