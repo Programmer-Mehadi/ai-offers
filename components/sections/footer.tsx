@@ -1,8 +1,12 @@
-﻿import Link from "next/link"
+﻿"use client"
+
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { useEffect, useState } from "react"
 
 import { Newsletter } from "@/components/newsletter"
 import { getCategories } from "@/data/offers"
+import type { Category } from "@/data/offers"
 
 const footerLinks = [
   {
@@ -44,8 +48,13 @@ const footerLinks = [
   },
 ]
 
-export async function Footer() {
-  const categories = await getCategories()
+export function Footer() {
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(() => {
+    getCategories().then(setCategories)
+  }, [])
+
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -55,7 +64,7 @@ export async function Footer() {
           <div className="flex flex-wrap gap-2">
             {categories.slice(0, 6).map((cat) => (
               <Link
-                key={cat.id}
+                key={cat.id || cat.name}
                 href={`/${cat.id}`}
                 className="inline-flex items-center gap-1 rounded-full border border-border/50 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:border-transparent hover:bg-muted hover:text-foreground"
               >
@@ -82,13 +91,34 @@ export async function Footer() {
               <span className="text-base font-bold">OfferPerks</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
-              Helping you save money with verified discounts and exclusive offers.
+              Helping you save money with verified discounts and exclusive
+              offers.
             </p>
             <div className="mt-4 flex gap-3">
-              <Link href="/new" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">New</Link>
-              <Link href="/popular" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Popular</Link>
-              <Link href="/discover" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Discover</Link>
-              <Link href="/compare" className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground">Compare</Link>
+              <Link
+                href="/new"
+                className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+              >
+                New
+              </Link>
+              <Link
+                href="/popular"
+                className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+              >
+                Popular
+              </Link>
+              <Link
+                href="/discover"
+                className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+              >
+                Discover
+              </Link>
+              <Link
+                href="/compare"
+                className="text-xs text-muted-foreground underline underline-offset-2 hover:text-foreground"
+              >
+                Compare
+              </Link>
             </div>
           </div>
 
@@ -98,7 +128,10 @@ export async function Footer() {
               <ul className="space-y-2">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -112,20 +145,41 @@ export async function Footer() {
             <div className="mt-6">
               <h4 className="mb-3 text-sm font-semibold">Follow Us</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Twitter / X</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">GitHub</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Discord</Link></li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Twitter / X
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    GitHub
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Discord
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
         </div>
 
         <div className="mt-10 border-t border-border/40 pt-6 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} OfferPerks. Not affiliated with any listed brands. Many offers require student verification.
-          All trademarks belong to their respective owners.
+          &copy; {new Date().getFullYear()} OfferPerks. Not affiliated with any
+          listed brands. Many offers require student verification. All
+          trademarks belong to their respective owners.
         </div>
       </div>
     </footer>
   )
 }
-

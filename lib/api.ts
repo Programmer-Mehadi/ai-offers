@@ -2,12 +2,21 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/v1"
 
 import { getFallback } from "./fallback"
 
+type ApiEnvelope<T> = {
+  success: boolean
+  data: T | { data: T; meta?: unknown }
+  meta?: unknown
+}
+
 async function fetchApi<T>(path: string): Promise<T> {
   try {
     const res = await fetch(`${BASE_URL}${path}`, { next: { revalidate: 60 } })
     if (!res.ok) throw new Error(`API ${res.status}: ${res.statusText}`)
-    const json = (await res.json()) as { success: boolean; data: T }
-    return json.data
+    const json = (await res.json()) as ApiEnvelope<T>
+    if (json.data && typeof json.data === "object" && "data" in json.data) {
+      return json.data.data
+    }
+    return json.data as T
   } catch {
     return getFallback(path) as T
   }
