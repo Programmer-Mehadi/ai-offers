@@ -155,9 +155,9 @@ export function CommandPalette() {
           </div>
         )}
         <div className="border-t border-border px-4 py-2 text-[10px] text-muted-foreground">
-          <kbd className="rounded border border-border px-1 py-0.5">â†‘â†“</kbd>{" "}
+          <kbd className="rounded border border-border px-1 py-0.5">↑↓</kbd>{" "}
           navigate{" "}
-          <kbd className="rounded border border-border px-1 py-0.5">â†µ</kbd>{" "}
+          <kbd className="rounded border border-border px-1 py-0.5">↵</kbd>{" "}
           select{" "}
           <kbd className="rounded border border-border px-1 py-0.5">ESC</kbd>{" "}
           close

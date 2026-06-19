@@ -29,7 +29,7 @@ export default async function ExpiringSoonPage() {
             <div>
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Expiring Soon</h1>
               <p className="mt-1 text-muted-foreground">
-                Don&apos;t miss out â€” these offers won&apos;t last forever.
+                Don&apos;t miss out — these offers won&apos;t last forever.
               </p>
             </div>
           </div>

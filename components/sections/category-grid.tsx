@@ -48,7 +48,7 @@ export async function CategoryGrid() {
             Browse by category
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Explore offers across {categories.length} categories â€” from
+            Explore offers across {categories.length} categories — from
             development tools to food & dining
           </p>
         </div>

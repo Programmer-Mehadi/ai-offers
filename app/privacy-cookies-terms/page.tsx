@@ -10,7 +10,7 @@ const sections = [
     icon: FileText,
     title: "Privacy Promise",
     content:
-      "OfferPerks respects your privacy. We do not sell, rent, or share your personal data with third parties for their marketing purposes. Favorites are stored locally in your browser using localStorage â€” they never touch our servers. We use minimal analytics to understand which offers are popular, and this data is anonymized.",
+      "OfferPerks respects your privacy. We do not sell, rent, or share your personal data with third parties for their marketing purposes. Favorites are stored locally in your browser using localStorage — they never touch our servers. We use minimal analytics to understand which offers are popular, and this data is anonymized.",
   },
   {
     icon: Cookie,
@@ -22,7 +22,7 @@ const sections = [
     icon: Shield,
     title: "Terms of Use",
     content:
-      "OfferPerks is a free informational resource for discovering student discounts. All offer details â€” including pricing, eligibility, and availability â€” are subject to change by the provider. We verify offers regularly but recommend confirming current terms on the provider's official website before making any purchase or commitment.",
+      "OfferPerks is a free informational resource for discovering student discounts. All offer details — including pricing, eligibility, and availability — are subject to change by the provider. We verify offers regularly but recommend confirming current terms on the provider's official website before making any purchase or commitment.",
   },
   {
     icon: Mail,

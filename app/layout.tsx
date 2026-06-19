@@ -22,7 +22,7 @@ const fontMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "OfferPerks â€” Discounts, Free Tools & Offers for Students",
+  title: "OfferPerks — Discounts, Free Tools & Offers for Students",
   description:
     "Discover verified discounts, free tools, and exclusive offers across development, AI, design, and more. Save big on the tools you need.",
 }

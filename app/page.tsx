@@ -192,7 +192,7 @@ export default async function HomePage() {
 
         <OffersSection
           title="Featured offers"
-          description="Curated picks that students love â€” verified and ready to claim."
+          description="Curated picks that students love — verified and ready to claim."
           offers={featuredOffers}
         />
 
@@ -202,7 +202,7 @@ export default async function HomePage() {
 
         <OffersSection
           title="Hidden gems"
-          description="Surprisingly valuable perks most students miss â€” grab them while they last."
+          description="Surprisingly valuable perks most students miss — grab them while they last."
           offers={hiddenGems}
           variant="compact"
         />

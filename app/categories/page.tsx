@@ -50,7 +50,7 @@ export default async function CategoriesPage() {
               All Categories
             </h1>
             <p className="mt-2 text-muted-foreground">
-              Browse offers by category â€” {categories.length} categories with
+              Browse offers by category — {categories.length} categories with
               verified discounts and free tools.
             </p>
           </div>

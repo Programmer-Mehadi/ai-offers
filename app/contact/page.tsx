@@ -27,7 +27,7 @@ const contactMethods = [
   {
     icon: MapPin,
     label: "Location",
-    value: "Remote â€” serving students worldwide",
+    value: "Remote — serving students worldwide",
     href: null,
   },
 ]

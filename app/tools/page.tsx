@@ -96,7 +96,15 @@ function ToolsContent() {
     })
 
     return result
-  }, [search, selectedCategory, selectedRegion, selectedType, sort, audience, offers])
+  }, [
+    search,
+    selectedCategory,
+    selectedRegion,
+    selectedType,
+    sort,
+    audience,
+    offers,
+  ])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE))
   const safePage = Math.min(page, totalPages)
@@ -115,14 +123,14 @@ function ToolsContent() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 pt-24">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
           <Breadcrumbs items={[{ label: "All Offers" }]} />
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h1 className="font-bold text-3xl sm:text-4xl tracking-tight">
               All offers
             </h1>
             <p className="mt-2 text-muted-foreground">
@@ -130,9 +138,9 @@ function ToolsContent() {
             </p>
           </div>
 
-          <div className="mb-6 flex flex-col gap-4 sm:flex-row">
+          <div className="flex sm:flex-row flex-col gap-4 mb-6">
             <div className="relative flex-1">
-              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="top-1/2 left-3 absolute w-4 h-4 text-muted-foreground -translate-y-1/2" />
               <Input
                 placeholder="Search offers, tags, or keywords..."
                 className="pl-9"
@@ -142,14 +150,14 @@ function ToolsContent() {
             </div>
             <div className="flex items-center gap-2">
               <div className="relative">
-                <SlidersHorizontal className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <SlidersHorizontal className="top-1/2 left-3 absolute w-4 h-4 text-muted-foreground -translate-y-1/2" />
                 <select
                   value={sort}
                   onChange={(e) => {
                     setSort(e.target.value as SortKey)
                     setPage(1)
                   }}
-                  className="h-10 appearance-none rounded-lg border border-input bg-transparent pr-8 pl-9 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:bg-input/30"
+                  className="bg-transparent dark:bg-input/30 pr-8 pl-9 border border-input focus-visible:border-ring rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50 h-10 text-sm appearance-none"
                 >
                   <option value="name">Sort: A-Z</option>
                   <option value="category">Sort: Category</option>
@@ -157,7 +165,7 @@ function ToolsContent() {
                 </select>
               </div>
             </div>
-            <div className="flex items-center gap-1 rounded-lg border border-border/50 bg-muted/30 p-0.5">
+            <div className="flex items-center gap-1 bg-muted/30 p-0.5 border border-border/50 rounded-lg">
               <button
                 onClick={() => {
                   setAudience("all")
@@ -188,7 +196,7 @@ function ToolsContent() {
             </div>
           </div>
 
-          <div className="mb-4 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-4">
             <Button
               variant={selectedCategory === null ? "default" : "outline"}
               size="sm"
@@ -212,15 +220,15 @@ function ToolsContent() {
             ))}
           </div>
 
-          <div className="mb-4 text-xs text-muted-foreground">
+          <div className="mb-4 text-muted-foreground text-xs">
             Showing {paginated.length} of {filtered.length} results
             {search && <span> for &quot;{search}&quot;</span>}
           </div>
 
           {paginated.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 text-center">
-              <p className="text-lg font-medium">No offers found</p>
-              <p className="mt-1 text-sm text-muted-foreground">
+            <div className="flex flex-col justify-center items-center py-20 text-center">
+              <p className="font-medium text-lg">No offers found</p>
+              <p className="mt-1 text-muted-foreground text-sm">
                 Try a different search or category
               </p>
               <Button
@@ -237,7 +245,7 @@ function ToolsContent() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {paginated.map((offer) => (
                   <div
                     key={offer.id}
@@ -250,14 +258,14 @@ function ToolsContent() {
               </div>
 
               {totalPages > 1 && (
-                <div className="mt-8 flex items-center justify-center gap-2">
+                <div className="flex justify-center items-center gap-2 mt-8">
                   <Button
                     variant="outline"
                     size="sm"
                     disabled={safePage <= 1}
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                   >
-                    <ChevronLeft className="h-4 w-4" />
+                    <ChevronLeft className="w-4 h-4" />
                   </Button>
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                     (p) => (
@@ -281,7 +289,7 @@ function ToolsContent() {
                     disabled={safePage >= totalPages}
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                   >
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="w-4 h-4" />
                   </Button>
                 </div>
               )}

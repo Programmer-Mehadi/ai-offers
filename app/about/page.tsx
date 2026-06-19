@@ -48,7 +48,7 @@ export default async function AboutPage() {
               About us
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              We help students discover verified discounts and free tools â€” because being a student
+              We help students discover verified discounts and free tools — because being a student
               is expensive enough.
             </p>
           </div>
@@ -89,7 +89,7 @@ export default async function AboutPage() {
             </p>
             <p className="mt-4 text-muted-foreground">
               Every offer on this site has been checked by a human, cross-referenced with official sources,
-              and verified for student eligibility. If a deal expires, we know within days â€” and we take it down.
+              and verified for student eligibility. If a deal expires, we know within days — and we take it down.
             </p>
           </div>
 
@@ -136,7 +136,7 @@ export default async function AboutPage() {
             <Award className="mx-auto mb-3 h-8 w-8 text-brand-600 dark:text-brand-400" />
             <h2 className="text-xl font-bold">Found a deal we missed?</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Help the community â€” submit a verified offer and we&apos;ll review it.
+              Help the community — submit a verified offer and we&apos;ll review it.
             </p>
             <Button className="mt-4" asChild>
               <Link href="/submit-offer">Submit an Offer</Link>

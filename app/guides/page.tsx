@@ -37,7 +37,7 @@ export default async function GuidesIndexPage() {
                     <h2 className="text-lg font-bold leading-snug group-hover:text-brand-600 dark:group-hover:text-brand-400">{guide.title}</h2>
                     <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{guide.description}</p>
                     <div className="mt-4 text-xs text-muted-foreground">
-                      {guide.date} Â· {guide.readTime}
+                      {guide.date} · {guide.readTime}
                     </div>
                   </CardContent>
                 </Card>
