@@ -16,9 +16,13 @@ import { cn } from "@/lib/utils"
 export default function SavingsCalculatorPage() {
   const [selections, setSelections] = useState<Record<string, boolean>>({})
   const [showAll, setShowAll] = useState(false)
-  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>([])
+  const [offers, setOffers] = useState<Awaited<ReturnType<typeof getOffers>>>(
+    []
+  )
 
-  useEffect(() => { getOffers().then(setOffers) }, [])
+  useEffect(() => {
+    getOffers().then(setOffers)
+  }, [])
 
   const displayed = showAll ? offers : offers.slice(0, 16)
 
@@ -38,38 +42,46 @@ export default function SavingsCalculatorPage() {
   }, 0)
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 pt-24">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
           <Breadcrumbs items={[{ label: "Savings Calculator" }]} />
 
           <div className="mb-10 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 shadow-md">
-              <Calculator className="h-7 w-7 text-white" />
+            <div className="flex justify-center items-center bg-linear-to-br from-emerald-500 to-green-600 shadow-md mx-auto mb-4 rounded-2xl w-14 h-14">
+              <Calculator className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Savings Calculator</h1>
+            <h1 className="font-bold text-3xl sm:text-4xl tracking-tight">
+              Savings Calculator
+            </h1>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-              Select the offers you&apos;d use and see how much you could save as a student.
+              Select the offers you&apos;d use and see how much you could save
+              as a student.
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
+          <div className="gap-8 grid lg:grid-cols-[1fr_320px]">
             <div>
-              <div className="mb-4 flex items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                  {Object.keys(selections).filter((k) => selections[k]).length} selected
+              <div className="flex justify-between items-center mb-4">
+                <p className="text-muted-foreground text-sm">
+                  {Object.keys(selections).filter((k) => selections[k]).length}{" "}
+                  selected
                 </p>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" onClick={() => setShowAll(!showAll)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowAll(!showAll)}
+                  >
                     {showAll ? "Show less" : "Show all 34"}
                   </Button>
                   <Button variant="ghost" size="sm" onClick={reset}>
-                    <RotateCcw className="mr-1 h-3 w-3" /> Reset
+                    <RotateCcw className="mr-1 w-3 h-3" /> Reset
                   </Button>
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="gap-3 grid grid-cols-1 sm:grid-cols-2">
                 {displayed.map((offer) => {
                   const selected = !!selections[offer.id]
                   return (
@@ -77,27 +89,39 @@ export default function SavingsCalculatorPage() {
                       key={offer.id}
                       onClick={() => toggle(offer.id)}
                       className={cn(
-                        "group flex items-start gap-3 rounded-xl border p-3 text-left transition-all",
+                        "group flex items-start gap-3 p-3 border rounded-xl text-left transition-all",
                         selected
                           ? "border-brand-500/40 bg-brand-500/5 shadow-sm"
-                          : "border-border/50 hover:border-border hover:bg-muted/30",
+                          : "border-border/50 hover:border-border hover:bg-muted/30"
                       )}
                     >
-                      <div className={cn(
-                        "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-sm font-bold text-white transition-all",
-                        `bg-gradient-to-br ${offer.color}`,
-                        selected && "ring-2 ring-offset-1 ring-brand-500/40",
-                      )}>
-                        {selected ? <Check className="h-4 w-4" /> : offer.name.slice(0, 2).toUpperCase()}
+                      <div
+                        className={cn(
+                          "flex justify-center items-center rounded-lg w-9 h-9 font-bold text-white text-sm transition-all shrink-0",
+                          `bg-linear-to-br ${offer.color}`,
+                          selected && "ring-2 ring-brand-500/40 ring-offset-1"
+                        )}
+                      >
+                        {selected ? (
+                          <Check className="w-4 h-4" />
+                        ) : (
+                          offer.name.slice(0, 2).toUpperCase()
+                        )}
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium leading-tight">{offer.name}</p>
-                        <p className="mt-0.5 text-xs text-muted-foreground">{offer.category}</p>
-                        <span className={cn(
-                          "mt-1 inline-block rounded px-1.5 py-0.5 text-[10px] font-semibold",
-                          `bg-gradient-to-r ${offer.color}`,
-                          "text-white",
-                        )}>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-sm leading-tight">
+                          {offer.name}
+                        </p>
+                        <p className="mt-0.5 text-muted-foreground text-xs">
+                          {offer.category}
+                        </p>
+                        <span
+                          className={cn(
+                            "inline-block mt-1 px-1.5 py-0.5 rounded font-semibold text-[10px]",
+                            `bg-linear-to-r ${offer.color}`,
+                            "text-white"
+                          )}
+                        >
                           {offer.discount}
                         </span>
                       </div>
@@ -107,26 +131,37 @@ export default function SavingsCalculatorPage() {
               </div>
             </div>
 
-            <div className="lg:sticky lg:top-28">
+            <div className="lg:top-28 lg:sticky">
               <Card className="border-border/50">
                 <CardContent className="p-5">
                   <h3 className="font-bold">Your total savings</h3>
-                  <p className="mt-1 text-3xl font-bold tracking-tight text-brand-600 dark:text-brand-400">
+                  <p className="mt-1 font-bold text-brand-600 dark:text-brand-400 text-3xl tracking-tight">
                     ${totalSaved.toLocaleString()}+
                   </p>
-                  <p className="mt-1 text-xs text-muted-foreground">per year using selected offers</p>
-                  <div className="mt-4 space-y-2">
+                  <p className="mt-1 text-muted-foreground text-xs">
+                    per year using selected offers
+                  </p>
+                  <div className="space-y-2 mt-4">
                     {selected.length === 0 && (
-                      <p className="text-xs text-muted-foreground">Select offers above to calculate your savings.</p>
+                      <p className="text-muted-foreground text-xs">
+                        Select offers above to calculate your savings.
+                      </p>
                     )}
                     {selected.slice(0, 6).map((o) => (
-                      <div key={o.id} className="flex items-center justify-between text-xs">
+                      <div
+                        key={o.id}
+                        className="flex justify-between items-center text-xs"
+                      >
                         <span className="truncate">{o.name}</span>
-                        <span className="shrink-0 text-muted-foreground">{o.discount}</span>
+                        <span className="text-muted-foreground shrink-0">
+                          {o.discount}
+                        </span>
                       </div>
                     ))}
                     {selected.length > 6 && (
-                      <p className="text-xs text-muted-foreground">+{selected.length - 6} more offers</p>
+                      <p className="text-muted-foreground text-xs">
+                        +{selected.length - 6} more offers
+                      </p>
                     )}
                   </div>
                   <Button className="mt-4 w-full" asChild>
@@ -142,4 +177,3 @@ export default function SavingsCalculatorPage() {
     </div>
   )
 }
-

@@ -2,6 +2,7 @@
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
+import { AuthProvider } from "@/components/auth-provider"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/toaster"
 import { ScrollToTop } from "@/components/scroll-to-top"
@@ -39,21 +40,22 @@ export default function RootLayout({
         "antialiased",
         fontMono.variable,
         "font-sans",
-        fontSans.variable,
+        fontSans.variable
       )}
     >
       <body>
         <ThemeProvider>
-          <TooltipProvider>
-            {children}
-            <Toaster />
-            <ScrollToTop />
-            <CookieConsent />
-            <CommandPalette />
-          </TooltipProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster />
+              <ScrollToTop />
+              <CookieConsent />
+              <CommandPalette />
+            </TooltipProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
   )
 }
-

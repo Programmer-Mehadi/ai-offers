@@ -40,48 +40,48 @@ export function Hero() {
     : []
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28">
+    <section className="relative pt-28 sm:pt-32 lg:pt-40 pb-16 sm:pb-20 lg:pb-28 overflow-hidden">
       {/* Animated gradient orbs */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute -top-32 -left-32 h-72 w-72 animate-pulse rounded-full bg-gradient-to-br from-brand-400/30 to-violet-500/20 blur-3xl duration-[4000ms]" />
-        <div className="absolute top-1/3 -right-32 h-96 w-96 animate-pulse rounded-full bg-gradient-to-br from-sky-400/20 to-brand-500/20 blur-3xl duration-[5000ms]" />
-        <div className="absolute bottom-0 left-1/3 h-64 w-64 animate-pulse rounded-full bg-gradient-to-br from-violet-400/20 to-pink-400/15 blur-3xl duration-[6000ms]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-100/40 via-transparent to-transparent dark:from-brand-900/20" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-violet-100/30 via-transparent to-transparent dark:from-violet-900/10" />
+      <div className="-z-10 absolute inset-0">
+        <div className="-top-32 -left-32 absolute bg-gradient-to-br from-brand-400/30 to-violet-500/20 blur-3xl rounded-full w-72 h-72 animate-pulse duration-[4000ms]" />
+        <div className="top-1/3 -right-32 absolute bg-gradient-to-br from-sky-400/20 to-brand-500/20 blur-3xl rounded-full w-96 h-96 animate-pulse duration-[5000ms]" />
+        <div className="bottom-0 left-1/3 absolute bg-gradient-to-br from-violet-400/20 to-pink-400/15 blur-3xl rounded-full w-64 h-64 animate-pulse duration-[6000ms]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-100/40 dark:from-brand-900/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-violet-100/30 dark:from-violet-900/10 via-transparent to-transparent" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-1.5 text-xs font-medium text-muted-foreground shadow-xs backdrop-blur-sm">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
+          <div className="inline-flex items-center gap-2 bg-background/80 shadow-xs backdrop-blur-sm mb-6 px-4 py-1.5 border border-border rounded-full font-medium text-muted-foreground text-xs">
+            <span className="flex bg-emerald-500 rounded-full w-2 h-2" />
             {stats.verifiedDeals} verified &mdash; updated daily
           </div>
 
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Student discounts,{" "}
-            <span className="bg-gradient-to-r from-brand-500 to-violet-600 bg-clip-text text-transparent">
-              verified for you
+          <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight">
+            Premium discounts,{" "}
+            <span className="bg-clip-text bg-gradient-to-r from-brand-500 to-violet-600 text-transparent">
+              Don{"'"}t pay full price for great software.
             </span>
           </h1>
 
-          <p className="mt-4 text-base text-muted-foreground sm:text-lg lg:mt-6 lg:text-xl">
+          <p className="mt-4 lg:mt-6 text-muted-foreground text-base sm:text-lg lg:text-xl">
             {stats.totalOffers}+ verified discounts and free tools across
             development, AI, design, and more. Every deal checked. Every savings
             real.
           </p>
 
-          <div className="relative mx-auto mt-8 max-w-xl lg:mt-10">
-            <div className="flex items-center gap-2 rounded-xl border border-border bg-background p-1.5 shadow-lg shadow-brand-500/5">
-              <Search className="ml-3 h-5 w-5 shrink-0 text-muted-foreground" />
+          <div className="relative mx-auto mt-8 lg:mt-10 max-w-xl">
+            <div className="flex items-center gap-2 bg-background shadow-brand-500/5 shadow-lg p-1.5 border border-border rounded-xl">
+              <Search className="ml-3 w-5 h-5 text-muted-foreground shrink-0" />
               <Input
                 placeholder="Search tools, categories, or keywords..."
-                className="border-0 bg-transparent shadow-none focus-visible:ring-0"
+                className="bg-transparent shadow-none border-0 focus-visible:ring-0"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setTimeout(() => setFocused(false), 200)}
               />
-              <Button size="sm" className="shrink-0 gap-1" asChild>
+              <Button size="sm" className="gap-1 shrink-0" asChild>
                 <Link
                   href={
                     query.trim()
@@ -90,38 +90,38 @@ export function Hero() {
                   }
                 >
                   Search
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </Button>
             </div>
 
             {focused && suggestions.length > 0 && (
-              <div className="animate-scale-in absolute inset-x-0 top-full z-20 mt-1.5 overflow-hidden rounded-xl border border-border bg-background shadow-xl">
+              <div className="top-full z-20 absolute inset-x-0 bg-background shadow-xl mt-1.5 border border-border rounded-xl overflow-hidden animate-scale-in">
                 {suggestions.map((offer) => (
                   <Link
                     key={offer.id}
                     href={`/offer/${offer.id}`}
-                    className="flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-muted"
+                    className="flex items-center gap-3 hover:bg-muted px-4 py-2.5 text-sm transition-colors"
                   >
                     <div
                       className={`h-7 w-7 shrink-0 rounded-md bg-gradient-to-br ${offer.color} flex items-center justify-center text-[8px] font-bold text-white`}
                     >
                       {offer.name.slice(0, 2).toUpperCase()}
                     </div>
-                    <div className="min-w-0 flex-1 text-left">
+                    <div className="flex-1 min-w-0 text-left">
                       <span className="font-medium">{offer.name}</span>
-                      <span className="ml-2 text-xs text-muted-foreground">
+                      <span className="ml-2 text-muted-foreground text-xs">
                         {offer.category}
                       </span>
                     </div>
-                    <span className="shrink-0 text-xs text-muted-foreground">
+                    <span className="text-muted-foreground text-xs shrink-0">
                       {offer.discount}
                     </span>
                   </Link>
                 ))}
                 <Link
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="block border-t border-border px-4 py-2.5 text-center text-xs font-medium text-muted-foreground transition-colors hover:bg-muted"
+                  className="block hover:bg-muted px-4 py-2.5 border-border border-t font-medium text-muted-foreground text-xs text-center transition-colors"
                 >
                   View all results for &quot;{query}&quot;
                 </Link>
@@ -129,7 +129,7 @@ export function Hero() {
             )}
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 mt-6 text-muted-foreground text-sm">
             <span className="flex items-center gap-1.5">
               <span className="font-semibold text-foreground">
                 {stats.totalOffers}+
