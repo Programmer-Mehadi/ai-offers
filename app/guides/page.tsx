@@ -10,33 +10,40 @@ import { getGuides } from "@/data/guides"
 export default async function GuidesIndexPage() {
   const guides = await getGuides()
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 pt-24">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
           <Breadcrumbs items={[{ label: "Guides" }]} />
 
           <div className="mb-10 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-md">
-              <BookOpen className="h-7 w-7 text-white" />
+            <div className="flex justify-center items-center bg-gradient-to-br from-amber-500 to-orange-600 shadow-md mx-auto mb-4 rounded-2xl w-14 h-14">
+              <BookOpen className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Student Guides</h1>
+            <h1 className="font-bold text-3xl sm:text-4xl tracking-tight">
+              Savings Guides
+            </h1>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-               In-depth guides to help you make the most of discounts, free tools, and student offers.
+              Handpicked strategies and insights to help you make the most of
+              exclusive discounts and free tools.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {guides.map((guide) => (
               <Link key={guide.id} href={`/guides/${guide.slug}`}>
-                <Card className="group h-full cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg">
-                  <CardContent className="flex h-full flex-col p-6">
-                    <div className="mb-3 inline-block w-fit rounded-md bg-gradient-to-r from-amber-500/10 to-orange-500/10 px-2.5 py-1 text-[10px] font-semibold text-amber-600 dark:text-amber-400">
+                <Card className="group hover:shadow-lg border-border/50 hover:border-transparent h-full transition-all duration-300 cursor-pointer">
+                  <CardContent className="flex flex-col p-6 h-full">
+                    <div className="inline-block bg-gradient-to-r from-amber-500/10 to-orange-500/10 mb-3 px-2.5 py-1 rounded-md w-fit font-semibold text-[10px] text-amber-600 dark:text-amber-400">
                       {guide.category}
                     </div>
-                    <h2 className="text-lg font-bold leading-snug group-hover:text-brand-600 dark:group-hover:text-brand-400">{guide.title}</h2>
-                    <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted-foreground">{guide.description}</p>
-                    <div className="mt-4 text-xs text-muted-foreground">
+                    <h2 className="font-bold dark:group-hover:text-brand-400 group-hover:text-brand-600 text-lg leading-snug">
+                      {guide.title}
+                    </h2>
+                    <p className="flex-1 mt-2 text-muted-foreground text-sm line-clamp-2">
+                      {guide.description}
+                    </p>
+                    <div className="mt-4 text-muted-foreground text-xs">
                       {guide.date} · {guide.readTime}
                     </div>
                   </CardContent>
@@ -50,4 +57,3 @@ export default async function GuidesIndexPage() {
     </div>
   )
 }
-

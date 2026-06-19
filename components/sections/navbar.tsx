@@ -1,6 +1,7 @@
 ﻿"use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Bookmark, Menu, Moon, Search, Sun, UserRound } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
@@ -36,6 +37,12 @@ export function Navbar() {
   }, [])
 
   const favCount = favoriteIds.length
+  const pathname = usePathname()
+
+  function isActive(href: string) {
+    if (href === "/") return pathname === "/"
+    return pathname.startsWith(href)
+  }
 
   return (
     <header className="top-0 z-50 fixed inset-x-0 bg-background/80 backdrop-blur-xl border-border/40 border-b">
@@ -48,15 +55,22 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="hover:bg-accent px-3 py-2 rounded-lg font-medium text-muted-foreground text-sm transition-colors hover:text-accent-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const active = isActive(link.href)
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={`px-3 py-2 rounded-lg font-medium text-sm transition-colors ${
+                  active
+                    ? "bg-accent text-accent-foreground"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
         </nav>
 
         <div className="flex items-center gap-1">
@@ -162,16 +176,23 @@ export function Navbar() {
               </div>
 
               <nav className="flex flex-col gap-1 mt-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="hover:bg-accent px-3 py-2.5 rounded-lg font-medium text-muted-foreground text-sm transition-colors hover:text-accent-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {navLinks.map((link) => {
+                  const active = isActive(link.href)
+                  return (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`px-3 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+                        active
+                          ? "bg-accent text-accent-foreground"
+                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                })}
               </nav>
 
               <div className="flex flex-col gap-1 mt-6 pt-6 border-border border-t">
