@@ -26,8 +26,15 @@ async function fetchApi<T>(path: string): Promise<T> {
   }
 }
 
+function mapTags(tags: unknown): string[] {
+  if (!Array.isArray(tags)) return [];
+  return tags.map((t: unknown) =>
+    typeof t === "string" ? t : (t as Record<string, unknown>).name as string
+  );
+}
+
 function mapOffer(raw: Record<string, unknown>) {
-  return { ...raw, id: raw.slug } as import("@/data/offers").Offer
+  return { ...raw, id: raw.slug, tags: mapTags(raw.tags) } as import("@/data/offers").Offer
 }
 
 function mapCategory(raw: Record<string, unknown>) {
@@ -35,7 +42,7 @@ function mapCategory(raw: Record<string, unknown>) {
 }
 
 function mapBlogPost(raw: Record<string, unknown>) {
-  return { ...raw, id: raw.slug } as import("@/data/offers").BlogPost
+  return { ...raw, id: raw.slug, tags: mapTags(raw.tags) } as import("@/data/offers").BlogPost
 }
 
 function mapTestimonial(raw: Record<string, unknown>) {
