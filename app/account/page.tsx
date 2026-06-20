@@ -6,6 +6,7 @@ import {
   Heart,
   LockKeyhole,
   LogOut,
+  MessageSquareText,
   UserRound,
 } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -320,6 +321,23 @@ export default function AccountPage() {
                     </p>
                     <Button asChild>
                       <Link href="/wishlist">Open wishlist</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-border/50">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <MessageSquareText className="w-5 h-5" />
+                      Testimonials
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-muted-foreground text-sm">
+                      View and manage the testimonials you&apos;ve submitted.
+                    </p>
+                    <Button asChild>
+                      <Link href="/account/testimonials">Open testimonials</Link>
                     </Button>
                   </CardContent>
                 </Card>

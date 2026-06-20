@@ -270,6 +270,21 @@ export function voteSuggestion(id: string) {
 
 // --- Testimonials (auth-required) ---
 
+export type MyTestimonial = {
+  _id: string
+  name: string
+  content: string
+  role?: string
+  school?: string
+  saved?: string
+  rating: number
+  createdAt: string
+}
+
+export function getMyTestimonials(token: string) {
+  return apiRequest<MyTestimonial[]>('/testimonials/mine', undefined, token)
+}
+
 export function submitTestimonial(
   token: string,
   input: {
