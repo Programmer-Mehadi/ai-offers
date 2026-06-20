@@ -1,52 +1,32 @@
-﻿"use client"
-
-import { ChevronDown, HelpCircle } from "lucide-react"
-import { useState } from "react"
+﻿import { HelpCircle, Sparkles, MessageSquareText } from "lucide-react"
 import Link from "next/link"
 
-import { Card, CardContent } from "@/components/ui/card"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
-import { cn } from "@/lib/utils"
+import { getFaqs, type FaqItem } from "@/data/faq"
 
-const faqs = [
-  {
-    q: "How do I verify my student status?",
-    a: "Most services use one of: school email (.edu), SheerID verification, GitHub Education, UNiDAYS, or Student Beans. Each offer page shows which method is required.",
-  },
-  {
-    q: "Are all offers really free?",
-    a: "Many offers are completely free (like JetBrains IDEs, GitHub Copilot, Figma education license). Others offer significant discounts (50-90% off). Each offer clearly shows whether it's free or discounted.",
-  },
-  {
-    q: "How often are offers updated?",
-    a: "We re-verify every offer monthly. Expired or changed offers are flagged or removed within days. Our community also helps by reporting outdated deals.",
-  },
-  {
-    q: "Do I need a credit card for free offers?",
-    a: "It depends on the offer. Azure for Students ($100 credit) requires NO credit card. Other platforms like GCP and AWS require a card even for their free tiers. We note this on each offer page.",
-  },
-  {
-    q: "Can international students use these offers?",
-    a: "Most offers are available globally. Some are region-specific (we label these clearly). Azure for Students works in most countries and is the best option for international students as it requires no credit card.",
-  },
-  {
-    q: "How do I save offers for later?",
-    a: "Click the heart icon on any offer to save it to your wishlist. Sign in to sync your wishlist across devices.",
-  },
-  {
-    q: "Can I submit an offer I found?",
-    a: "Absolutely! Use our Submit an Offer page. Our team reviews every submission and publishes it within 24-48 hours if it passes verification.",
-  },
-  {
-    q: "How do I report an expired or incorrect offer?",
-    a: "Each offer detail page has a 'Report expired or incorrect' button. You can also email corrections@OfferPerks.co.",
-  },
-]
+function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
+  return (
+    <div className="space-y-3">
+      {faqs.map((faq) => (
+        <details key={faq._id} className="group rounded-xl border border-border/50 bg-card transition-colors open:border-brand-500/30">
+          <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 text-sm font-medium leading-snug marker:hidden [&::-webkit-details-marker]:hidden">
+            <span>{faq.question}</span>
+            <svg className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+          <div className="border-t border-border/50 px-5 py-4 text-sm leading-relaxed text-muted-foreground [&_a]:text-brand-600 [&_a:hover]:underline [&_h1]:mb-2 [&_h1]:text-base [&_h1]:font-semibold [&_h1]:text-foreground [&_h2]:mb-2 [&_h2]:text-base [&_h2]:font-semibold [&_h2]:text-foreground [&_h3]:mb-2 [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:text-foreground [&_p]:mb-3 [&_p: last-child]:mb-0 [&_ul]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:mb-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-xs [&_pre]:mb-3 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-muted [&_pre]:p-4 [&_pre]:text-xs [&_blockquote]:mb-3 [&_blockquote]:border-l-2 [&_blockquote]:border-brand-500/30 [&_blockquote]:pl-4 [&_blockquote]:italic [&_img]:rounded-lg [&_img]:border [&_img]:border-border/50"
+            dangerouslySetInnerHTML={{ __html: faq.answer }} />
+        </details>
+      ))}
+    </div>
+  )
+}
 
-export default function FAQPage() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+export default async function FaqPage() {
+  const faqs = await getFaqs()
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -61,51 +41,24 @@ export default function FAQPage() {
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Frequently Asked Questions</h1>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-               Everything you need to know about OfferPerks and how our discounts work.
+              Answers to the most common questions about student offers, savings, and how our platform works.
             </p>
           </div>
 
-          <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <Card
-                key={i}
-                className={cn(
-                  "cursor-pointer border-border/50 transition-all",
-                  openIndex === i && "border-brand-500/30 shadow-sm",
-                )}
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              >
-                <CardContent className="p-5">
-                  <div className="flex items-center justify-between gap-4">
-                    <h3 className="font-semibold leading-snug">{faq.q}</h3>
-                    <ChevronDown
-                      className={cn(
-                        "h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200",
-                        openIndex === i && "rotate-180",
-                      )}
-                    />
-                  </div>
-                  <div
-                    className={cn(
-                      "grid transition-all duration-200",
-                      openIndex === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
-                    )}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{faq.a}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {faqs.length === 0 ? (
+            <div className="rounded-xl border border-border/50 bg-muted/30 p-12 text-center">
+              <HelpCircle className="mx-auto mb-3 h-8 w-8 text-muted-foreground" />
+              <p className="text-muted-foreground">No FAQs available yet. Check back soon!</p>
+            </div>
+          ) : (
+            <FaqAccordion faqs={faqs} />
+          )}
 
           <div className="mt-10 rounded-xl border border-border/50 bg-muted/30 p-6 text-center">
+            <MessageSquareText className="mx-auto mb-2 h-5 w-5 text-muted-foreground" />
             <p className="text-sm text-muted-foreground">
               Still have questions?{" "}
-              <Link href="/contact" className="font-medium text-foreground underline underline-offset-2">
-                Contact our support team
-              </Link>
+              <Link href="/contact" className="font-medium text-foreground underline underline-offset-2">Contact us</Link>
             </p>
           </div>
         </div>
@@ -114,4 +67,3 @@ export default function FAQPage() {
     </div>
   )
 }
-

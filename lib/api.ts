@@ -132,3 +132,7 @@ export async function getResources() {
 export async function getStats() {
   return fetchApi<Record<string, number>>("/stats")
 }
+
+export async function getFaqs() {
+  return fetchApi<{ _id: string; question: string; answer: string; order: number }[]>("/faq")
+}
