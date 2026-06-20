@@ -268,6 +268,24 @@ export function voteSuggestion(id: string) {
   })
 }
 
+// --- Testimonials (auth-required) ---
+
+export function submitTestimonial(
+  token: string,
+  input: {
+    content: string
+    role?: string
+    school?: string
+    saved?: string
+    rating?: number
+  },
+) {
+  return apiRequest<{ _id: string }>('/testimonials', {
+    method: 'POST',
+    body: JSON.stringify(input),
+  }, token)
+}
+
 export function deleteSuggestion(token: string, id: string) {
   return apiRequest<{ message: string }>(
     `/wishlist/${id}`,
