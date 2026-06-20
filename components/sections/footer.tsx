@@ -58,14 +58,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-10 rounded-2xl border border-border/50 bg-background/80 p-5 sm:p-6">
-          <div className="w-full">
-            <p className="mb-2 text-sm font-semibold">Weekly savings brief</p>
-            <div className="w-full">
-              <Newsletter />
-            </div>
-          </div>
-        </div>
+        <Newsletter />
 
         {/* Top categories */}
         <div className="mb-10">
