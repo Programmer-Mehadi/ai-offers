@@ -4,6 +4,7 @@ import { Heart, Search, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -140,11 +141,13 @@ function WishlistCard({
       <CardContent className="p-5">
         <div className="flex justify-between items-start gap-3 mb-3">
           <div className="flex items-center gap-3">
-            <div
-              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${offer.color} text-sm font-bold text-white shadow-sm`}
-            >
-              {offer.name.slice(0, 2).toUpperCase()}
-            </div>
+            <OfferLogoImage
+              src={offer.logo}
+              name={offer.name}
+              size="lg"
+              color={`bg-gradient-to-br ${offer.color}`}
+              rounded="xl"
+            />
             <div className="min-w-0">
               <Link
                 href={`/offer/${offer.id}`}

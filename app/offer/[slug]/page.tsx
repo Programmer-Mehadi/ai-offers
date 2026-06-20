@@ -32,6 +32,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { useAuth } from "@/components/auth-provider"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
@@ -146,11 +147,13 @@ export default function OfferPage() {
                   <CardContent className="p-6 sm:p-8">
                     <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4 mb-6">
                       <div className="flex items-center gap-3 sm:gap-4">
-                        <div
-                          className={`flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-gradient-to-br ${offer.color} text-base sm:text-xl font-bold text-white shadow-md`}
-                        >
-                          {offer.name.slice(0, 2).toUpperCase()}
-                        </div>
+                        <OfferLogoImage
+                          src={offer.logo}
+                          name={offer.name}
+                          size="xl"
+                          color={`bg-gradient-to-br ${offer.color}`}
+                          rounded="xl"
+                        />
                         <div className="min-w-0 flex-1">
                           <h1 className="font-bold text-xl sm:text-2xl lg:text-3xl break-words">
                             {offer.name}
@@ -435,13 +438,13 @@ export default function OfferPage() {
                         key={ro.id}
                         href={`/offer/${ro.id}`}
                         className="group flex items-center gap-3 hover:shadow-md p-4 border border-border/50 hover:border-transparent rounded-xl transition-all"
-                      >
-                        <div
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${ro.color} text-xs font-bold text-white`}
-                        >
-                          {ro.name.slice(0, 2).toUpperCase()}
-                        </div>
-                        <div className="flex-1 min-w-0">
+                      >                            <OfferLogoImage
+                              src={ro.logo}
+                              name={ro.name}
+                              size="lg"
+                              color={`bg-gradient-to-br ${ro.color}`}
+                            />
+                            <div className="flex-1 min-w-0">
                           <p className="font-medium dark:group-hover:text-brand-400 group-hover:text-brand-600 text-sm leading-tight">
                             {ro.name}
                           </p>
@@ -471,11 +474,12 @@ export default function OfferPage() {
                             href={`/offer/${ro.id}`}
                             className="flex items-center gap-3 hover:bg-muted p-2 rounded-lg transition-colors"
                           >
-                            <div
-                              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${ro.color} text-[10px] font-bold text-white`}
-                            >
-                              {ro.name.slice(0, 2).toUpperCase()}
-                            </div>
+                            <OfferLogoImage
+                              src={ro.logo}
+                              name={ro.name}
+                              size="sm"
+                              color={`bg-gradient-to-br ${ro.color}`}
+                            />
                             <div className="min-w-0">
                               <p className="font-medium text-sm truncate leading-tight">
                                 {ro.name}

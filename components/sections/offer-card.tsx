@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { cn } from "@/lib/utils"
 import type { Offer } from "@/data/offers"
 
@@ -53,9 +54,12 @@ export function OfferCard({
 
       <CardContent className={"p-4 py-0"}>
         <div className="mb-3 flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground shadow-sm">
-            {offer.name.slice(0, 2).toUpperCase()}
-          </div>
+          <OfferLogoImage
+            src={offer.logo}
+            name={offer.name}
+            size="md"
+            color="bg-primary"
+          />
           <div className="min-w-0">
             <h3
               className={cn(

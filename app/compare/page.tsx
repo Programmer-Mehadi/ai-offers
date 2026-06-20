@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { getOffers, type Offer } from "@/data/offers"
 
@@ -93,9 +94,13 @@ export default function ComparePage() {
                         className="flex items-center justify-between rounded-lg border border-border/50 px-3 py-2"
                       >
                         <div className="flex items-center gap-2">
-                          <div className={`h-6 w-6 rounded-md bg-gradient-to-br ${o.color} text-[8px] font-bold text-white flex items-center justify-center`}>
-                            {o.name.slice(0, 2)}
-                          </div>
+                          <OfferLogoImage
+                            src={o.logo}
+                            name={o.name}
+                            size="sm"
+                            color={`bg-gradient-to-br ${o.color}`}
+                            rounded="md"
+                          />
                           <span className="text-sm font-medium">{o.name}</span>
                         </div>
                         <button onClick={() => remove(o.id)} className="text-muted-foreground hover:text-foreground">
@@ -136,9 +141,12 @@ export default function ComparePage() {
                             className="border-b border-border/50 px-4 py-3 text-left"
                           >
                             <div className="flex items-center gap-2">
-                              <div className={`h-8 w-8 rounded-lg bg-gradient-to-br ${o.color} text-xs font-bold text-white flex items-center justify-center`}>
-                                {o.name.slice(0, 2)}
-                              </div>
+                              <OfferLogoImage
+                                src={o.logo}
+                                name={o.name}
+                                size="md"
+                                color={`bg-gradient-to-br ${o.color}`}
+                              />
                               <Link href={`/offer/${o.id}`} className="font-semibold hover:underline">
                                 {o.name}
                               </Link>

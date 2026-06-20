@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { getOffers, getStats } from "@/data/offers"
 import type { Offer } from "@/data/offers"
 
@@ -114,11 +115,12 @@ export function Hero() {
                     href={`/offer/${offer.id}`}
                     className="flex items-center gap-3 hover:bg-muted px-4 py-2.5 text-sm transition-colors"
                   >
-                    <div
-                      className={`h-7 w-7 shrink-0 rounded-md bg-gradient-to-br ${offer.color} flex items-center justify-center text-[8px] font-bold text-white`}
-                    >
-                      {offer.name.slice(0, 2).toUpperCase()}
-                    </div>
+                    <OfferLogoImage
+                      src={offer.logo}
+                      name={offer.name}
+                      size="sm"
+                      color={`bg-gradient-to-br ${offer.color}`}
+                    />
                     <div className="flex-1 min-w-0 text-left">
                       <span className="font-medium">{offer.name}</span>
                       <span className="ml-2 text-muted-foreground text-xs">

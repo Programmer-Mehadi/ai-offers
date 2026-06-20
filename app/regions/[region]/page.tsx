@@ -5,6 +5,7 @@ import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Card, CardContent } from "@/components/ui/card"
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { getOffers, getRegions } from "@/data/offers"
 
 export default async function RegionPage({
@@ -50,9 +51,13 @@ export default async function RegionPage({
                   <Card className="group cursor-pointer border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg">
                     <CardContent className="p-5">
                       <div className="mb-3 flex items-center gap-3">
-                        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${offer.color} text-sm font-bold text-white`}>
-                          {offer.name.slice(0, 2).toUpperCase()}
-                        </div>
+                        <OfferLogoImage
+                          src={offer.logo}
+                          name={offer.name}
+                          size="lg"
+                          color={`bg-gradient-to-br ${offer.color}`}
+                          rounded="xl"
+                        />
                         <div className="min-w-0 flex-1">
                           <h3 className="font-semibold leading-tight group-hover:text-brand-600 dark:group-hover:text-brand-400">{offer.name}</h3>
                           <p className="text-xs text-muted-foreground">{offer.category}</p>

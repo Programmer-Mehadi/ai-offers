@@ -6,6 +6,7 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
@@ -65,9 +66,13 @@ export default function DiscoverPage() {
                   <div className={`h-1.5 bg-gradient-to-r ${offer.color}`} />
                   <CardContent className="p-5">
                     <div className="mb-3 flex items-center gap-3">
-                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${offer.color} text-sm font-bold text-white shadow-sm`}>
-                        {offer.name.slice(0, 2).toUpperCase()}
-                      </div>
+                      <OfferLogoImage
+                        src={offer.logo}
+                        name={offer.name}
+                        size="lg"
+                        color={`bg-gradient-to-br ${offer.color}`}
+                        rounded="xl"
+                      />
                       <div className="min-w-0 flex-1">
                         <h3 className="font-semibold leading-tight">{offer.name}</h3>
                         <p className="text-xs text-muted-foreground">{offer.category}</p>

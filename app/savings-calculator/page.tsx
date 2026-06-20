@@ -7,6 +7,7 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { OfferLogoImage } from "@/components/offer-logo-image"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { Breadcrumbs } from "@/components/breadcrumbs"
@@ -95,19 +96,19 @@ export default function SavingsCalculatorPage() {
                           : "border-border/50 hover:border-border hover:bg-muted/30"
                       )}
                     >
-                      <div
-                        className={cn(
-                          "flex justify-center items-center rounded-lg w-9 h-9 font-bold text-white text-sm transition-all shrink-0",
-                          `bg-linear-to-br ${offer.color}`,
-                          selected && "ring-2 ring-brand-500/40 ring-offset-1"
-                        )}
-                      >
-                        {selected ? (
+                      {selected ? (
+                        <div className="flex justify-center items-center rounded-lg w-9 h-9 font-bold text-white text-sm transition-all shrink-0 bg-linear-to-br from-emerald-500 to-green-600 ring-2 ring-brand-500/40 ring-offset-1">
                           <Check className="w-4 h-4" />
-                        ) : (
-                          offer.name.slice(0, 2).toUpperCase()
-                        )}
-                      </div>
+                        </div>
+                      ) : (
+                        <OfferLogoImage
+                          src={offer.logo}
+                          name={offer.name}
+                          size="md"
+                          color={`bg-linear-to-br ${offer.color}`}
+                          className="transition-all"
+                        />
+                      )}
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-sm leading-tight">
                           {offer.name}
