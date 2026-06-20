@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowUpRight, Heart } from "lucide-react"
+import { ArrowUpRight, Award, Gem, Heart, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
 
@@ -9,7 +9,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { useAuth } from "@/components/auth-provider"
 import { cn } from "@/lib/utils"
 import type { Offer } from "@/data/offers"
-import { Button } from "@/components/ui/button"
 
 export function ToolCard({ offer }: { offer: Offer }) {
   const { wishlistIds, toggleWishlist, isAuthenticated } = useAuth()
@@ -34,31 +33,59 @@ export function ToolCard({ offer }: { offer: Offer }) {
   }
 
   return (
-    <Card className="group relative overflow-hidden border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
-      <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
-
-      <div className="absolute top-2 right-2 z-20">
+    <Card className="group relative border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
+      {/* Wishlist button */}
+      <div className="absolute top-3 right-3 z-20">
         <button
           onClick={handleWishlistToggle}
           className={cn(
-            "flex h-6 w-6 items-center justify-center rounded-md border transition-colors",
+            "flex h-7 w-7 items-center justify-center rounded-md border transition-colors",
             inWishlist
               ? "border-brand-500 bg-brand-500 text-white"
               : "border-border bg-background text-muted-foreground hover:border-brand-500/50 hover:text-brand-500"
           )}
         >
-          <Heart
-            className={cn("h-3 w-3", inWishlist && "fill-current")}
-          />
+          <Heart className={cn("h-3.5 w-3.5", inWishlist && "fill-current")} />
           <span className="sr-only">
             {inWishlist ? "Remove from" : "Add to"} wishlist
           </span>
         </button>
       </div>
 
-      <CardContent className="p-5">
+      {/* Badges at top like OfferCard */}
+      <div className="flex flex-wrap gap-2 p-4 pb-0">
+        {offer.featured && (
+          <Badge
+            variant="secondary"
+            className="gap-1 bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400"
+          >
+            <Sparkles className="h-3 w-3" />
+            Featured
+          </Badge>
+        )}
+        {offer.hidden_gem && (
+          <Badge
+            variant="secondary"
+            className="gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400"
+          >
+            <Gem className="h-3 w-3" />
+            Hidden Gem
+          </Badge>
+        )}
+        {offer.underrated && (
+          <Badge
+            variant="secondary"
+            className="gap-1 bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-400"
+          >
+            <Award className="h-3 w-3" />
+            Underrated
+          </Badge>
+        )}
+      </div>
+
+      <CardContent className="p-4 pt-0">
         <div className="mb-3 flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-sm font-bold text-primary-foreground shadow-sm">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground shadow-sm">
             {offer.name.slice(0, 2).toUpperCase()}
           </div>
           <div className="min-w-0">
@@ -66,29 +93,16 @@ export function ToolCard({ offer }: { offer: Offer }) {
             <p className="text-xs text-muted-foreground">{offer.category}</p>
           </div>
         </div>
+
         <p className="text-sm text-muted-foreground">{offer.description}</p>
+
         <div className="mt-3 inline-block rounded-lg bg-primary px-3 py-1.5 text-sm font-bold text-primary-foreground shadow-sm">
           {offer.discount}
         </div>
       </CardContent>
+
       <CardFooter className="flex items-center justify-between border-t border-border/50 px-5 py-3">
-        <div className="flex flex-wrap gap-1">
-          {offer.featured && (
-            <Badge
-              variant="secondary"
-              className="bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400"
-            >
-              Featured
-            </Badge>
-          )}
-          {offer.hidden_gem && (
-            <Badge
-              variant="secondary"
-              className="bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400"
-            >
-              Hidden
-            </Badge>
-          )}
+        <div>
           {offer.audience === "everyone" ? (
             <Badge
               variant="secondary"
@@ -105,11 +119,13 @@ export function ToolCard({ offer }: { offer: Offer }) {
             </Badge>
           )}
         </div>
-        <Link href={`/offer/${offer.id}`} onClick={(e) => e.stopPropagation()}>
-          <Button size="sm" className="h-7">
-            View
-            <ArrowUpRight className="h-3 w-3" />
-          </Button>
+        <Link
+          href={`/offer/${offer.slug}`}
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          View Deal
+          <ArrowUpRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </CardFooter>
     </Card>

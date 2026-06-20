@@ -63,35 +63,35 @@ export default async function CategoryPage({
         <main className="flex-1">
           {/* Hero banner */}
           <section className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16">
-              <div
-                className={`absolute inset-0 bg-linear-to-br ${gradientClass} opacity-5 dark:opacity-[0.07]`}
-              />
-              <div
-                className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] ${gradientClass} via-transparent to-transparent opacity-[0.08]`}
-              />
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${gradientClass} text-lg font-bold text-white shadow-md`}
-                  >
-                    {cat.name.charAt(0)}
-                  </div>
-                  <div>
-                    <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-                      {cat.name}
-                    </h1>
-                    <p className="mt-1 max-w-xl text-muted-foreground">
-                      {categoryDescriptions[slug]}
-                    </p>
-                    <p className="mt-0.5 text-sm text-muted-foreground/70">
-                      {categoryOffers.length} offers available
-                    </p>
-                  </div>
+            <div
+              className={`absolute inset-0 bg-linear-to-br ${gradientClass} opacity-5 dark:opacity-[0.07]`}
+            />
+            <div
+              className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] ${gradientClass} via-transparent to-transparent opacity-[0.08]`}
+            />
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center gap-4">
+                <div
+                  className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${gradientClass} text-lg font-bold text-white shadow-md`}
+                >
+                  {cat.name.charAt(0)}
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                    {cat.name}
+                  </h1>
+                  <p className="mt-1 max-w-xl text-muted-foreground">
+                    {categoryDescriptions[slug]}
+                  </p>
+                  <p className="mt-0.5 text-sm text-muted-foreground/70">
+                    {categoryOffers.length} offers available
+                  </p>
                 </div>
               </div>
-            </section>
+            </div>
+          </section>
 
-          <div className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+          <div className="mx-auto mt-8 max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
             {categoryOffers.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
                 <p className="text-lg font-medium">
