@@ -58,6 +58,15 @@ export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mb-10 rounded-2xl border border-border/50 bg-background/80 p-5 sm:p-6">
+          <div className="w-full">
+            <p className="mb-2 text-sm font-semibold">Weekly savings brief</p>
+            <div className="w-full">
+              <Newsletter />
+            </div>
+          </div>
+        </div>
+
         {/* Top categories */}
         <div className="mb-10">
           <h4 className="mb-3 text-sm font-semibold">Top Categories</h4>
@@ -82,10 +91,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-linear-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
                 OP
               </div>
               <span className="text-base font-bold">OfferPerks</span>
@@ -120,28 +129,6 @@ export function Footer() {
                 Compare
               </Link>
             </div>
-          </div>
-
-          {footerLinks.map((group) => (
-            <div key={group.title}>
-              <h4 className="mb-3 text-sm font-semibold">{group.title}</h4>
-              <ul className="space-y-2">
-                {group.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          <div className="col-span-2 md:col-span-1">
-            <Newsletter />
             <div className="mt-6">
               <h4 className="mb-3 text-sm font-semibold">Follow Us</h4>
               <ul className="space-y-2">
@@ -172,6 +159,24 @@ export function Footer() {
               </ul>
             </div>
           </div>
+
+          {footerLinks.map((group) => (
+            <div key={group.title}>
+              <h4 className="mb-3 text-sm font-semibold">{group.title}</h4>
+              <ul className="space-y-2">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <div className="mt-10 border-t border-border/40 pt-6 text-center text-xs text-muted-foreground">

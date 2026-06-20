@@ -1,24 +1,16 @@
 ﻿"use client"
 
-import { Mail } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { toast } from "sonner"
 
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 
 export function Newsletter() {
   const { isAuthenticated, user, setNewsletterSubscribed } = useAuth()
-  const [email, setEmail] = useState("")
-  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    if (user?.email) {
-      setEmail(user.email)
-    }
-  }, [user?.email])
+  const [loading, setLoading] = useState(false)
 
   async function handleAuthenticatedToggle() {
     if (!user || loading) return
@@ -39,9 +31,9 @@ export function Newsletter() {
 
   if (!isAuthenticated || !user) {
     return (
-      <div className="bg-linear-to-br from-brand-500/5 to-violet-500/5 p-6 border border-border/50 rounded-xl">
-        <label className="font-medium text-sm">Get weekly deals</label>
-        <p className="mt-1 mb-3 text-muted-foreground text-sm">
+      <div className="w-full rounded-xl border border-border/50 bg-linear-to-br from-brand-500/5 to-violet-500/5 p-6">
+        <label className="text-sm font-medium">Get weekly deals</label>
+        <p className="mt-1 mb-3 text-sm text-muted-foreground">
           Sign in to subscribe to our weekly newsletter and never miss a deal.
         </p>
         <Button size="sm" asChild>
@@ -52,14 +44,13 @@ export function Newsletter() {
   }
 
   return (
-    <div className="bg-linear-to-br from-brand-500/5 to-violet-500/5 p-6 border border-border/50 rounded-xl">
-      <div className="flex justify-between items-start gap-4">
+    <div className="w-full rounded-xl border border-border/50 bg-linear-to-br from-brand-500/5 to-violet-500/5 p-6">
+      <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="font-medium text-sm">Weekly deals for {user.email}</p>
-          <p className="mt-1 text-muted-foreground text-sm">
+          <p className="text-sm font-medium">Weekly deals for {user.email}</p>
+          <p className="mt-1 text-sm text-muted-foreground">
             Newsletter is currently{" "}
-            {user.newsletterSubscribed ? "enabled" : "paused"} for your
-            account.
+            {user.newsletterSubscribed ? "enabled" : "paused"} for your account.
           </p>
         </div>
         <Button
@@ -75,7 +66,7 @@ export function Newsletter() {
               : "Turn on"}
         </Button>
       </div>
-      <p className="mt-3 text-muted-foreground text-xs">
+      <p className="mt-3 text-xs text-muted-foreground">
         Need more controls? Manage them in{" "}
         <Link href="/account" className="underline underline-offset-2">
           your account
