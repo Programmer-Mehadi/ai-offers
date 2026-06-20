@@ -35,52 +35,56 @@ export function ToolCard({ offer }: { offer: Offer }) {
   return (
     <Card className="group relative border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
       {/* Wishlist button */}
-      <div className="absolute top-3 right-3 z-20">
-        <button
-          onClick={handleWishlistToggle}
-          className={cn(
-            "flex h-7 w-7 items-center justify-center rounded-md border transition-colors",
-            inWishlist
-              ? "border-brand-500 bg-brand-500 text-white"
-              : "border-border bg-background text-muted-foreground hover:border-brand-500/50 hover:text-brand-500"
-          )}
-        >
-          <Heart className={cn("h-3.5 w-3.5", inWishlist && "fill-current")} />
-          <span className="sr-only">
-            {inWishlist ? "Remove from" : "Add to"} wishlist
-          </span>
-        </button>
-      </div>
 
-      {/* Badges at top like OfferCard */}
-      <div className="flex flex-wrap gap-2 p-4 pb-0">
-        {offer.featured && (
-          <Badge
-            variant="secondary"
-            className="gap-1 bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400"
+      <div className="items-between grid grid-cols-[1fr_auto] justify-between gap-4 px-4 py-0 pb-0">
+        {/* Badges at top like OfferCard */}
+        <div className="flex flex-wrap gap-2">
+          {offer.featured && (
+            <Badge
+              variant="secondary"
+              className="gap-1 bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400"
+            >
+              <Sparkles className="h-3 w-3" />
+              Featured
+            </Badge>
+          )}
+          {offer.hidden_gem && (
+            <Badge
+              variant="secondary"
+              className="gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400"
+            >
+              <Gem className="h-3 w-3" />
+              Hidden Gem
+            </Badge>
+          )}
+          {offer.underrated && (
+            <Badge
+              variant="secondary"
+              className="gap-1 bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-400"
+            >
+              <Award className="h-3 w-3" />
+              Underrated
+            </Badge>
+          )}
+        </div>
+        <div className="">
+          <button
+            onClick={handleWishlistToggle}
+            className={cn(
+              "flex h-7 w-7 items-center justify-center rounded-md border transition-colors",
+              inWishlist
+                ? "border-brand-500 bg-brand-500 text-white"
+                : "border-border bg-background text-muted-foreground hover:border-brand-500/50 hover:text-brand-500"
+            )}
           >
-            <Sparkles className="h-3 w-3" />
-            Featured
-          </Badge>
-        )}
-        {offer.hidden_gem && (
-          <Badge
-            variant="secondary"
-            className="gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400"
-          >
-            <Gem className="h-3 w-3" />
-            Hidden Gem
-          </Badge>
-        )}
-        {offer.underrated && (
-          <Badge
-            variant="secondary"
-            className="gap-1 bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-400"
-          >
-            <Award className="h-3 w-3" />
-            Underrated
-          </Badge>
-        )}
+            <Heart
+              className={cn("h-3.5 w-3.5", inWishlist && "fill-current")}
+            />
+            <span className="sr-only">
+              {inWishlist ? "Remove from" : "Add to"} wishlist
+            </span>
+          </button>
+        </div>
       </div>
 
       <CardContent className="p-4 pt-0">
