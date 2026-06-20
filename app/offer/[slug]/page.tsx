@@ -144,18 +144,18 @@ export default function OfferPage() {
                 <Card className="border-border/50 overflow-hidden">
                   <div className={`h-2 bg-gradient-to-r ${offer.color}`} />
                   <CardContent className="p-6 sm:p-8">
-                    <div className="flex justify-between items-start gap-4 mb-6">
-                      <div className="flex items-center gap-4">
+                    <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4 mb-6">
+                      <div className="flex items-center gap-3 sm:gap-4">
                         <div
-                          className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${offer.color} text-xl font-bold text-white shadow-md`}
+                          className={`flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-gradient-to-br ${offer.color} text-base sm:text-xl font-bold text-white shadow-md`}
                         >
                           {offer.name.slice(0, 2).toUpperCase()}
                         </div>
-                        <div>
-                          <h1 className="font-bold text-2xl sm:text-3xl">
+                        <div className="min-w-0 flex-1">
+                          <h1 className="font-bold text-xl sm:text-2xl lg:text-3xl break-words">
                             {offer.name}
                           </h1>
-                          <div className="flex items-center gap-2 mt-1">
+                          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1">
                             <Link
                               href={`/categories/${catSlug}`}
                               className="text-muted-foreground hover:text-foreground text-sm underline underline-offset-2 transition-colors"
@@ -330,7 +330,7 @@ export default function OfferPage() {
                       </div>
                     )}
 
-                    <div className="flex sm:flex-row flex-col gap-3">
+                    <div className="flex flex-col sm:flex-row gap-3">
                       <Button
                         size="lg"
                         className={cn(

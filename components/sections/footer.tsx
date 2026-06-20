@@ -84,8 +84,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-linear-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
                 OP
@@ -149,6 +149,7 @@ export function Footer() {
                     Discord
                   </Link>
                 </li>
+
               </ul>
             </div>
           </div>

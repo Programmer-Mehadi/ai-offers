@@ -115,7 +115,7 @@ export default function HowWeVerifyPage() {
             </p>
           </div>
 
-          <div className="gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
+          <div className="gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {steps.map((step) => {
               const Icon = step.icon
               return (
@@ -152,12 +152,12 @@ export default function HowWeVerifyPage() {
           </div>
 
           <div className="bg-amber-50 dark:bg-amber-950/30 mt-12 border border-amber-200 dark:border-amber-900/50 rounded-2xl overflow-hidden">
-            <div className="flex items-start gap-4 p-6">
-              <div className="flex justify-center items-center bg-amber-400/30 dark:bg-amber-500/20 rounded-full w-12 h-12 shrink-0">
-                <Award className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+            <div className="flex flex-col sm:flex-row items-start gap-4 p-5 sm:p-6">
+              <div className="flex justify-center items-center bg-amber-400/30 dark:bg-amber-500/20 rounded-full w-10 h-10 sm:w-12 sm:h-12 shrink-0">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-amber-900 dark:text-amber-300 text-lg">
+                <h3 className="font-bold text-amber-900 dark:text-amber-300 text-base sm:text-lg">
                   Your Safety Comes First
                 </h3>
                 <div className="bg-amber-500 mt-2 rounded-full w-12 h-0.5" />

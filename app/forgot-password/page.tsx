@@ -79,7 +79,7 @@ export default function ForgotPasswordPage() {
             <p className="font-medium text-brand-600 dark:text-brand-400 text-sm uppercase tracking-[0.2em]">
               Recover access
             </p>
-            <h1 className="font-bold text-4xl sm:text-5xl tracking-tight">
+            <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl tracking-tight">
               Reset your password without touching your saved offers.
             </h1>
             <p className="text-muted-foreground">

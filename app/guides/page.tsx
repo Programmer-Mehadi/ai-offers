@@ -29,7 +29,7 @@ export default async function GuidesIndexPage() {
             </p>
           </div>
 
-          <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {guides.map((guide) => (
               <Link key={guide.id} href={`/guides/${guide.slug}`}>
                 <Card className="group hover:shadow-lg border-border/50 hover:border-transparent h-full transition-all duration-300 cursor-pointer">

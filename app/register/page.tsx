@@ -55,7 +55,7 @@ export default function RegisterPage() {
               <p className="font-medium text-brand-600 dark:text-brand-400 text-sm uppercase tracking-[0.2em]">
                 Start saving properly
               </p>
-              <h1 className="font-bold text-4xl sm:text-5xl tracking-tight">
+              <h1 className="font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
                 Create an account to save offers to your wishlist and manage your offer
                 profile.
               </h1>

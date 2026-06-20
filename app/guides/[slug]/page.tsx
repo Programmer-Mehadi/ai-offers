@@ -28,9 +28,8 @@ export default async function GuidePage({
     <div className="flex min-h-screen flex-col">
       <Navbar />
       <ReadingProgress />
-      <main className="flex-1 pt-24">
-        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1fr_250px]">
+      <main className="flex-1 pt-24">          <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="grid gap-6 sm:gap-10 lg:grid-cols-[1fr_250px]">
             <article className="min-w-0">
               <Breadcrumbs items={[
                 { label: "Guides", href: "/guides" },

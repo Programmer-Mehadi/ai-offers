@@ -73,7 +73,7 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1">
           <Tooltip>
             <TooltipTrigger asChild>
               <button
@@ -85,10 +85,10 @@ export function Navbar() {
                   })
                   window.dispatchEvent(ev)
                 }}
-                className="hidden md:inline-flex items-center gap-2 bg-muted/50 hover:bg-muted px-3 py-1.5 border border-border/60 rounded-lg text-muted-foreground text-xs transition-colors"
+                className="hidden md:inline-flex items-center gap-2 bg-muted/50 hover:bg-muted px-2 lg:px-3 py-1.5 border border-border/60 rounded-lg text-muted-foreground text-xs transition-colors"
               >
                 <Search className="w-3.5 h-3.5" />
-                <span>Search...</span>
+                <span className="hidden lg:inline">Search...</span>
                 <kbd className="bg-background px-1 py-0.5 border border-border rounded font-medium text-[10px] text-muted-foreground/70">
                   ⌘K
                 </kbd>

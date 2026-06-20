@@ -113,7 +113,7 @@ export default function AccountPage() {
               <p className="font-medium text-brand-600 dark:text-brand-400 text-sm uppercase tracking-[0.2em]">
                 Account
               </p>
-              <h1 className="font-bold text-4xl sm:text-5xl tracking-tight">
+              <h1 className="font-bold text-2xl sm:text-3xl lg:text-5xl tracking-tight">
                 Profile, password, wishlist, and newsletter settings.
               </h1>
             </div>

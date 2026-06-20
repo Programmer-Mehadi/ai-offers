@@ -71,17 +71,28 @@ export function Hero() {
           </p>
 
           <div className="relative mx-auto mt-8 lg:mt-10 max-w-xl">
-            <div className="flex items-center gap-2 bg-background shadow-brand-500/5 shadow-lg p-1.5 border border-border rounded-xl">
-              <Search className="ml-3 w-5 h-5 text-muted-foreground shrink-0" />
+            <div className="flex items-center gap-1 sm:gap-2 bg-background shadow-brand-500/5 shadow-lg p-1 sm:p-1.5 border border-border rounded-xl">
+              <Search className="ml-2 sm:ml-3 w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground shrink-0" />
               <Input
-                placeholder="Search tools, categories, or keywords..."
-                className="bg-transparent shadow-none border-0 focus-visible:ring-0"
+                placeholder="Search tools, categories..."
+                className="bg-transparent shadow-none border-0 focus-visible:ring-0 text-sm"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setTimeout(() => setFocused(false), 200)}
               />
-              <Button size="sm" className="gap-1 shrink-0" asChild>
+              <Button size="xs" className="sm:hidden shrink-0" asChild>
+                <Link
+                  href={
+                    query.trim()
+                      ? `/search?q=${encodeURIComponent(query.trim())}`
+                      : "/tools"
+                  }
+                >
+                  <Search className="w-3.5 h-3.5" />
+                </Link>
+              </Button>
+              <Button size="sm" className="hidden sm:inline-flex gap-1 shrink-0" asChild>
                 <Link
                   href={
                     query.trim()

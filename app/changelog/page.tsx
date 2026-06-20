@@ -31,22 +31,20 @@ export default async function ChangelogPage() {
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
                Track every update, new offer, and site improvement.
             </p>
-          </div>
+          </div>            <div className="relative">
+            <div className="absolute left-[15px] sm:left-[19px] top-0 h-full w-px bg-border/60" />
 
-          <div className="relative">
-            <div className="absolute left-[19px] top-0 h-full w-px bg-border/60" />
-
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {changelogEntries.map((entry, i) => {
                 const config = typeConfig[entry.type]
                 const Icon = config.icon
                 return (
-                  <div key={i} className="relative flex gap-5">
+                  <div key={i} className="relative flex gap-3 sm:gap-5">
                     <div className={cn(
-                      "relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white shadow-sm",
+                      "relative z-10 flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg sm:rounded-xl text-white shadow-sm",
                       `bg-gradient-to-br ${config.color}`,
                     )}>
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     </div>
                     <div className="min-w-0 flex-1 pt-1">
                       <div className="mb-1 flex items-center gap-2">

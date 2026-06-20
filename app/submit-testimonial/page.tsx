@@ -7,6 +7,7 @@ import { Star, Send, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { Navbar } from "@/components/sections/navbar"
 import { Footer } from "@/components/sections/footer"
 import { useAuth } from "@/components/auth-provider"
@@ -124,10 +125,9 @@ export default function SubmitTestimonialPage() {
 
                   <div className="space-y-2">
                     <label htmlFor="content" className="text-sm font-medium">Your Story *</label>
-                    <textarea
+                    <Textarea
                       id="content"
                       rows={4}
-                      className="flex min-h-10 w-full rounded-lg border border-input bg-transparent px-3 py-2 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm dark:bg-input/30"
                       value={content}
                       onChange={(e) => setContent(e.target.value)}
                       placeholder="Share your experience — what offer helped you save money?"

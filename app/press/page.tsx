@@ -47,7 +47,7 @@ export default function PressPage() {
 
           <section className="mb-12">
             <h2 className="mb-4 text-xl font-bold">Key Facts & Stats</h2>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-4">
               {stats.map((s) => (
                 <Card key={s.label} className="border-border/50">
                   <CardContent className="p-4 text-center">
@@ -61,7 +61,7 @@ export default function PressPage() {
 
           <section className="mb-12">
             <h2 className="mb-4 text-xl font-bold">Brand Assets</h2>
-            <div className="overflow-hidden rounded-xl border border-border/50">
+            <div className="overflow-x-auto rounded-xl border border-border/50">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border/50 bg-muted/30">

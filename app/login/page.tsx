@@ -90,7 +90,7 @@ function LoginPageShell({
               <p className="font-medium text-brand-600 dark:text-brand-400 text-sm uppercase tracking-[0.2em]">
                 Your saved offers, synced
               </p>
-              <h1 className="font-bold text-4xl sm:text-5xl tracking-tight">
+              <h1 className="font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
                 Sign in to keep your wishlist, account settings, and newsletter
                 choices in one place.
               </h1>

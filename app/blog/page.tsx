@@ -34,9 +34,7 @@ export default async function BlogPage() {
               Tips, comparisons, and guides to help save money and make the most
               of their discounts.
             </p>
-          </div>
-
-          <div className="gap-6 grid sm:grid-cols-2 lg:grid-cols-3">
+          </div>            <div className="gap-4 sm:gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {blogPosts.map((post) => (
               <Card
                 key={post.id}

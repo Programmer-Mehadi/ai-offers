@@ -173,7 +173,7 @@ export default async function HomePage() {
             <h2 className="mb-6 text-xl font-bold sm:text-2xl">
               Offers by Region
             </h2>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {regions.map((region) => (
                 <Link
                   key={region.id}

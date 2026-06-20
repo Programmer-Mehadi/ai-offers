@@ -131,7 +131,7 @@ export default function SavingsCalculatorPage() {
               </div>
             </div>
 
-            <div className="lg:top-28 lg:sticky">
+            <div className="lg:top-28 lg:sticky order-first lg:order-last">
               <Card className="border-border/50">
                 <CardContent className="p-5">
                   <h3 className="font-bold">Your total savings</h3>

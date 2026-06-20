@@ -53,7 +53,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mb-16 grid grid-cols-2 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <Card className="border-border/50 text-center">
               <CardContent className="p-6">
                 <p className="text-3xl font-bold text-brand-600 dark:text-brand-400">{stats.totalOffers}+</p>
@@ -95,7 +95,7 @@ export default async function AboutPage() {
 
           <div className="mb-16">
             <h2 className="mb-6 text-2xl font-bold tracking-tight">What We Stand For</h2>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {values.map((v) => {
                 const Icon = v.icon
                 return (
@@ -132,7 +132,7 @@ export default async function AboutPage() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-border/50 bg-muted/30 p-6 text-center sm:p-8">
+          <div className="rounded-xl border border-border/50 bg-muted/30 p-5 text-center sm:p-8">
             <Award className="mx-auto mb-3 h-8 w-8 text-brand-600 dark:text-brand-400" />
             <h2 className="text-xl font-bold">Found a deal we missed?</h2>
             <p className="mt-1 text-sm text-muted-foreground">
