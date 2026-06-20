@@ -6,6 +6,7 @@ export interface Offer {
   description: string
   discount: string
   category: string
+  slug: string
   featured?: boolean
   hidden_gem?: boolean
   underrated?: boolean

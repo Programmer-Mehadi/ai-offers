@@ -106,7 +106,7 @@ export function OfferCard({ offer, variant = "default" }: OfferCardProps) {
           </Badge>
         )}
         <Link
-          href={offer.url}
+          href={`/offer/${offer.slug}`}
           className="inline-flex items-center gap-1 font-medium text-muted-foreground hover:text-foreground text-xs transition-colors"
         >
           View Deal
