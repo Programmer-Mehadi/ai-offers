@@ -3,7 +3,7 @@
 import Link from "next/link"
 import {
   BellRing,
-  Bookmark,
+  Heart,
   LockKeyhole,
   LogOut,
   UserRound,
@@ -24,7 +24,7 @@ export default function AccountPage() {
     ready,
     isAuthenticated,
     user,
-    favoriteIds,
+    wishlistIds,
     updateProfile,
     changePassword,
     setNewsletterSubscribed,
@@ -113,7 +113,7 @@ export default function AccountPage() {
                 Account
               </p>
               <h1 className="font-bold text-4xl sm:text-5xl tracking-tight">
-                Profile, password, bookmarks, and newsletter settings.
+                Profile, password, wishlist, and newsletter settings.
               </h1>
             </div>
             {isAuthenticated ? (
@@ -141,7 +141,7 @@ export default function AccountPage() {
                   You are not signed in
                 </h2>
                 <p className="max-w-2xl text-muted-foreground">
-                  Sign in to save bookmarks on the backend, update your profile,
+                  Sign in to save offers to your wishlist, update your profile,
                   change your password, and manage newsletter delivery.
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -308,18 +308,18 @@ export default function AccountPage() {
                 <Card className="border-border/50">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-xl">
-                      <Bookmark className="w-5 h-5" />
-                      Saved offers
+                      <Heart className="w-5 h-5" />
+                      Wishlist
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground text-sm">
-                      {favoriteIds.length} offer
-                      {favoriteIds.length === 1 ? "" : "s"} currently saved to
-                      your account.
+                      {wishlistIds.length} offer
+                      {wishlistIds.length === 1 ? "" : "s"} currently saved to
+                      your wishlist.
                     </p>
                     <Button asChild>
-                      <Link href="/favorites">Open favorites</Link>
+                      <Link href="/wishlist">Open wishlist</Link>
                     </Button>
                   </CardContent>
                 </Card>

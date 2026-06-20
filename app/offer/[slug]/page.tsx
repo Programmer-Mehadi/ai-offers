@@ -7,12 +7,12 @@ import {
   ArrowRight,
   ArrowUpRight,
   Award,
-  Bookmark,
   CheckCircle2,
   DollarSign,
   Flag,
   Gem,
   Globe,
+  Heart,
   Link2,
   LucideIcon,
   Share2,
@@ -66,7 +66,7 @@ export default function OfferPage() {
     []
   )
   const [loading, setLoading] = useState(true)
-  const { favoriteIds, toggleFavorite } = useAuth()
+  const { wishlistIds, claimedIds, toggleWishlist, toggleClaimed } = useAuth()
 
   useEffect(() => {
     Promise.all([getOfferBySlug(slug), getOffers()]).then(([o, all]) => {
@@ -79,47 +79,38 @@ export default function OfferPage() {
   if (loading) return null
   if (!offer) notFound()
 
-  const saved = favoriteIds.includes(slug)
+  const saved = wishlistIds.includes(slug)
+  const claimed = claimedIds.includes(slug)
   const savingsValue = extractValue(offer.discount)
 
-  async function handleFavoriteToggle() {
+  async function handleWishlistToggle() {
     try {
-      const result = await toggleFavorite(slug)
+      const result = await toggleWishlist(slug)
       toast.success(
-        result.saved ? "Saved to favorites" : "Removed from favorites",
+        result.saved ? "Saved to wishlist" : "Removed from wishlist",
         {
-          description: result.synced
-            ? "Your bookmarks are synced to your account."
-            : "Saved locally in this browser. Sign in to sync across devices.",
+          description: "Your wishlist is synced to your account.",
         }
       )
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Unable to update favorites"
+        error instanceof Error ? error.message : "Unable to update wishlist"
       )
     }
   }
 
-  function isClaimed(id: string): boolean {
+  async function handleClaimedToggle() {
     try {
-      return JSON.parse(localStorage.getItem("claimed") || "[]").includes(id)
-    } catch {
-      return false
+      const result = await toggleClaimed(slug)
+      toast.success(
+        result.claimed ? "Marked as claimed!" : "Marked as unclaimed"
+      )
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Unable to update claimed status"
+      )
     }
   }
-  function toggleClaimed(id: string) {
-    const c = JSON.parse(localStorage.getItem("claimed") || "[]")
-    const idx = c.indexOf(id)
-    if (idx === -1) {
-      c.push(id)
-      toast.success("Marked as claimed!")
-    } else {
-      c.splice(idx, 1)
-    }
-    localStorage.setItem("claimed", JSON.stringify(c))
-    window.dispatchEvent(new Event("claimed-updated"))
-  }
-  const claimed = isClaimed(slug)
 
   const currentIndex = offers.findIndex((o) => o.id === slug)
   const prevOffer = currentIndex > 0 ? offers[currentIndex - 1] : null
@@ -213,24 +204,24 @@ export default function OfferPage() {
                               size="icon"
                               className="w-9 h-9"
                               onClick={() => {
-                                void handleFavoriteToggle()
+                                void handleWishlistToggle()
                               }}
                             >
-                              <Bookmark
+                              <Heart
                                 className={cn(
                                   "w-4 h-4",
                                   saved && "fill-brand-500 text-brand-500"
                                 )}
                               />
                               <span className="sr-only">
-                                {saved ? "Remove from" : "Save to"} favorites
+                                {saved ? "Remove from" : "Save to"} wishlist
                               </span>
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>
                             {saved
-                              ? "Remove from favorites"
-                              : "Save to favorites"}
+                              ? "Remove from wishlist"
+                              : "Save to wishlist"}
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
@@ -347,7 +338,7 @@ export default function OfferPage() {
                           claimed &&
                             "border-emerald-500 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400"
                         )}
-                        onClick={() => toggleClaimed(slug)}
+                        onClick={() => { void handleClaimedToggle() }}
                         asChild={!claimed}
                       >
                         {claimed ? (

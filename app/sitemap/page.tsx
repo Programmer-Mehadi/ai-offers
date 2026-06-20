@@ -15,7 +15,7 @@ const groups = [
       { href: "/popular", label: "Most Popular" },
       { href: "/expiring-soon", label: "Expiring Soon" },
       { href: "/compare", label: "Compare Offers" },
-      { href: "/favorites", label: "Your Favorites" },
+      { href: "/wishlist", label: "Your Wishlist" },
     ],
   },
   {

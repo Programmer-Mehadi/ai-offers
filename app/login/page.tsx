@@ -91,12 +91,12 @@ function LoginPageShell({
                 Your saved offers, synced
               </p>
               <h1 className="font-bold text-4xl sm:text-5xl tracking-tight">
-                Sign in to keep bookmarks, account settings, and newsletter
+                Sign in to keep your wishlist, account settings, and newsletter
                 choices in one place.
               </h1>
               <p className="max-w-xl text-muted-foreground">
                 This account works with the Nest backend you already have
-                running. Bookmarks stay on the server once you log in.
+                running.                 Your wishlist stays on the server once you log in.
               </p>
             </div>
 

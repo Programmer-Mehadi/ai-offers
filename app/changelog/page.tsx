@@ -69,7 +69,7 @@ export default async function ChangelogPage() {
 
           <div className="mt-10 rounded-xl border border-border/50 bg-muted/30 p-6 text-center">
             <Sparkles className="mx-auto mb-2 h-5 w-5 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">Something missing? <Link href="/wishlist" className="font-medium text-foreground underline underline-offset-2">Suggest an offer</Link></p>
+            <p className="text-sm text-muted-foreground">Something missing? <Link href="/suggest" className="font-medium text-foreground underline underline-offset-2">Suggest an offer</Link></p>
           </div>
         </div>
       </main>

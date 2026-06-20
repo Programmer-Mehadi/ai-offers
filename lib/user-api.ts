@@ -190,7 +190,9 @@ export function updateNewsletterPreference(token: string, subscribed: boolean) {
   )
 }
 
-export async function getFavoriteOffers(token: string) {
+// --- Wishlist (saved offers) ---
+
+export async function getWishlist(token: string) {
   const raw = await apiRequest<Record<string, unknown>[]>(
     "/user/favorites",
     undefined,
@@ -199,7 +201,7 @@ export async function getFavoriteOffers(token: string) {
   return raw.map(mapOffer)
 }
 
-export async function addFavoriteOffer(token: string, offerId: string) {
+export async function addWishlist(token: string, offerId: string) {
   const raw = await apiRequest<Record<string, unknown>[]>(
     "/user/favorites",
     {
@@ -211,7 +213,7 @@ export async function addFavoriteOffer(token: string, offerId: string) {
   return raw.map(mapOffer)
 }
 
-export async function removeFavoriteOffer(token: string, offerId: string) {
+export async function removeWishlist(token: string, offerId: string) {
   const raw = await apiRequest<Record<string, unknown>[]>(
     `/user/favorites/${offerId}`,
     {
@@ -220,4 +222,76 @@ export async function removeFavoriteOffer(token: string, offerId: string) {
     token
   )
   return raw.map(mapOffer)
+}
+
+// --- Claimed offers ---
+
+export async function getClaimedOffers(token: string) {
+  const raw = await apiRequest<Record<string, unknown>[]>(
+    "/user/claimed",
+    undefined,
+    token
+  )
+  return raw.map(mapOffer)
+}
+
+export async function addClaimedOffer(token: string, offerId: string) {
+  const raw = await apiRequest<Record<string, unknown>[]>(
+    "/user/claimed",
+    {
+      method: "POST",
+      body: JSON.stringify({ offerId }),
+    },
+    token
+  )
+  return raw.map(mapOffer)
+}
+
+export async function removeClaimedOffer(token: string, offerId: string) {
+  const raw = await apiRequest<Record<string, unknown>[]>(
+    `/user/claimed/${offerId}`,
+    {
+      method: "DELETE",
+    },
+    token
+  )
+  return raw.map(mapOffer)
+}
+
+// --- Wishlist suggestions (feature requests) ---
+
+export type WishlistSuggestion = {
+  _id: string
+  title: string
+  description?: string
+  votes: number
+  createdAt: string
+}
+
+export function getSuggestions() {
+  return apiRequest<WishlistSuggestion[]>("/wishlist")
+}
+
+export function createSuggestion(input: {
+  title: string
+  description?: string
+}) {
+  return apiRequest<WishlistSuggestion>("/wishlist", {
+    method: "POST",
+    body: JSON.stringify(input),
+  })
+}
+
+export function voteSuggestion(id: string) {
+  return apiRequest<WishlistSuggestion>(`/wishlist/${id}/vote`, {
+    method: "POST",
+  })
+}
+
+export function deleteSuggestion(token: string, id: string) {
+  return apiRequest<{ message: string }>(
+    `/wishlist/${id}`,
+    { method: "DELETE" },
+    token
+  )
 }

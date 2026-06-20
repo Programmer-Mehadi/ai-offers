@@ -9,14 +9,17 @@ import {
 } from "react"
 
 import {
-  addFavoriteOffer,
+  addWishlist as apiAddWishlist,
   changePassword as changeUserPassword,
   forgotPassword as requestPasswordReset,
-  getFavoriteOffers,
+  getWishlist as apiGetWishlist,
+  getClaimedOffers,
   getProfile,
   loginUser,
   registerUser,
-  removeFavoriteOffer,
+  removeWishlist as apiRemoveWishlist,
+  addClaimedOffer,
+  removeClaimedOffer,
   resetPassword as submitPasswordReset,
   updateNewsletterPreference,
   updateProfile as saveProfile,
@@ -28,7 +31,8 @@ type AuthContextValue = {
   ready: boolean
   isAuthenticated: boolean
   user: AuthUser | null
-  favoriteIds: string[]
+  wishlistIds: string[]
+  claimedIds: string[]
   login: (input: { email: string; password: string }) => Promise<AuthUser>
   register: (input: {
     name?: string
@@ -51,11 +55,13 @@ type AuthContextValue = {
     newPassword: string
   }) => Promise<void>
   setNewsletterSubscribed: (subscribed: boolean) => Promise<AuthUser>
-  toggleFavorite: (offerId: string) => Promise<{
+  toggleWishlist: (offerId: string) => Promise<{
     saved: boolean
-    synced: boolean
   }>
-  removeFavorite: (offerId: string) => Promise<void>
+  removeWishlist: (offerId: string) => Promise<void>
+  toggleClaimed: (offerId: string) => Promise<{
+    claimed: boolean
+  }>
 }
 
 type StoredSession = {
@@ -64,28 +70,8 @@ type StoredSession = {
 }
 
 const SESSION_KEY = "offerperks-user-session"
-const FAVORITES_KEY = "favorites"
 
 const AuthContext = createContext<AuthContextValue | null>(null)
-
-function readFavoriteIds() {
-  if (typeof window === "undefined") return [] as string[]
-
-  try {
-    const parsed = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]")
-    return Array.isArray(parsed)
-      ? parsed.filter((item): item is string => typeof item === "string")
-      : []
-  } catch {
-    return []
-  }
-}
-
-function writeFavoriteIds(favoriteIds: string[]) {
-  if (typeof window === "undefined") return
-  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoriteIds))
-  window.dispatchEvent(new Event("favorites-updated"))
-}
 
 function readStoredSession() {
   if (typeof window === "undefined") return null as StoredSession | null
@@ -121,11 +107,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false)
   const [token, setToken] = useState<string | null>(null)
   const [user, setUser] = useState<AuthUser | null>(null)
-  const [favoriteIds, setFavoriteIds] = useState<string[]>([])
+  const [wishlistIds, setWishlistIds] = useState<string[]>([])
+  const [claimedIds, setClaimedIds] = useState<string[]>([])
 
   useEffect(() => {
-    setFavoriteIds(readFavoriteIds())
-
     const session = readStoredSession()
     if (!session) {
       setReady(true)
@@ -137,13 +122,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === FAVORITES_KEY) {
-        setFavoriteIds(readFavoriteIds())
-      }
-
       if (event.key === SESSION_KEY && !event.newValue) {
         setToken(null)
         setUser(null)
+        setWishlistIds([])
+        setClaimedIds([])
       }
     }
 
@@ -153,14 +136,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function restoreSession(session: StoredSession) {
     try {
-      const [profile, favorites] = await Promise.all([
+      const [profile, wishlist, claimed] = await Promise.all([
         getProfile(session.token),
-        getFavoriteOffers(session.token),
+        apiGetWishlist(session.token),
+        getClaimedOffers(session.token),
       ])
 
       setToken(session.token)
       setUser(profile)
-      applyFavoriteIds(favorites.map((offer) => offer.id))
+      setWishlistIds(wishlist.map((offer) => offer.id))
+      setClaimedIds(claimed.map((offer) => offer.id))
       writeStoredSession({ token: session.token, user: profile })
     } catch {
       writeStoredSession(null)
@@ -171,27 +156,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  function applyFavoriteIds(nextFavoriteIds: string[]) {
-    setFavoriteIds(nextFavoriteIds)
-    writeFavoriteIds(nextFavoriteIds)
-  }
-
   async function completeAuth(response: AuthResponse) {
     setToken(response.access_token)
     setUser(response.user)
     writeStoredSession({ token: response.access_token, user: response.user })
 
-    const localFavorites = readFavoriteIds()
-    if (localFavorites.length > 0) {
-      await Promise.allSettled(
-        localFavorites.map((offerId) =>
-          addFavoriteOffer(response.access_token, offerId)
-        )
-      )
-    }
-
-    const favorites = await getFavoriteOffers(response.access_token)
-    applyFavoriteIds(favorites.map((offer) => offer.id))
+    const [wishlist, claimed] = await Promise.all([
+      apiGetWishlist(response.access_token),
+      getClaimedOffers(response.access_token),
+    ])
+    setWishlistIds(wishlist.map((offer) => offer.id))
+    setClaimedIds(claimed.map((offer) => offer.id))
 
     return response.user
   }
@@ -199,6 +174,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   function logout() {
     setToken(null)
     setUser(null)
+    setWishlistIds([])
+    setClaimedIds([])
     writeStoredSession(null)
   }
 
@@ -257,29 +234,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return nextUser
   }
 
-  async function toggleFavorite(offerId: string) {
-    const isSaved = favoriteIds.includes(offerId)
-
+  async function toggleWishlist(offerId: string) {
     if (!token) {
-      const nextFavoriteIds = isSaved
-        ? favoriteIds.filter((id) => id !== offerId)
-        : [...favoriteIds, offerId]
-
-      applyFavoriteIds(nextFavoriteIds)
-      return { saved: !isSaved, synced: false }
+      throw new Error("Sign in to save offers to your wishlist")
     }
 
+    const isSaved = wishlistIds.includes(offerId)
     const offers = isSaved
-      ? await removeFavoriteOffer(token, offerId)
-      : await addFavoriteOffer(token, offerId)
+      ? await apiRemoveWishlist(token, offerId)
+      : await apiAddWishlist(token, offerId)
 
-    applyFavoriteIds(offers.map((offer) => offer.id))
-    return { saved: !isSaved, synced: true }
+    setWishlistIds(offers.map((offer) => offer.id))
+    return { saved: !isSaved }
   }
 
-  async function removeFavorite(offerId: string) {
-    if (!favoriteIds.includes(offerId)) return
-    await toggleFavorite(offerId)
+  async function removeWishlist(offerId: string) {
+    if (!wishlistIds.includes(offerId) || !token) return
+    const offers = await apiRemoveWishlist(token, offerId)
+    setWishlistIds(offers.map((offer) => offer.id))
+  }
+
+  async function toggleClaimed(offerId: string) {
+    if (!token) {
+      throw new Error("Sign in to mark offers as claimed")
+    }
+
+    const isClaimed = claimedIds.includes(offerId)
+    const offers = isClaimed
+      ? await removeClaimedOffer(token, offerId)
+      : await addClaimedOffer(token, offerId)
+
+    setClaimedIds(offers.map((offer) => offer.id))
+    return { claimed: !isClaimed }
   }
 
   return (
@@ -288,7 +274,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         ready,
         isAuthenticated: Boolean(token && user),
         user,
-        favoriteIds,
+        wishlistIds,
+        claimedIds,
         login,
         register,
         logout,
@@ -297,8 +284,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         updateProfile,
         changePassword,
         setNewsletterSubscribed,
-        toggleFavorite,
-        removeFavorite,
+        toggleWishlist,
+        removeWishlist,
+        toggleClaimed,
       }}
     >
       {children}

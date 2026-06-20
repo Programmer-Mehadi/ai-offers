@@ -28,7 +28,7 @@ const footerLinks = [
       { href: "/guides", label: "Guides" },
       { href: "/savings-calculator", label: "Savings Calculator" },
       { href: "/faq", label: "FAQ" },
-      { href: "/wishlist", label: "Wishlist" },
+      { href: "/suggest", label: "Suggest an Offer" },
       { href: "/changelog", label: "Changelog" },
       { href: "/press", label: "Press Kit" },
       { href: "/discover", label: "Discover" },

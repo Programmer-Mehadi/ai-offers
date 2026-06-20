@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "How do I save offers for later?",
-    a: "Click the bookmark icon on any offer to save it to your favorites. Your saved offers are stored in your browser and accessible from the Favorites page.",
+    a: "Click the heart icon on any offer to save it to your wishlist. Sign in to sync your wishlist across devices.",
   },
   {
     q: "Can I submit an offer I found?",

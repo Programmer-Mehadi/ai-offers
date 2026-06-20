@@ -56,7 +56,7 @@ export default function RegisterPage() {
                 Start saving properly
               </p>
               <h1 className="font-bold text-4xl sm:text-5xl tracking-tight">
-                Create an account to sync bookmarks and manage your offer
+                Create an account to save offers to your wishlist and manage your offer
                 profile.
               </h1>
               <p className="max-w-xl text-muted-foreground">

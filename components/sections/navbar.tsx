@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Bookmark, Menu, Moon, Search, Sun, UserRound } from "lucide-react"
+import { Heart, Menu, Moon, Search, Sun, UserRound } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
@@ -29,14 +29,14 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
-  const { favoriteIds, isAuthenticated, user } = useAuth()
+  const { wishlistIds, isAuthenticated, user } = useAuth()
   const isDark = mounted && resolvedTheme === "dark"
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const favCount = favoriteIds.length
+  const wishlistCount = wishlistIds.length
   const pathname = usePathname()
 
   function isActive(href: string) {
@@ -100,14 +100,14 @@ export function Navbar() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="relative" asChild>
-                <Link href="/favorites">
-                  <Bookmark className="w-4 h-4" />
-                  {favCount > 0 && (
+                <Link href="/wishlist">
+                  <Heart className="w-4 h-4" />
+                  {wishlistCount > 0 && (
                     <span className="-top-0.5 -right-0.5 absolute flex justify-center items-center bg-brand-500 px-1 rounded-full min-w-3.5 h-4 font-bold text-[10px] text-white">
-                      {favCount}
+                      {wishlistCount}
                     </span>
                   )}
-                  <span className="sr-only">Favorites</span>
+                  <span className="sr-only">Wishlist</span>
                 </Link>
               </Button>
             </TooltipTrigger>
@@ -197,15 +197,15 @@ export function Navbar() {
 
               <div className="flex flex-col gap-1 mt-6 pt-6 border-border border-t">
                 <Link
-                  href="/favorites"
+                  href="/wishlist"
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-2 hover:bg-accent px-3 py-2.5 rounded-lg font-medium text-muted-foreground text-sm transition-colors hover:text-accent-foreground"
                 >
-                  <Bookmark className="w-4 h-4" />
-                  Favorites
-                  {favCount > 0 && (
+                  <Heart className="w-4 h-4" />
+                  Wishlist
+                  {wishlistCount > 0 && (
                     <span className="flex justify-center items-center bg-brand-500 px-1.5 rounded-full min-w-4.5 h-5 font-bold text-[10px] text-white">
-                      {favCount}
+                      {wishlistCount}
                     </span>
                   )}
                 </Link>
