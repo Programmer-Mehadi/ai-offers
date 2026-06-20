@@ -98,26 +98,6 @@ async function apiRequest<T>(
   return payload as T
 }
 
-export function subscribeToNewsletter(email: string) {
-  return apiRequest<{ email: string; subscribed: boolean }>(
-    "/newsletter/subscribe",
-    {
-      method: "POST",
-      body: JSON.stringify({ email }),
-    }
-  )
-}
-
-export function unsubscribeFromNewsletter(email: string) {
-  return apiRequest<{ email: string; subscribed: boolean }>(
-    "/newsletter/unsubscribe",
-    {
-      method: "DELETE",
-      body: JSON.stringify({ email }),
-    }
-  )
-}
-
 export function registerUser(input: {
   name?: string
   email: string
