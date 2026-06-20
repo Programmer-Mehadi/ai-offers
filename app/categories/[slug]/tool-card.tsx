@@ -1,40 +1,60 @@
 "use client"
 
-import { ArrowUpRight, Plus } from "lucide-react"
+import { ArrowUpRight, Heart } from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { useCompare } from "@/lib/use-compare"
+import { useAuth } from "@/components/auth-provider"
 import { cn } from "@/lib/utils"
 import type { Offer } from "@/data/offers"
 import { Button } from "@/components/ui/button"
 
 export function ToolCard({ offer }: { offer: Offer }) {
-  const { compareIds, toggleCompare } = useCompare()
-  const inCompare = compareIds.includes(offer.id)
+  const { wishlistIds, toggleWishlist, isAuthenticated } = useAuth()
+  const inWishlist = wishlistIds.includes(offer.id)
+
+  async function handleWishlistToggle(e: React.MouseEvent) {
+    e.stopPropagation()
+    try {
+      const result = await toggleWishlist(offer.id)
+      toast.success(
+        result.saved ? "Saved to wishlist" : "Removed from wishlist"
+      )
+    } catch (error) {
+      if (!isAuthenticated) {
+        toast.error("Sign in to save offers to your wishlist")
+      } else {
+        toast.error(
+          error instanceof Error ? error.message : "Unable to update wishlist"
+        )
+      }
+    }
+  }
 
   return (
     <Card className="group relative overflow-hidden border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-lg hover:shadow-brand-500/10">
       <div className="absolute inset-x-0 top-0 h-1 bg-primary" />
 
-      <button
-        onClick={(e) => {
-          e.stopPropagation()
-          toggleCompare(offer.id)
-        }}
-        className={cn(
-          "absolute top-2 right-2 z-20 flex h-6 w-6 items-center justify-center rounded-md border text-muted-foreground transition-colors",
-          inCompare
-            ? "border-brand-500 bg-brand-500 text-white"
-            : "border-border bg-background hover:border-brand-500/50 hover:text-brand-500"
-        )}
-      >
-        <Plus className={cn("h-3 w-3", inCompare && "rotate-45")} />
-        <span className="sr-only">
-          {inCompare ? "Remove from" : "Add to"} compare
-        </span>
-      </button>
+      <div className="absolute top-2 right-2 z-20">
+        <button
+          onClick={handleWishlistToggle}
+          className={cn(
+            "flex h-6 w-6 items-center justify-center rounded-md border transition-colors",
+            inWishlist
+              ? "border-brand-500 bg-brand-500 text-white"
+              : "border-border bg-background text-muted-foreground hover:border-brand-500/50 hover:text-brand-500"
+          )}
+        >
+          <Heart
+            className={cn("h-3 w-3", inWishlist && "fill-current")}
+          />
+          <span className="sr-only">
+            {inWishlist ? "Remove from" : "Add to"} wishlist
+          </span>
+        </button>
+      </div>
 
       <CardContent className="p-5">
         <div className="mb-3 flex items-center gap-3">
