@@ -9,64 +9,63 @@ import type { Offer } from "@/data/offers"
 interface OfferCardProps {
   offer: Offer
   variant?: "default" | "compact"
+  show?: "all" | "featured" | "hidden_gems" | "underrated"
 }
 
-export function OfferCard({ offer, variant = "default" }: OfferCardProps) {
+export function OfferCard({
+  offer,
+  variant = "default",
+  show,
+}: OfferCardProps) {
   const isCompact = variant === "compact"
 
   return (
-    <Card className="group relative hover:shadow-brand-500/10 hover:shadow-lg border-border/50 hover:border-transparent overflow-hidden transition-all duration-300">
-      <div className="top-0 absolute inset-x-0 bg-primary h-1" />
-
-      {offer.featured && (
-        <div className="top-2 right-2 absolute">
+    <Card className="group relative">
+      <div className="flex flex-wrap gap-2 p-4 py-0">
+        {offer.featured && show !== "hidden_gems" && show !== "underrated" && (
           <Badge
             variant="secondary"
             className="gap-1 bg-amber-50 text-amber-700"
           >
-            <Sparkles className="w-3 h-3" />
+            <Sparkles className="h-3 w-3" />
             Featured
           </Badge>
-        </div>
-      )}
-      {offer.hidden_gem && (
-        <div className="top-2 right-2 absolute">
+        )}
+        {offer.hidden_gem && show !== "featured" && show !== "underrated" && (
           <Badge
             variant="secondary"
-            className="gap-1 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400"
+            className="gap-1 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400"
           >
-            <Gem className="w-3 h-3" />
+            <Gem className="h-3 w-3" />
             Hidden Gem
           </Badge>
-        </div>
-      )}
-      {offer.underrated && (
-        <div className="top-2 right-2 absolute">
+        )}
+        {offer.underrated && show !== "hidden_gems" && show !== "featured" && (
           <Badge
             variant="secondary"
-            className="gap-1 bg-violet-50 dark:bg-violet-950/50 text-violet-700 dark:text-violet-400"
+            className="gap-1 bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-400"
           >
-            <Award className="w-3 h-3" />
+            <Award className="h-3 w-3" />
             Underrated
           </Badge>
-        </div>
-      )}
+        )}
+      </div>
 
-      <CardContent className={cn(isCompact ? "p-4" : "p-5 sm:p-6")}>
-        <div className="flex items-center gap-3 mb-3">
-          <div className="flex justify-center items-center bg-primary shadow-sm rounded-lg w-9 h-9 font-bold text-primary-foreground text-xs shrink-0">
+      <CardContent className={"p-4 py-0"}>
+        <div className="mb-3 flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground shadow-sm">
             {offer.name.slice(0, 2).toUpperCase()}
           </div>
           <div className="min-w-0">
             <h3
               className={cn(
-                "font-semibold leading-tight",
+                "leading-tight font-semibold",
                 isCompact ? "text-sm" : "text-base"
               )}
             >
               {offer.name}
             </h3>
-            <p className="text-muted-foreground text-xs">{offer.category}</p>
+            <p className="text-xs text-muted-foreground">{offer.category}</p>
           </div>
         </div>
 
@@ -79,38 +78,38 @@ export function OfferCard({ offer, variant = "default" }: OfferCardProps) {
           {offer.description}
         </p>
 
-        <div className="inline-block bg-primary shadow-sm mt-3 px-3 py-1.5 rounded-lg font-bold text-primary-foreground text-sm">
+        <div className="mt-3 inline-block rounded-lg bg-primary px-3 py-1.5 text-sm font-bold text-primary-foreground shadow-sm">
           {offer.discount}
         </div>
       </CardContent>
 
       <CardFooter
         className={cn(
-          "flex justify-between items-center pt-3 border-border/50 border-t",
+          "mt-auto flex items-center justify-between border-t border-border/50 pt-3",
           isCompact ? "px-4 pb-3" : "px-5 pb-4 sm:px-6 sm:pb-5"
         )}
       >
         {offer.audience === "everyone" ? (
           <Badge
             variant="secondary"
-            className="bg-sky-50 dark:bg-sky-950/50 text-sky-700 dark:text-sky-400"
+            className="bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-400"
           >
             Everyone
           </Badge>
         ) : (
           <Badge
             variant="secondary"
-            className="bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-400"
+            className="dark:bg-brand-950/50 bg-brand-50 text-brand-700 dark:text-brand-400"
           >
             Students
           </Badge>
         )}
         <Link
           href={`/offer/${offer.slug}`}
-          className="inline-flex items-center gap-1 font-medium text-muted-foreground hover:text-foreground text-xs transition-colors"
+          className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           View Deal
-          <ArrowUpRight className="w-3 h-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          <ArrowUpRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </Link>
       </CardFooter>
     </Card>

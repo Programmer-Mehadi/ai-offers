@@ -15,42 +15,42 @@ export function TestimonialsSection() {
   }, [])
 
   return (
-    <section className="bg-muted/20 py-12 sm:py-16 border-border/40 border-y">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section className="border-y border-border/40 bg-muted/20 py-12 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 text-center">
-          <h2 className="font-bold text-xl sm:text-2xl">
+          <h2 className="text-xl font-bold sm:text-2xl">
             What our community is saying
           </h2>
-          <p className="mt-1 text-muted-foreground text-sm">
+          <p className="mt-1 text-sm text-muted-foreground">
             Real savings from real members.
           </p>
         </div>
 
-        <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {testimonials.map((t, index) => (
             <Card
               key={t.id || `${t.name}-${index}`}
-              className="group hover:shadow-md border-border/50 hover:border-transparent transition-all duration-300"
+              className="group border-border/50 transition-all duration-300 hover:border-transparent hover:shadow-md"
             >
               <CardContent className="p-5">
-                <Quote className="mb-3 w-5 h-5 text-brand-500/40 dark:text-brand-400/40" />
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <Quote className="mb-3 h-5 w-5 text-brand-500/40 dark:text-brand-400/40" />
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   &ldquo;{t.content}&rdquo;
                 </p>
-                <div className="flex items-center gap-3 mt-4 pt-4 border-border/40 border-t">
-                  <div className="flex justify-center items-center bg-gradient-to-br from-brand-500 to-violet-600 rounded-full w-8 h-8 font-bold text-[10px] text-white shrink-0">
+                <div className="mt-2 w-fit shrink-0 rounded-md bg-gradient-to-r from-emerald-500/10 to-green-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+                  Saved {t.saved}
+                </div>
+                <div className="mt-4 flex items-center gap-3 border-t border-border/40 pt-4">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-violet-600 text-[10px] font-bold text-white">
                     {t.avatar}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-sm leading-tight">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm leading-tight font-semibold">
                       {t.name}
                     </p>
-                    <p className="text-muted-foreground text-xs">
+                    <p className="text-xs text-muted-foreground">
                       {t.role} &middot; {t.school}
                     </p>
-                  </div>
-                  <div className="bg-gradient-to-r from-emerald-500/10 to-green-500/10 px-2 py-1 rounded-md font-semibold text-[10px] text-emerald-600 dark:text-emerald-400 shrink-0">
-                    Saved {t.saved}
                   </div>
                 </div>
               </CardContent>
